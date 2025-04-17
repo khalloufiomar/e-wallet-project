@@ -37,7 +37,7 @@ export const routes: Routes = [
   {
     path: 'user',
     component: UserComponent,
-    // canActivate: [authGuard], // 🔒 Protège toute la section "user"
+    canActivate: [authGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'transactions', component: TransactionsComponent },

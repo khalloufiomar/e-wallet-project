@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SignupService } from '../services/signup.service';
 import { Router } from '@angular/router';
+import { User } from '../model/class/user';
 
 @Component({
   selector: 'app-signup',
