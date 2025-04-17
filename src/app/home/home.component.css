@@ -422,3 +422,117 @@ header {
         transform: translateY(0);
     }
 }
+
+/* Base responsive styles */
+@media (max-width: 1200px) {
+    .nav-card {
+        width: 90%;
+        max-width: 450px;
+        padding: 10px 20px;
+    }
+
+    .nav-card ul {
+        gap: 20px;
+    }
+
+    .main-text {
+        font-size: 40px;
+    }
+
+    .custom-image {
+        width: 300px;
+    }
+}
+
+@media (max-width: 991px) {
+    .maincard {
+        height: auto;
+        padding: 20px;
+    }
+
+    .faq-card {
+        width: 60%;
+    }
+
+    .custom-card {
+        height: auto;
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .nav-card ul {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 0;
+    }
+
+    .main-text {
+        font-size: 32px;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .main-card input {
+        width: 90%;
+        max-width: 250px;
+        margin: 30px auto;
+    }
+
+    .btn-subscribe {
+        display: block;
+        margin: 20px auto;
+    }
+
+    .skills-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .faq-card {
+        width: 90%;
+        margin-bottom: 100px;
+    }
+
+    .custom-footer {
+        height: auto;
+        padding: 20px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-icons {
+        margin-top: 15px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-text {
+        font-size: 28px;
+    }
+
+    .custom-card .card-text {
+        font-size: 24px;
+    }
+
+    .step-number {
+        font-size: 1.5rem;
+    }
+
+    .step-title {
+        font-size: 0.9rem;
+    }
+
+    .step-description {
+        font-size: 0.8rem;
+    }
+}
