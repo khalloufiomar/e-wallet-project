@@ -51,7 +51,7 @@
               </a>
             </li>
             <!-- Buy Coins - Visible si userType est 'hrcompany' OU 'client' -->
-            <li *ngIf="isHrCompany() || isClient()">
+            <li *ngIf="isHrCompany() || isLearner()">
               <a
                 routerLink="buyCoins"
                 routerLinkActive="active-link"

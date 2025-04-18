@@ -18,7 +18,7 @@ export class SignupComponent {
     email: '',
     password: '',
     confirmPassword: '',
-    type: 'client',
+    type: 'learner',
     companyCode: '',
     termsAccepted: false,
   };
@@ -143,7 +143,7 @@ export class SignupComponent {
       return;
     }
 
-    this.signupService.createUser(this.user).subscribe(
+    this.signupService.createUser(new User(this.user.name,this.user.email,this.user.type,this.user.companyCode,this.user.password)).subscribe(
       (response) => {
         console.log('Utilisateur créé avec succès:', response);
         this.router.navigate(['/login']);

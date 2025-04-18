@@ -62,7 +62,7 @@ export class UserComponent {
     return this.userType === 'employee';
   }
 
-  isClient(): boolean {
-    return this.userType === 'client';
+  isLearner(): boolean {
+    return this.userType === 'learner';
   }
 }

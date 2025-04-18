@@ -2,11 +2,11 @@
 export class User {
   name: string;
   email: string;
+  login:string;
   type: string;
   companyCode: string; // optionnel, seulement si le rôle est 'employe'
   password: string;
-  confirmPassword: string;
-  termsAccepted: boolean;
+
 
   constructor(
     name: string,
@@ -14,21 +14,20 @@ export class User {
     type: string,
     companyCode: string,
     password: string,
-    confirmPassword: string,
-    termsAccepted: boolean
+
   ) {
     this.name = name;
     this.email = email;
+    this.login = this.email;
     this.type = type;
     this.companyCode = companyCode;
     this.password = password;
-    this.confirmPassword = confirmPassword;
-    this.termsAccepted = termsAccepted;
+
   }
 }
 
 export interface Login {
-  email: string;
+  login: string;
   password: string;
 }
 

@@ -7,7 +7,7 @@ import { User } from '../model/class/user';
   providedIn: 'root',
 })
 export class SignupService {
-  private apiUrl = 'http://localhost:3000/users'; // URL du json-server
+  private apiUrl = 'http://localhost:8069/api/sign_up_user'; // URL du json-server
 
   constructor(private http: HttpClient) {}
 
