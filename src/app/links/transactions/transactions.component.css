@@ -210,3 +210,180 @@ body {
     background-color: #9f98ff;
     color: white;
 }
+
+/* Styles responsifs */
+@media (max-width: 1255px) {
+    .card {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 1000px) {
+    .card {
+        padding: 20px;
+        margin: 0 10px;
+        max-width: 95%;
+    }
+
+    .title {
+        font-size: 32px;
+        margin-left: 20px;
+    }
+
+    .header-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .right-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .search-bar input {
+        width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        margin-top: 70px;
+        padding: 0 10px;
+    }
+
+    .title {
+        font-size: 28px;
+        margin-left: 10px;
+    }
+
+    /* Cacher la 5ème colonne sur tablette */
+    .transactions-table th:nth-child(5),
+    .transactions-table td:nth-child(5) {
+        display: none;
+    }
+
+    .filter-btn,
+    .export-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .pagination {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .pagination-info {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .header {
+        margin-top: 60px;
+    }
+
+    .title {
+        font-size: 24px;
+        margin-left: 0;
+    }
+
+    .card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .transaction-history {
+        font-size: 18px;
+    }
+
+    .right-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+
+    .buttons {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    /* Cacher les colonnes 4 et 5 sur mobile */
+    .transactions-table th:nth-child(4),
+    .transactions-table td:nth-child(4),
+    .transactions-table th:nth-child(5),
+    .transactions-table td:nth-child(5) {
+        display: none;
+    }
+
+    /* Réduire la taille du texte et des éléments */
+    .transactions-table {
+        font-size: 13px;
+    }
+
+    .transaction-icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+    }
+
+    .transaction-name {
+        font-size: 14px;
+    }
+
+    .transaction-subtext {
+        font-size: 12px;
+    }
+
+    .status-text {
+        padding: 4px 8px;
+        font-size: 12px;
+        min-width: 70px;
+    }
+
+    .pagination-buttons {
+        gap: 5px;
+    }
+
+    .prev-btn,
+    .next-btn,
+    .page-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 400px) {
+
+    /* Ne garder que les colonnes essentielles */
+    .transactions-table th:nth-child(3),
+    .transactions-table td:nth-child(3) {
+        display: none;
+    }
+
+    .transactions-table th,
+    .transactions-table td {
+        padding: 8px 6px;
+    }
+
+    .transaction-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 6px;
+    }
+
+    .pagination-buttons .page-btn:not(.current-page) {
+        display: none;
+    }
+}

@@ -30,6 +30,9 @@
 }
 
 .dashboard-card {
+    min-height: 180px;
+    /* Définir une hauteur minimale */
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -448,7 +451,7 @@
 /* Balance Section */
 .wallet-body {
     text-align: center;
-    z-index: 1000;
+    z-index: 100;
     margin-bottom: 10px;
     cursor: pointer;
 
@@ -505,7 +508,7 @@
     margin-top: 10px;
     /* Réduit la marge du haut */
     text-align: center;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .wallet-action {
@@ -528,4 +531,240 @@
 
 .wallet-action:hover {
     transform: scale(1.1);
+}
+
+
+/* Styles responsifs pour réorganiser les cartes */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* Ajuster les marges pour les colonnes */
+    .col-md-8,
+    .col-md-4 {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+
+
+    .text-section {
+        font-size: 20px;
+    }
+
+    /* Réorganiser l'affichage des cartes */
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Garder la dashboard-card en premier */
+    .dashboard-card {
+        margin-bottom: 20px;
+    }
+
+    /* Placer les cartes info et wallet avant les transactions */
+    .col-md-4 {
+        order: 1;
+    }
+
+    .col-md-8 {
+        order: 2;
+    }
+
+    /* Mettre les cartes info et wallet côte à côte */
+    .col-md-4 .row {
+        flex-direction: row;
+        margin: 0 -10px;
+    }
+
+    .col-md-4 .col-xs-12 {
+        width: 50%;
+        padding: 0 10px;
+        margin-top: 0;
+    }
+
+    /* Centrer les cartes info et wallet */
+    .info-card,
+    .wallet-card {
+        margin: 0 0 20px 0;
+        width: 100%;
+    }
+
+    /* Ajuster la hauteur des cartes pour qu'elles soient similaires */
+    .info-card,
+    .wallet-card {
+        min-height: 180px;
+    }
+
+    .info-card {
+        height: 195px;
+    }
+
+    /* Ajustements pour les transactions */
+    .transactions-title {
+        margin-top: 20px;
+    }
+
+    /* Reste des styles inchangés */
+}
+
+/* Styles pour les très petits écrans */
+@media (max-width: 576px) {
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .text-section {
+        font-size: 15px !important;
+    }
+
+    .hello-text {
+        font-size: 24px;
+    }
+
+    .dashboard-card {
+        min-height: 150px;
+        margin-bottom: 30px;
+    }
+
+    .text-section {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .image-section {
+        width: 120px;
+        height: 120px;
+    }
+
+    .illustration {
+        width: 90px;
+    }
+
+    .image-icon-section {
+        left: 20px;
+        bottom: 10px;
+    }
+
+    .wallet-icon {
+        width: 40px;
+    }
+
+    /* Mettre les cartes info et wallet en colonne */
+    .col-md-4 .row {
+        flex-direction: column;
+    }
+
+    .col-md-4 .col-xs-12 {
+        width: 100%;
+        padding: 0;
+    }
+
+    .info-card,
+    .wallet-card {
+        min-height: auto;
+        margin-bottom: 15px;
+        padding: 12px;
+    }
+
+    .info-card {
+        height: auto;
+    }
+
+    /* Ajustements pour les transactions */
+    .transaction-card {
+        padding: 8px 0;
+    }
+
+    .transaction-logo {
+        width: 35px;
+        height: 35px;
+    }
+
+    .transaction-name {
+        font-size: 13px;
+    }
+
+    .transaction-date {
+        font-size: 11px;
+    }
+
+    .amount-ct {
+        font-size: 13px;
+    }
+
+    .amount-dt {
+        font-size: 11px;
+        margin-top: -10px;
+    }
+
+    /* Ajustements pour le calculateur de transfert */
+    .transfer-title {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .transfer-card {
+        padding: 20px;
+        min-width: 90%;
+    }
+
+    .transfer-input {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .Equivalent {
+        width: 30px;
+        height: 30px;
+    }
+
+    .flag-icon,
+    .coin-icon {
+        width: 16px;
+        height: 16px;
+        right: 30px;
+    }
+
+    .currency-text {
+        font-size: 12px;
+    }
+
+    /* Ajustements pour les cartes d'info et wallet */
+    .profile-icon {
+        max-width: 40px;
+        max-height: 40px;
+    }
+
+    .full-name,
+    .user-type {
+        font-size: 0.8rem;
+    }
+
+    .email {
+        font-size: 0.7rem;
+    }
+
+    .wallet-small-img {
+        margin-right: -30px !important;
+    }
+
+    .balance {
+        font-size: 20px;
+    }
+
+    .coin {
+        width: 25px;
+        height: 25px;
+    }
+
+    .wallet-action {
+        width: 30px;
+        height: 30px;
+        padding: 8px;
+    }
 }

@@ -80,12 +80,48 @@
 /* Formulaire (réduction de taille) */
 form {
     width: 70%;
-    /* Réduit la taille du formulaire */
-    max-width: 400px;
-    /* Fixe une largeur maximale pour le formulaire */
-    margin-left: 80px;
-    margin-top: 50px;
+    max-width: 450px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
 
+@media (min-width: 1400px) {
+    .col-md-7 {
+        padding: 40px;
+        margin-left: 10px;
+    }
+
+    form {
+        width: 85%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .d-flex.align-items-center.mb-4 {
+        margin-left: -25px;
+        margin-bottom: 40px !important;
+    }
+}
+
+.col-md-7 {
+    border-radius: 15px;
+    background-color: #F4F6F9 !important;
+    width: calc(57.14% + 0.2cm);
+    height: 560px;
+    margin-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.d-flex.align-items-center.mb-4 {
+    align-self: flex-start;
+    margin-left: -20px;
+    margin-bottom: 60px !important;
 }
 
 /* Lien mot de passe oublié */
@@ -217,3 +253,67 @@ form {
     background-color: #f0f0f0;
   }
    */
+
+
+@media (max-width: 992px) {
+    .custom-card {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 0;
+    }
+
+    .col-md-4 {
+        display: none;
+    }
+
+    .col-md-7 {
+        width: 100%;
+        margin: 0;
+        height: auto;
+        min-height: 500px;
+        border-radius: 15px;
+    }
+
+    .back-arrow {
+        position: static;
+        /* Changé de absolute à static */
+        margin-right: 15px;
+    }
+
+    .login-header {
+        margin-top: 0;
+        text-align: left;
+        /* Changé de center à left */
+    }
+
+    form {
+        width: 85%;
+        margin: 0 auto;
+        padding: 20px 0;
+    }
+
+    /* Ajout pour maintenir l'alignement du titre et de la flèche */
+    .d-flex.align-items-center.mb-4 {
+        padding-left: 20px;
+        margin-bottom: 30px !important;
+    }
+}
+
+
+@media (min-width: 993px) and (max-width: 1199px) {
+    .col-md-4 {
+        margin-left: 25px;
+        margin-right: 0px;
+    }
+
+    .col-md-7 {
+        margin-right: 15px;
+        margin-left: 10px;
+    }
+
+    form {
+        width: 80%;
+        max-width: 480px;
+    }
+}

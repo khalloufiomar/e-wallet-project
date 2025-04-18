@@ -21,10 +21,13 @@
 
         .nav-card ul {
           gap: 15px; /* Reduced gap between items */
+          flex-direction: row; /* Garder les liens en ligne */
+          justify-content: center;
         }
 
         .nav-card a {
-          font-size: 12px;
+          font-size: 11px; /* Taille de police réduite */
+          padding: 2px 5px; /* Espacement interne réduit */
         }
 
         .header-logo {
@@ -35,6 +38,23 @@
         .btn-signup {
           padding: 2px 8px; /* Smaller buttons */
           font-size: 12px;
+        }
+      }
+
+      /* Ajout des styles pour les écrans de 480px ou moins */
+      @media (max-width: 480px) {
+        .nav-card {
+          display: none; /* Masquer complètement la navbar */
+        }
+
+        .header-logo {
+          width: 45px; /* Logo plus petit */
+        }
+
+        .btn-login,
+        .btn-signup {
+          padding: 2px 6px; /* Boutons plus petits */
+          font-size: 11px;
         }
       }
     </style>
@@ -159,6 +179,34 @@
   </div>
 </section>
 
+<style>
+  /* Ajout d'une media query pour les écrans entre 769px et 1061px */
+  @media (min-width: 769px) and (max-width: 1061px) {
+    #explore {
+      margin-top: -400px !important; /* Augmenter la marge négative pour réduire l'espace */
+    }
+
+    .skills-title {
+      margin-bottom: 0 !important; /* Réduire la marge sous le titre */
+    }
+
+    .text-center.py-2 {
+      padding-bottom: 0 !important; /* Réduire le padding en bas */
+    }
+
+    /* Réduire l'espace entre "How It Works?" et la section suivante */
+    .text-center.py-4 {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin-top: -100px;
+    }
+
+    /* Ajuster la marge de la section container qui suit */
+    .container.py-5 {
+      padding-top: 10px !important;
+    }
+  }
+</style>
 <!-- Title Underneath the Card -->
 <section class="text-center py-4">
   <h2 class="skills-title">How It Works?</h2>
