@@ -7,13 +7,14 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginService {
-  private apiUrl = 'https://freeapi.miniprojectideas.com/api/BigBasket/Login';
+  private apiUrl = 'http://localhost:8069/web/session/authenticate';
 
   constructor(private http: HttpClient) {}
-
+  
   // Méthode pour envoyer l'email et le mot de passe au backend
-  login(email: string, password: string): Observable<any> {
-    const userData = { email, password }; // Données à envoyer
+  login(login: string, password: string): Observable<any> {
+    const userData = { login, password }; // Données à envoyer
     return this.http.post(this.apiUrl, userData); // Envoi des données avec POST
   }
 }
+
