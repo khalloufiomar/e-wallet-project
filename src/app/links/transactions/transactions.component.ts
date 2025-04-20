@@ -17,30 +17,26 @@ export class TransactionsComponent {
 
   ngOnInit(): void {
     this.loading = true;
-    const userId = localStorage.getItem('userId');
 
-    if (userId) {
-      this.transactionService.getTransactionsByUser(userId).subscribe(
-        (data) => {
-          this.transactions = data
-            .sort(
-              (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-            ) // tri décroissant
-            .slice(0, 3); // prend les 3 premières
-          this.loading = false;
-        },
-        (error) => {
-          console.error(
-            'Erreur lors de la récupération des transactions',
-            error
-          );
-          this.loading = false;
-        }
-      );
-    } else {
-      console.error('User ID non trouvé');
-      this.loading = false;
-    }
+    this.transactionService.getTransactionsByUser().subscribe(
+      (data) => {
+        console.log(data)
+        this.transactions = data
+          .sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          ) // tri décroissant
+          .slice(0, 3); // prend les 3 premières
+        this.loading = false;
+      },
+      (error) => {
+        console.error(
+          'Erreur lors de la récupération des transactions',
+          error
+        );
+        this.loading = false;
+      }
+    );
+    
   }
 
   searchText = '';
