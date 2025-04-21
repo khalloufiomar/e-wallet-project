@@ -23,9 +23,9 @@ export class TransactionsComponent {
         console.log(data);
         this.transactions = data
           .sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+            (a, b) => new Date(b.create_date).getTime() - new Date(a.create_date).getTime()
           ) // tri décroissant
-          .slice(0, 3); // prend les 3 premières
+          .slice(0, 5); // prend les 3 premières
         this.loading = false;
       },
       (error) => {
