@@ -182,3 +182,86 @@
 .success-toast {
     background-color: #4caf50;
 }
+
+/* Add responsive styles */
+@media (max-width: 1150px) {
+    .transfer-card.expanded {
+        width: calc(100% - 0px);
+        margin: 0 auto;
+        margin-left: 20px;
+    }
+
+    .wallet-card-custom {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .toast-container {
+        margin-top: 120px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .transfer-content {
+        flex-direction: column-reverse;
+    }
+
+    .right-side {
+        flex-direction: row !important;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .info-card,
+    .wallet-card-custom {
+        width: 48% !important;
+        max-width: 48% !important;
+    }
+
+    .info-card {
+        margin-bottom: 22px;
+        width: 50% !important;
+        margin-left: 50px;
+    }
+
+    .wallet-card-custom {
+        width: 50% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .transfer-container {
+        width: 95%;
+    }
+
+    .header-title {
+        font-size: 28px;
+    }
+
+    .right-side {
+        flex-direction: column !important;
+        align-items: center;
+    }
+
+    .info-card,
+    .wallet-card-custom {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 15px;
+    }
+
+    .transfer-card.expanded {
+        margin-left: -1px !important;
+    }
+}

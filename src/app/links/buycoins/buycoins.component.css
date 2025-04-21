@@ -334,3 +334,187 @@ body {
     color: #1f2937;
     font-size: 18px;
 }
+
+/* Responsive Styles */
+@media (max-width: 1255px) {
+    .content-wrapper {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .wallet-card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .wallet-card {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+
+    .wallet-header h5 {
+        margin-left: -45px;
+    }
+
+    .round-icon {
+        margin-right: -40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .purchase-container {
+        padding: 30px;
+    }
+
+    .page-title {
+        margin-left: 30px;
+    }
+
+    .purchase-card {
+        max-width: 500px;
+        padding: 30px;
+    }
+
+    .wallet-card {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .wallet-header h5 {
+        margin-left: -25px;
+    }
+
+    .round-icon {
+        margin-right: -25px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 913px) {
+    .purchase-card {
+        max-width: 450px;
+        padding: 25px;
+    }
+
+    .wallet-card {
+        max-width: 350px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .wallet-header h5 {
+        margin-left: -20px;
+    }
+
+    .round-icon {
+        margin-right: -20px;
+    }
+
+    .content-wrapper {
+        gap: 20px;
+    }
+
+    .wallet-header h5 {
+        margin-left: -20px;
+    }
+
+    .round-icon {
+        margin-right: -20px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 843px) {
+    .content-wrapper {
+        gap: 15px;
+    }
+
+    .wallet-header h5 {
+        margin-left: -15px;
+    }
+
+    .round-icon {
+        margin-right: -15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wallet-card {
+        max-width: 350px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .wallet-header h5 {
+        margin-left: -20px;
+    }
+
+    .round-icon {
+        margin-right: -20px;
+    }
+
+    .purchase-container {
+        padding: 20px;
+    }
+
+    .page-title {
+        font-size: 36px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    .content-wrapper {
+        gap: 25px;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .purchase-card {
+        padding: 25px;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .wallet-card {
+        max-width: 350px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .wallet-header h5 {
+        margin-left: -20px;
+    }
+
+    .round-icon {
+        margin-right: -20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .purchase-container {
+        padding: 15px;
+    }
+
+    .page-title {
+        font-size: 30px;
+        margin-left: 15px;
+        margin-bottom: 15px;
+    }
+
+    .purchase-card {
+        padding: 20px;
+    }
+
+    .wallet-card {
+        max-width: 350px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .wallet-header h5 {
+        margin-left: -20px;
+    }
+
+    .round-icon {
+        margin-right: -20px;
+    }
+}
