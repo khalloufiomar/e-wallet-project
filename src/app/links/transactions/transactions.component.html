@@ -41,7 +41,8 @@
           <th>Transaction</th>
           <th>Date</th>
           <th>Category</th>
-          <th>Status</th>
+          <th>Sender</th>
+          <th>Receiver</th>
           <th>Amount</th>
         </tr>
       </thead>
@@ -49,22 +50,15 @@
         <tr *ngFor="let transaction of transactions">
           <td><input type="checkbox" /></td>
           <td class="transaction-cell">
-            <img [src]="transaction.icon" alt="Icon" class="transaction-icon" />
+            <!-- <img [src]="transaction.icon" alt="Icon" class="transaction-icon" /> -->
             <div>
-              <div class="transaction-name">{{ transaction.name }}</div>
-              <div class="transaction-subtext">{{ transaction.subtext }}</div>
+              <div class="transaction-name">{{ transaction.id }}</div>
             </div>
           </td>
-          <td>{{ transaction.date }}</td>
+          <td>{{ transaction.create_date }}</td>
           <td>{{ transaction.category }}</td>
-          <td
-            [ngClass]="{
-              'status-completed': transaction.status === 'Completed',
-              'status-pending': transaction.status === 'Pending'
-            }"
-          >
-            <span class="status-text">{{ transaction.status }}</span>
-          </td>
+          <td>{{ transaction.sender }}</td>
+          <td>{{ transaction.receiver }}</td>
           <td>{{ transaction.amount }} CT</td>
         </tr>
       </tbody>

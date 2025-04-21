@@ -40,8 +40,10 @@ export interface Transaction {
   id: number;
   name: string;
   icon: string;
+  sender: string;
+  receiver: string;
   subtext: string;
-  date: string;
+  create_date: string;
   category: string;
   status: string;
   amount: number;
