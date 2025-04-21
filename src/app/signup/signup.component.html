@@ -14,7 +14,37 @@
         <div
           class="w-100 d-flex flex-column justify-content-center align-items-center"
         >
-          <h3 class="text-dark mb-4 sign-header">Welcome to Clevory!</h3>
+          <div class="d-flex align-items-center mb-4">
+            <a
+              [routerLink]="'/'"
+              class="back-arrow d-flex align-items-center justify-content-center me-3"
+            >
+              <i class="material-icons">arrow_back</i>
+            </a>
+            <h3 class="text-dark text-start sign-header m-0">
+              Welcome to Clevory!
+            </h3>
+          </div>
+
+          <style>
+            .back-arrow {
+              width: 40px;
+              height: 40px;
+              background-color: #f0f0f0;
+              border-radius: 50%;
+              text-decoration: none;
+              color: #000;
+              transition: background-color 0.3s ease;
+            }
+
+            .back-arrow:hover {
+              background-color: #c7c4c4;
+            }
+
+            .material-icons {
+              font-size: 24px;
+            }
+          </style>
 
           <form
             class="form"
