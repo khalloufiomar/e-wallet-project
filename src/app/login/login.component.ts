@@ -24,10 +24,12 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
+  //Disabled this for testing purposes (Aziz)
   // Valide le format de l'email
   isValidEmail(email: string): boolean {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return regex.test(email);
+    /* const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return regex.test(email); */
+    return true;
   }
 
   // Méthode de connexion

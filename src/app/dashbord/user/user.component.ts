@@ -35,27 +35,24 @@ export class UserComponent {
   userId: number = 1;
 
   ngOnInit(): void {
-    const userIdString = localStorage.getItem('userId');
-    if (userIdString) {
-      const id = +userIdString;
-      this.authService.getUserById(id).subscribe({
-        next: (user) => {
-          console.log('Utilisateur récupéré :', user); // <= ici
-          this.userId = user.id;
-          this.userName = user.name;
-          this.userType = user.type;
-          this.userEmail = user.email;
-          this.userBalance = user.balance;
-        },
-        error: (err) => {
-          console.error('Erreur lors de la récupération du user :', err);
-        },
-      });
-    }
+    this.authService.getCurrentUserInfos().subscribe({
+      next: (user) => {
+        console.log('Utilisateur récupéré :', user); // <= ici
+        this.userId = user.userID;
+        this.userName = user.userName;
+        this.userType = user.userType;
+        this.userEmail = user.userEmail;
+        this.userBalance = user.userBalance;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération du user :', err);
+      },
+    });
+
   }
 
   isHrCompany(): boolean {
-    return this.userType === 'hrcompany';
+    return this.userType === 'hr';
   }
 
   isEmployee(): boolean {

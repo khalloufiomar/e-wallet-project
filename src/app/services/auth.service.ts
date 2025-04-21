@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/users';
+  private baseUrl = 'http://localhost:8069/';
   constructor(private http: HttpClient, private router: Router) {}
 
   setToken(token: string): void {
@@ -28,6 +28,9 @@ export class AuthService {
     return !!this.getToken();
   }
 
+  getCurrentUserInfos(): Observable<any> {
+    return this.http.get(`${this.baseUrl}web/session/me`, { withCredentials: true });
+  }
   getUserById(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
   }

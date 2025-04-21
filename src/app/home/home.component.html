@@ -12,51 +12,6 @@
         display: block;
         padding: 0px;
       }
-
-      @media (max-width: 768px) {
-        .nav-card {
-          padding: 2px 10px; /* Reduced vertical and horizontal padding */
-          width: 300px; /* Slightly reduced width */
-        }
-
-        .nav-card ul {
-          gap: 15px; /* Reduced gap between items */
-          flex-direction: row; /* Garder les liens en ligne */
-          justify-content: center;
-        }
-
-        .nav-card a {
-          font-size: 11px; /* Taille de police réduite */
-          padding: 2px 5px; /* Espacement interne réduit */
-        }
-
-        .header-logo {
-          width: 50px; /* Smaller logo for mobile */
-        }
-
-        .btn-login,
-        .btn-signup {
-          padding: 2px 8px; /* Smaller buttons */
-          font-size: 12px;
-        }
-      }
-
-      /* Ajout des styles pour les écrans de 480px ou moins */
-      @media (max-width: 480px) {
-        .nav-card {
-          display: none; /* Masquer complètement la navbar */
-        }
-
-        .header-logo {
-          width: 45px; /* Logo plus petit */
-        }
-
-        .btn-login,
-        .btn-signup {
-          padding: 2px 6px; /* Boutons plus petits */
-          font-size: 11px;
-        }
-      }
     </style>
     <div class="nav-card shadow-lg">
       <ul
@@ -90,6 +45,7 @@
 <!-- Main Content -->
 <section
   class="d-flex justify-content-center align-items-center vh-100 flex-column"
+  style="z-index: 9999"
 >
   <div
     class="main-card shadow-lg p-5 d-flex"
@@ -139,7 +95,25 @@
       <img src="student.png" alt="Student Image" class="student-image" />
     </div>
   </div>
+  <div class="container-ronde">
+    <img src="ronde.png" alt="Image" class="image-ronde" />
+  </div>
+  <style>
+    /* Conteneur de l'image */
+    .container-ronde {
+      text-align: right;
+      /* Centrer l'image à droite */
+      z-index: 0;
+      /* L'image au premier plan */
+    }
 
+    .image-ronde {
+      width: 40%;
+      height: auto;
+      border-radius: 0px;
+      margin-top: -820px;
+    }
+  </style>
   <!-- Title Underneath -->
   <section class="text-center py-2">
     <!-- Changed from py-4 to py-2 -->
@@ -421,157 +395,4 @@
     </div>
   </div>
 </footer>
-<style>
-  /* Tablet view (376px - 768px) */
-  @media (min-width: 376px) and (max-width: 768px) {
-    .nav-card {
-      padding: 2px 10px;
-      width: 300px;
-    }
-
-    .nav-card ul {
-      gap: 15px;
-    }
-
-    .nav-card a {
-      font-size: 12px;
-    }
-
-    .header-logo {
-      width: 50px;
-    }
-
-    .btn-login,
-    .btn-signup {
-      padding: 2px 8px;
-      font-size: 12px;
-    }
-  }
-
-  /* Mobile view (max-width 375px) */
-  @media (max-width: 375px) {
-    /* Header adjustments */
-    .nav-card {
-      padding: 2px 5px;
-      width: 150px;
-    }
-
-    /* Main card adjustments */
-    .main-card {
-      flex-direction: column !important;
-      height: auto !important;
-      padding: 15px !important;
-      margin: 10px;
-    }
-
-    .main-text {
-      font-size: 24px;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .small-text {
-      font-size: 11px;
-      text-align: center;
-    }
-
-    .student-image {
-      width: 100% !important;
-      margin: 15px 0 !important;
-    }
-
-    /* Subscribe section adjustments */
-    .d-flex.align-items-center {
-      flex-direction: column;
-      width: 100%;
-      padding: 0 15px;
-    }
-
-    .form-control {
-      width: 100%;
-      margin: 8px 0;
-      max-width: none;
-    }
-
-    .btn-subscribe {
-      width: 100%;
-      margin: 8px 0;
-      max-width: none;
-    }
-
-    /* Steps section */
-    .maincard {
-      padding: 10px !important;
-    }
-
-    .step-card {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-
-    .row.justify-content-between {
-      flex-direction: column;
-    }
-
-    /* FAQ section */
-    .faq-card {
-      width: 95%;
-      margin: 15px auto;
-    }
-
-    /* Footer */
-    .footer-container {
-      flex-direction: column;
-      text-align: center;
-      gap: 10px;
-    }
-
-    /* Hide decorative images */
-    .image-ronde,
-    .image-violet,
-    .section-imageronde,
-    .image-l,
-    .image-cube,
-    .section-imagex {
-      display: none;
-    }
-
-    /* Custom card */
-    .custom-card {
-      height: auto !important;
-      margin: 8px 0;
-    }
-
-    .card-text {
-      font-size: 16px !important;
-    }
-
-    /* Section spacing */
-    .vh-100 {
-      height: auto !important;
-      min-height: auto !important;
-    }
-
-    section {
-      padding: 15px 0;
-    }
-
-    /* Additional mobile-specific adjustments */
-    .skills-title {
-      font-size: 20px;
-      margin: 10px 0;
-    }
-
-    .step-number {
-      font-size: 20px;
-    }
-
-    .step-title {
-      font-size: 14px;
-    }
-
-    .step-description {
-      font-size: 12px;
-    }
-  }
-</style>
+<style></style>

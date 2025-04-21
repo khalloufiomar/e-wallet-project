@@ -6,11 +6,13 @@ import { Transaction } from '../model/class/user';
   providedIn: 'root',
 })
 export class TransactionService {
-  private apiUrl = 'https://6dbe4df5-0ff9-43fe-bf8b-2534b3265323.mock.pstmn.io'; // Remplace par l'URL de ton API
+  private apiUrl = 'http://localhost:8069/api/getTransactions'; // Remplace par l'URL de ton API
 
   constructor(private http: HttpClient) {}
-
-  getTransactionsByUser(userId: string): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.apiUrl}?userId=${userId}`);
+  
+  getTransactionsByUser(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.apiUrl,{
+      withCredentials: true, 
+      });
   }
 }
