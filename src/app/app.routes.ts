@@ -15,6 +15,7 @@ import { BuyCoinsComponent } from './links/buycoins/buycoins.component';
 import { SettingsComponent } from './links/settings/settings.component';
 import { ProfileSettingsComponentComponent } from './settings links/profilesettings/profile-settings-component.component';
 import { authGuard } from './auth.guard';
+import { InvoicesComponent } from './links/invoices/invoices.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,8 @@ export const routes: Routes = [
       { path: 'transfer', component: TransferComponent },
       { path: 'buyCoins', component: BuyCoinsComponent },
       { path: 'notifications', component: NotificationsComponent },
+      { path: 'invoices', component: InvoicesComponent },
+
       {
         path: 'settings',
         component: SettingsComponent,
