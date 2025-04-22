@@ -15,4 +15,10 @@ export class InvoicesService {
       withCredentials: true,
     });
   }
+  // Récupérer les détails d'une facture par son ID
+  getInvoiceById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`, {
+      withCredentials: true,
+    });
+  }
 }

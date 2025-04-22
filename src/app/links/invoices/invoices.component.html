@@ -12,7 +12,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let invoice of invoices">
+    <tr
+      *ngFor="let invoice of invoices"
+      (click)="openInvoiceDetails(invoice)"
+      style="cursor: pointer"
+    >
       <td>{{ invoice.ref }}</td>
       <td>{{ invoice.date }}</td>
       <td>{{ invoice.amount }}</td>
@@ -33,4 +37,51 @@
 
 <div *ngIf="invoices.length === 0" class="alert alert-info mt-4">
   Aucune facture disponible.
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="invoiceDetailsModal"
+  tabindex="-1"
+  aria-labelledby="invoiceDetailsLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="invoiceDetailsLabel">
+          Détails de la Facture
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Fermer"
+        ></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedInvoice">
+        <p><strong>Référence :</strong> {{ selectedInvoice.ref }}</p>
+        <p><strong>Date :</strong> {{ selectedInvoice.date }}</p>
+        <p>
+          <strong>Montant :</strong> {{ selectedInvoice.amount }}
+          {{ selectedInvoice.currency }}
+        </p>
+        <p>
+          <strong>Statut :</strong>
+          <span
+            [ngClass]="{
+              'badge bg-success': selectedInvoice.payment_state === 'paid',
+              'badge bg-danger': selectedInvoice.payment_state === 'not_paid'
+            }"
+          >
+            {{
+              selectedInvoice.payment_state === "paid" ? "Payée" : "Non payée"
+            }}
+          </span>
+        </p>
+        <!-- Tu peux ajouter plus de détails ici -->
+      </div>
+    </div>
+  </div>
 </div>
