@@ -10,7 +10,7 @@ export class TransactionService {
 
   constructor(private http: HttpClient) {}
   
-  getTransactionsByUser(): Observable<Transaction[]> {
+  getSelfTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.apiUrl,{
       withCredentials: true, 
       });

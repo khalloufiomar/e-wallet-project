@@ -18,7 +18,7 @@ export class TransactionsComponent {
   ngOnInit(): void {
     this.loading = true;
 
-    this.transactionService.getTransactionsByUser().subscribe(
+    this.transactionService.getSelfTransactions().subscribe(
       (data) => {
         console.log(data);
         this.transactions = data

@@ -79,20 +79,24 @@
       </div>
 
       <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
-        <!-- Recipient User ID -->
+        <!-- Recipient Wallet ID -->
         <div class="form-group mb-3">
-          <label for="recipient-id" class="form-label">
-            <h5>Recipient User ID</h5>
+          <label for="recipient-wallet-id" class="form-label">
+            <h5>Recipient User</h5>
           </label>
           <div class="input-with-icon">
             <i class="bi bi-person"></i>
-            <input
+            <select 
               type="text"
               class="form-control"
-              id="recipient-id"
-              placeholder="Enter Recipient ID"
-              formControlName="recipientId"
-            />
+              id="recipient-wallet-id"
+              placeholder="Enter Recipient Wallet ID"
+              formControlName="recipientWalletId"
+            >
+            <option *ngFor="let emp of employees" [value]="emp.walletId">
+              {{ emp.userName }}
+            </option>
+          </select>
           </div>
         </div>
 
@@ -145,9 +149,9 @@
             <div *ngFor="let transfer of recentTransfers" class="mb-2">
               <div class="transfer-item d-flex justify-content-between">
                 <div class="transfer-info">
-                  <p class="employee-name mb-0">{{ transfer.recipientName }}</p>
+                  <p class="employee-name mb-0">{{ transfer.receiver }}</p>
                   <p class="transfer-date text-muted mb-0">
-                    {{ transfer.date | date : "yyyy-MM-dd" }}
+                    {{ transfer.create_date | date : "yyyy-MM-dd" }}
                   </p>
                 </div>
                 <p class="transfer-amount text-danger mb-0">

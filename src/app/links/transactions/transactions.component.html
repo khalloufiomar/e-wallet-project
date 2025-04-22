@@ -55,7 +55,7 @@
               <div class="transaction-name">{{ transaction.id }}</div>
             </div>
           </td>
-          <td>{{ transaction.create_date }}</td>
+          <td>{{ transaction.create_date | date : "yyyy-MM-dd" }}</td>
           <td>{{ transaction.category }}</td>
           <td>{{ transaction.sender }}</td>
           <td>{{ transaction.receiver }}</td>

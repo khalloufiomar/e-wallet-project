@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { DashboardService } from '../../services/dashboard.service';
+import { TransactionService } from '../../services/transaction.service';
 import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -15,11 +15,11 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   // transactions: any[] = [];
 
-  tndAmount: number = 10; // Montant en TND
+  tndAmount: number = 50; // Montant en TND
   ctAmount: number = 50; // Montant en CT
-
+  loading: boolean = true;
   convertToCT(): void {
-    const conversionRate = 0.2; // 1 TND = 0.2 CT
+    const conversionRate = 1; // 1 TND = 1 CT
     this.ctAmount = this.tndAmount * conversionRate;
   }
 
@@ -32,44 +32,42 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private dashboardService: DashboardService,
+    private transactionService: TransactionService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    const userIdString = localStorage.getItem('userId');
-    if (userIdString) {
-      const id = +userIdString;
-      this.authService.getUserById(id).subscribe({
+      this.authService.getCurrentUserInfos().subscribe({
         next: (user) => {
           console.log('Utilisateur récupéré :', user);
-          this.userId = user.id;
-          this.userName = user.name;
-          this.userType = user.type;
-          this.userEmail = user.email;
-          this.userBalance = user.balance;
+          this.userId = user.userID;
+          this.userName = user.userName;
+          this.userType = user.userType;
+          this.userEmail = user.userEmail;
+          this.userBalance = user.userBalance;
 
           // ✅ Récupérer les 3 dernières transactions
-          this.dashboardService
-            .getRecentTransactionsByUserId(this.userId)
-            .subscribe({
-              next: (transactions) => {
-                this.transactions = transactions;
-                console.log('Dernières transactions :', this.transactions);
-              },
-              error: (err) => {
-                console.error(
-                  'Erreur lors de la récupération des transactions :',
-                  err
-                );
-              },
-            });
+          this.transactionService.getSelfTransactions().subscribe(
+            (data) => {
+              console.log(data);
+              this.transactions = data
+                .sort(
+                  (a, b) => new Date(b.create_date).getTime() - new Date(a.create_date).getTime()
+                ) // tri décroissant
+                .slice(0, 3); // prend les 3 premières
+              this.loading = false;
+            },
+            (error) => {
+              console.error('Erreur lors de la récupération des transactions', error);
+              this.loading = false;
+            }
+          );
         },
         error: (err) => {
           console.error('Erreur lors de la récupération du user :', err);
         },
       });
-    }
+
   }
 
   triggerSeeAll() {

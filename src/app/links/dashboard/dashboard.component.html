@@ -43,12 +43,12 @@
         <div class="transaction-card" *ngFor="let transaction of transactions">
           <img src="logo.png" class="transaction-logo" alt="Transaction Logo" />
           <div class="transaction-info">
-            <p class="transaction-name">{{ transaction.name }}</p>
-            <p class="transaction-date">{{ transaction.date }}</p>
+            <p class="transaction-name">ID: {{ transaction.id }} Category: {{ transaction.category }}</p>
+            <p class="transaction-date">{{ transaction.create_date | date : "yyyy-MM-dd" }}</p>
           </div>
           <div class="transaction-amount">
             <p class="amount-ct">{{ transaction.amount }} CT</p>
-            <p class="amount-dt">{{ transaction.amount * 0.2 }} DT</p>
+            <p class="amount-dt">{{ transaction.amount * 1 }} DT</p>
           </div>
         </div>
       </div>
