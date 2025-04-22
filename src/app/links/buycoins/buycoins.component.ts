@@ -17,23 +17,23 @@ export class BuyCoinsComponent implements OnInit {
   userId: number = 1;
   constructor(private authservice: AuthService) {}
   ngOnInit(): void {
-    const userIdString = localStorage.getItem('userId');
-    if (userIdString) {
-      const id = +userIdString;
-      this.authservice.getUserById(id).subscribe({
+
+
+
+      this.authservice.getCurrentUserInfos().subscribe({
         next: (user) => {
           console.log('Utilisateur récupéré :', user); // <= ici
-          this.userId = user.id;
-          this.userName = user.name;
-          this.userType = user.type;
-          this.userEmail = user.email;
-          this.userBalance = user.balance;
+          this.userId = user.userID;
+          this.userName = user.userName;
+          this.userType = user.userType;
+          this.userEmail = user.userEmail;
+          this.userBalance = user.userBalance;
         },
         error: (err) => {
           console.error('Erreur lors de la récupération du user :', err);
         },
       });
-    }
+
   }
 
   showModal: boolean = false;
@@ -50,6 +50,6 @@ export class BuyCoinsComponent implements OnInit {
 
   calculateTotal() {
     // Exemple de calcul du total
-    this.totalPrice = this.coinAmount * 0.5; // Par exemple, chaque coin coûte 0.5 Dinars
+    this.totalPrice = this.coinAmount * 1; // Par exemple, chaque coin coûte 0.5 Dinars
   }
 }
