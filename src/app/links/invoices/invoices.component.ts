@@ -35,6 +35,6 @@ export class InvoicesComponent {
   }
   openInvoiceDetails(invoice: any): void {
     // Naviguer vers la page de détails de la facture en passant l'ID dans l'URL
-    this.router.navigate(['/invoice', invoice.id]);
+    this.router.navigate(['user/invoice-details/', invoice.id]);
   }
 }
