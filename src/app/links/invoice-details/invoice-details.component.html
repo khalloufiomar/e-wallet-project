@@ -18,6 +18,8 @@
     </span>
   </p>
   <p><strong>Details supplémentaires :</strong> {{ invoiceDetails.details }}</p>
+  <!-- Paypal Payment Buttons -->
+  <ngx-paypal [config]="payPalConfig"></ngx-paypal>
 </div>
 
 <div *ngIf="!invoiceDetails">
