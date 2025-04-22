@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { BuycoinsService } from '../../services/buycoins.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buycoins',
@@ -18,7 +19,8 @@ export class BuyCoinsComponent implements OnInit {
   userId: number = 1;
   constructor(
     private authservice: AuthService,
-    private buyCoinsService: BuycoinsService
+    private buyCoinsService: BuycoinsService,
+    private router: Router
   ) {}
   ngOnInit(): void {
 
@@ -59,6 +61,8 @@ export class BuyCoinsComponent implements OnInit {
         (response) => {
           console.log('Réponse API :', response);
           this.responseMessage = 'Facture générée avec succès.';
+          this.router.navigate(['/user/invoices']);
+
         },
         (error) => {
           console.error('Erreur API :', error);
@@ -68,5 +72,6 @@ export class BuyCoinsComponent implements OnInit {
     } else {
       this.errorMessage = 'Veuillez entrer un nombre valide.';
     }
+
   }
 }

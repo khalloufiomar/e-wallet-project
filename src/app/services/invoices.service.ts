@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class InvoicesService {
-  private apiUrl = 'http://localhost:8069/fund_wallet/request_invoice'; // Remplace par ton vrai endpoint si différent
+  private apiUrl = 'http://localhost:8069/api/getInvoices'; // Remplace par ton vrai endpoint si différent
 
   constructor(private http: HttpClient) {}
 
