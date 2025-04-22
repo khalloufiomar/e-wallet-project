@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { BuycoinsService } from '../../services/buycoins.service';
 
 @Component({
   selector: 'app-buycoins',
@@ -15,7 +16,10 @@ export class BuyCoinsComponent implements OnInit {
   userEmail = '';
   userBalance = '';
   userId: number = 1;
-  constructor(private authservice: AuthService) {}
+  constructor(
+    private authservice: AuthService,
+    private buyCoinsService: BuycoinsService
+  ) {}
   ngOnInit(): void {
 
 
@@ -36,20 +40,33 @@ export class BuyCoinsComponent implements OnInit {
 
   }
 
-  showModal: boolean = false;
   coinAmount: number = 0.0;
   totalPrice: number = 0;
-
-  openModal() {
-    this.showModal = true; // Ouvre le modal
-  }
-
-  closeModal() {
-    this.showModal = false; // Ferme le modal
-  }
 
   calculateTotal() {
     // Exemple de calcul du total
     this.totalPrice = this.coinAmount * 1; // Par exemple, chaque coin coûte 0.5 Dinars
+  }
+
+  responseMessage: string = '';
+  errorMessage: string = '';
+  submitCoinAmount(): void {
+    this.responseMessage = '';
+    this.errorMessage = '';
+
+    if (this.coinAmount > 0) {
+      this.buyCoinsService.getInvoiceByQuantity(this.coinAmount).subscribe(
+        (response) => {
+          console.log('Réponse API :', response);
+          this.responseMessage = 'Facture générée avec succès.';
+        },
+        (error) => {
+          console.error('Erreur API :', error);
+          this.errorMessage = 'Une erreur est survenue.';
+        }
+      );
+    } else {
+      this.errorMessage = 'Veuillez entrer un nombre valide.';
+    }
   }
 }

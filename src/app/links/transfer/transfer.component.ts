@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { TransferService, Employee} from '../../services/transfer.service';
+import { TransferService, Employee } from '../../services/transfer.service';
 import { Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
@@ -25,7 +25,7 @@ export class TransferComponent implements OnInit {
   userEmail = '';
   userBalance = '';
   userId: number = 1;
-  employees : Employee[] = [];
+  employees: Employee[] = [];
   constructor(
     private fb: FormBuilder,
     private transferService: TransferService,
@@ -56,13 +56,13 @@ export class TransferComponent implements OnInit {
       next: (data) => {
         console.log('Employees wallets retrived :', data); // <= ici
         this.employees = data;
-        console.log("Employees array: ",this.employees)
+        console.log('Employees array: ', this.employees);
       },
       error: (err) => {
         console.error('Erreur lors de la récupération du wallets :', err);
       },
     });
-    
+
     this.transferForm = this.fb.group({
       recipientWalletId: [
         '',
@@ -74,9 +74,6 @@ export class TransferComponent implements OnInit {
       ],
       description: [''],
     });
-
-      
-    
   }
 
   get f() {
@@ -104,7 +101,7 @@ export class TransferComponent implements OnInit {
         this.errorMessages.push('Amount must be a valid number.');
       }
       return;
-    } 
+    }
 
     this.isLoading = true;
 
@@ -136,7 +133,7 @@ export class TransferComponent implements OnInit {
         console.error(err);
       },
     });
-    console.log(formData)
+    console.log(formData);
     setTimeout(() => {
       window.location.reload();
     }, 1000);
@@ -144,9 +141,13 @@ export class TransferComponent implements OnInit {
   getRecentTransfers(): void {
     this.transferService.getLastTransfers().subscribe({
       next: (transfers) => {
-        this.recentTransfers = transfers.sort(
-          (a, b) => new Date(b.create_date).getTime() - new Date(a.create_date).getTime()
-        ).slice(0, 3);;
+        this.recentTransfers = transfers
+          .sort(
+            (a, b) =>
+              new Date(b.create_date).getTime() -
+              new Date(a.create_date).getTime()
+          )
+          .slice(0, 3);
       },
       error: (err) => {
         console.error('Erreur lors du chargement des transferts récents', err);
