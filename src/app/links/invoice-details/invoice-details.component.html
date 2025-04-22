@@ -1,0 +1,25 @@
+<div *ngIf="invoiceDetails">
+  <h2>Détails de la Facture</h2>
+  <p><strong>Référence :</strong> {{ invoiceDetails.ref }}</p>
+  <p><strong>Date :</strong> {{ invoiceDetails.date }}</p>
+  <p>
+    <strong>Montant :</strong> {{ invoiceDetails.amount }}
+    {{ invoiceDetails.currency }}
+  </p>
+  <p>
+    <strong>Statut :</strong>
+    <span
+      [ngClass]="{
+        'badge bg-success': invoiceDetails.payment_state === 'paid',
+        'badge bg-danger': invoiceDetails.payment_state === 'not_paid'
+      }"
+    >
+      {{ invoiceDetails.payment_state === "paid" ? "Payée" : "Non payée" }}
+    </span>
+  </p>
+  <p><strong>Details supplémentaires :</strong> {{ invoiceDetails.details }}</p>
+</div>
+
+<div *ngIf="!invoiceDetails">
+  <p>Chargement des détails...</p>
+</div>
