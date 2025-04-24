@@ -34,4 +34,9 @@ export class AuthService {
   getUserById(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
+
+
+  logoutCurrentUser(): Observable<any> {
+    return this.http.get(`${this.baseUrl}web/session/logout`, { withCredentials: true });
+  }
 }

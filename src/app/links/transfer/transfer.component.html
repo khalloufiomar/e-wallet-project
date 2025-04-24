@@ -95,6 +95,7 @@
             >
             <option *ngFor="let emp of employees" [value]="emp.walletId">
               {{ emp.userName }}
+              - Current Balance: {{ emp.balance }} CT
             </option>
           </select>
           </div>
