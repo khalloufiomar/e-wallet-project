@@ -21,10 +21,16 @@ export class UserComponent {
     this.showTransactions = true;
   }
   logout() {
-    console.log('Logging out...');
-    localStorage.removeItem('userId');
-    this.router.navigate(['/login']);
-  }
+    this.authService.logoutCurrentUser().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error('Logout failed:', err);
+        // Optionally handle errors (e.g. show a notification)
+        this.router.navigate(['/login']); // fallback redirect just in case
+      }})
+    }
 
   constructor(private authService: AuthService, private router: Router) {}
 

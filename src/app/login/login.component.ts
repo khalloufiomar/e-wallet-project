@@ -77,7 +77,17 @@ export class LoginComponent {
         }
       );
   }
-
+  loginWithGoogle() {
+    const clientId = '702801246137-5qak9l8aul55he74p63ib2m2jsllvuft.apps.googleusercontent.com';
+    const redirectUri = encodeURIComponent('http://localhost:8069/api/googleAuth');
+    const scope = encodeURIComponent('email profile openid');
+    const responseType = 'code';
+  
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&prompt=consent`;
+    console.log("Clicked!")
+    window.location.href = googleAuthUrl;
+  }
+  
   // Afficher/Masquer le mot de passe
   togglePassword(): void {
     this.showPassword = !this.showPassword;

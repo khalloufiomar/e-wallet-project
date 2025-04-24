@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { TransactionService } from '../../services/transaction.service';
+
 import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -60,11 +61,13 @@ export class DashboardComponent implements OnInit {
             (error) => {
               console.error('Erreur lors de la récupération des transactions', error);
               this.loading = false;
+              this.router.navigate(['/login']);
             }
           );
         },
         error: (err) => {
           console.error('Erreur lors de la récupération du user :', err);
+          this.router.navigate(['/login']);
         },
       });
 
