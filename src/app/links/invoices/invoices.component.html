@@ -39,3 +39,63 @@
   Aucune facture disponible.
 </div>
 
+<!-- Modal -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="invoiceModal"
+  tabindex="-1"
+  aria-labelledby="invoiceModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="invoiceModalLabel">
+          Détails de la facture
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Fermer"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="invoiceDetails">
+          <h2>Détails de la Facture</h2>
+          <p><strong>Référence :</strong> {{ invoiceDetails.ref }}</p>
+          <p><strong>Date :</strong> {{ invoiceDetails.date }}</p>
+          <p>
+            <strong>Montant :</strong> {{ invoiceDetails.amount }}
+            {{ invoiceDetails.currency }}
+          </p>
+          <p>
+            <strong>Statut :</strong>
+            <span
+              [ngClass]="{
+                'badge bg-success': invoiceDetails.payment_state === 'paid',
+                'badge bg-danger': invoiceDetails.payment_state === 'not_paid'
+              }"
+            >
+              {{
+                invoiceDetails.payment_state === "paid" ? "Payée" : "Non payée"
+              }}
+            </span>
+          </p>
+          <p>
+            <strong>Détails supplémentaires :</strong>
+            {{ invoiceDetails.details }}
+          </p>
+
+          <!-- Paypal Payment Buttons -->
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+
+        <div *ngIf="!invoiceDetails">
+          <p>Chargement des détails...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
