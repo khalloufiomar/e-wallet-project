@@ -15,4 +15,11 @@ export class TransactionService {
       withCredentials: true, 
       });
   }
+  getReport(type: string): Observable<any> {
+    return this.http.get(`http://localhost:8069/transactions/export?type=${type}`, {
+      withCredentials: true,
+      responseType: 'blob'  // <-- important if you're downloading a file!
+    });
+  }
+  
 }

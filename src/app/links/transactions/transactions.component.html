@@ -19,9 +19,15 @@
           <button class="filter-btn">
             <i class="fa fa-filter"></i> Filter
           </button>
+        </div>
+        <div class="export-container" (click)="toggleDropdown()">
           <button class="export-btn">
             <i class="fa fa-download"></i> Export
           </button>
+          <ul *ngIf="dropdownOpen" class="export-options">
+            <li (click)="getReport('pdf')">PDF</li>
+            <li (click)="getReport('csv')">CSV</li>
+          </ul>
         </div>
       </div>
     </div>

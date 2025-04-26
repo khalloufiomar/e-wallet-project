@@ -12,7 +12,7 @@ import { TransactionService } from '../../services/transaction.service';
 export class TransactionsComponent {
   transactions: Transaction[] = [];
   loading: boolean = true;
-
+  dropdownOpen = false;
   constructor(private transactionService: TransactionService) {}
 
   ngOnInit(): void {
@@ -40,4 +40,23 @@ export class TransactionsComponent {
   changePage(direction: string) {
     console.log('Change page: ', direction);
   }
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+  getReport(type: string) {
+    this.transactionService.getReport(type).subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `transactions.${type}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Download error:', error);
+    });
+  }
+  
+
 }

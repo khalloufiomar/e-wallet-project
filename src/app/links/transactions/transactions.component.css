@@ -50,7 +50,33 @@ body {
     gap: 15px;
     margin-bottom: 40px;
 }
-
+.export-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+.export-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    width: 120px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+  
+.export-options li {
+    padding: 10px;
+    cursor: pointer;
+}
+  
+.export-options li:hover {
+    background-color: #f0f0f0;
+}
+  
 .transaction-history {
     font-size: 22px;
     /* Augmenté pour plus de lisibilité */
