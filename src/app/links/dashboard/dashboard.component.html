@@ -99,9 +99,22 @@
               <p class="full-name">{{ userName }}</p>
               <p class="user-type">{{ userType }}</p>
               <p class="email">{{ userEmail }}</p>
+        
+              <!-- Company Code toggle (only for HR users) -->
+              <div *ngIf="userType === 'hr'" class="company-code-section text-center mt-2">
+                <p (click)="toggleCode()" class="company-code-toggle" style="cursor: pointer;">
+                  Company Code
+                  <i [ngClass]="{ 'bi bi-chevron-down': !showCode, 'bi bi-chevron-up': showCode }"></i>
+                </p>
+                <div *ngIf="showCode" class="company-code mt-1">
+                  <p>{{ companyCode }}</p>
+                  <p class="company-code-tip">Share this code with your colleagues.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        
 
         <!-- Deuxième carte -->
         <div class="col-xs-12 mb-3">

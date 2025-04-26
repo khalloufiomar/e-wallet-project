@@ -39,7 +39,7 @@ export class UserComponent {
   userEmail = '';
   userBalance = '';
   userId: number = 1;
-
+  companyCode = ""
   ngOnInit(): void {
     this.authService.getCurrentUserInfos().subscribe({
       next: (user) => {
@@ -49,6 +49,9 @@ export class UserComponent {
         this.userType = user.userType;
         this.userEmail = user.userEmail;
         this.userBalance = user.userBalance;
+        if (this.userType == "hr"){
+          this.companyCode = user.companyCode
+        }
       },
       error: (err) => {
         console.error('Erreur lors de la récupération du user :', err);

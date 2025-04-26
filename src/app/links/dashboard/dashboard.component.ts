@@ -29,14 +29,17 @@ export class DashboardComponent implements OnInit {
   userEmail = '';
   userBalance = '';
   userId: number = 1;
+  companyCode = ""
   transactions: any[] = [];
-
+  showCode: boolean = false;
   constructor(
     private authService: AuthService,
     private transactionService: TransactionService,
     private router: Router
   ) {}
-
+  toggleCode() {
+    this.showCode = !this.showCode;
+  }
   ngOnInit(): void {
       this.authService.getCurrentUserInfos().subscribe({
         next: (user) => {
@@ -46,7 +49,9 @@ export class DashboardComponent implements OnInit {
           this.userType = user.userType;
           this.userEmail = user.userEmail;
           this.userBalance = user.userBalance;
-
+          if (this.userType == "hr"){
+            this.companyCode = user.companyCode
+          }
           // ✅ Récupérer les 3 dernières transactions
           this.transactionService.getSelfTransactions().subscribe(
             (data) => {

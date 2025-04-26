@@ -320,8 +320,19 @@
     text-align: center;
     margin-bottom: 5px;
 }
-
-.email {
+.company-code {
+    border: 1px solid #dcdcdc; 
+    padding: 8px 12px;        
+    border-radius: 5px;      
+    display: inline-block;   
+    text-align: center;       
+  }
+  
+  .company-code p {
+    margin: 4px 0; 
+    font-size: 14px; 
+  }
+.email,.company-code-tip {
     font-size: 0.8rem;
     font-weight: 400;
     text-align: center;
