@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { TransactionService } from '../../services/transaction.service';
 import { MessagingService } from '../../services/messaging.service';
-
 import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -45,41 +44,45 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.messagingService.requestPermission();
     this.messagingService.listenForMessages();
-      this.authService.getCurrentUserInfos().subscribe({
-        next: (user) => {
-          console.log('Utilisateur récupéré :', user);
-          this.userId = user.userID;
-          this.userName = user.userName;
-          this.userType = user.userType;
-          this.userEmail = user.userEmail;
-          this.userBalance = user.userBalance;
-          if (this.userType == "hr"){
-            this.companyCode = user.companyCode
+    this.authService.getCurrentUserInfos().subscribe({
+      next: (user) => {
+        console.log('Utilisateur récupéré :', user);
+        this.userId = user.userID;
+        this.userName = user.userName;
+        this.userType = user.userType;
+        this.userEmail = user.userEmail;
+        this.userBalance = user.userBalance;
+        if (this.userType == 'hr') {
+          this.companyCode = user.companyCode;
+        }
+        // ✅ Récupérer les 3 dernières transactions
+        this.transactionService.getSelfTransactions().subscribe(
+          (data) => {
+            console.log(data);
+            this.transactions = data
+              .sort(
+                (a, b) =>
+                  new Date(b.create_date).getTime() -
+                  new Date(a.create_date).getTime()
+              ) // tri décroissant
+              .slice(0, 3); // prend les 3 premières
+            this.loading = false;
+          },
+          (error) => {
+            console.error(
+              'Erreur lors de la récupération des transactions',
+              error
+            );
+            this.loading = false;
+            this.router.navigate(['/login']);
           }
-          // ✅ Récupérer les 3 dernières transactions
-          this.transactionService.getSelfTransactions().subscribe(
-            (data) => {
-              console.log(data);
-              this.transactions = data
-                .sort(
-                  (a, b) => new Date(b.create_date).getTime() - new Date(a.create_date).getTime()
-                ) // tri décroissant
-                .slice(0, 3); // prend les 3 premières
-              this.loading = false;
-            },
-            (error) => {
-              console.error('Erreur lors de la récupération des transactions', error);
-              this.loading = false;
-              this.router.navigate(['/login']);
-            }
-          );
-        },
-        error: (err) => {
-          console.error('Erreur lors de la récupération du user :', err);
-          this.router.navigate(['/login']);
-        },
-      });
-
+        );
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération du user :', err);
+        this.router.navigate(['/login']);
+      },
+    });
   }
 
   triggerSeeAll() {
