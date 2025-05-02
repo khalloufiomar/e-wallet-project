@@ -1,32 +1,22 @@
 <div *ngIf="data; else loading">
   <div class="card" *ngFor="let item of data">
-    <!-- Image principale -->
-    <img
-      [src]="item.imageUrl"
-      class="card-img-top"
-      alt="Image de la formation"
-    />
-
     <div class="card-body">
       <!-- Titre -->
       <h5 class="card-title">{{ item.title }}</h5>
 
-      <!-- Dates début / fin -->
-      <p class="card-text">
-        <small class="text-muted">
-          Du {{ item.startDate | date : "dd/MM/yyyy" }} au
-          {{ item.endDate | date : "dd/MM/yyyy" }}
-        </small>
-      </p>
-
       <!-- Description -->
       <p class="card-text">{{ item.description }}</p>
 
+      <!-- Date -->
+      <p class="card-text">
+        <small class="text-muted">Publié le : {{ item.date }}</small>
+      </p>
+
       <!-- Prix -->
-      <p class="card-text">Prix : {{ item.price }} TND</p>
+      <p class="card-text">Prix : {{ item.price }}</p>
 
       <!-- Bouton d'achat -->
-      <button class="btn btn-primary">S'inscrire</button>
+      <button class="btn btn-primary">Acheter</button>
     </div>
   </div>
 </div>
@@ -37,18 +27,11 @@
 
 <style>
   .card {
-    width: 20rem;
+    width: 18rem;
     margin: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-
-  .card-img-top {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
   }
 
   .card-body {
@@ -61,14 +44,14 @@
   }
 
   .card-text {
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin-bottom: 10px;
   }
 
   .btn-primary {
     background-color: #007bff;
     border: none;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 5px;
     color: white;
     cursor: pointer;
