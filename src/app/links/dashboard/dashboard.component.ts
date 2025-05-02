@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
   userEmail = '';
   userBalance = '';
   userId: number = 1;
-  companyCode = ""
+  companyCode = '';
   transactions: any[] = [];
   showCode: boolean = false;
   constructor(
@@ -43,8 +43,6 @@ export class DashboardComponent implements OnInit {
     this.showCode = !this.showCode;
   }
   ngOnInit(): void {
-      this.messagingService.requestPermission();
-      this.messagingService.listenForMessages();
       this.authService.getCurrentUserInfos().subscribe({
         next: (user) => {
           console.log('Utilisateur récupéré :', user);
@@ -67,7 +65,6 @@ export class DashboardComponent implements OnInit {
                 .slice(0, 3); // prend les 3 premières
               this.loading = false;
             },
-
             (error) => {
               console.error('Erreur lors de la récupération des transactions', error);
               this.loading = false;
@@ -96,5 +93,16 @@ export class DashboardComponent implements OnInit {
 
   goToTransactions() {
     this.router.navigate(['/user/transactions']);
+  }
+  isHrCompany(): boolean {
+    return this.userType === 'hr';
+  }
+
+  isEmployee(): boolean {
+    return this.userType === 'employee';
+  }
+
+  isLearner(): boolean {
+    return this.userType === 'learner';
   }
 }

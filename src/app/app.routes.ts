@@ -17,6 +17,7 @@ import { ProfileSettingsComponentComponent } from './settings links/profilesetti
 import { authGuard } from './auth.guard';
 import { InvoicesComponent } from './links/invoices/invoices.component';
 import { InvoiceDetailsComponent } from './links/invoice-details/invoice-details.component';
+import { StoreComponent } from './links/store/store.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,7 @@ export const routes: Routes = [
       { path: 'notifications', component: NotificationsComponent },
       { path: 'invoices', component: InvoicesComponent },
       { path: 'invoice-details/:id', component: InvoiceDetailsComponent },
+      { path: 'store', component: StoreComponent },
 
       {
         path: 'settings',
