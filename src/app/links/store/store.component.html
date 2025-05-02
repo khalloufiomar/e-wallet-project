@@ -1,1 +1,63 @@
-<p>store works!</p>
+<div *ngIf="data; else loading">
+  <div class="card" *ngFor="let item of data">
+    <div class="card-body">
+      <!-- Titre -->
+      <h5 class="card-title">{{ item.title }}</h5>
+
+      <!-- Description -->
+      <p class="card-text">{{ item.description }}</p>
+
+      <!-- Date -->
+      <p class="card-text">
+        <small class="text-muted">Publié le : {{ item.date }}</small>
+      </p>
+
+      <!-- Prix -->
+      <p class="card-text">Prix : {{ item.price }}</p>
+
+      <!-- Bouton d'achat -->
+      <button class="btn btn-primary">Acheter</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Chargement des données...</p>
+</ng-template>
+
+<style>
+  .card {
+    width: 18rem;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+</style>

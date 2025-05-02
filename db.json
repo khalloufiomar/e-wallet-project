@@ -1,20 +1,18 @@
 {
-  "formations": [
+  "products": [
     {
       "id": 1,
-      "nom": "Formation Angular",
-      "description": "Apprenez à développer des applications avec Angular.",
+      "title": "Formation Angular",
+      "description": "Apprenez Angular pour créer des applications web modernes.",
       "date": "2025-05-01",
-      "duree": "3 mois",
-      "prix": 500
+      "price": 199.99
     },
     {
       "id": 2,
-      "nom": "Formation React",
-      "description": "Maîtrisez React pour le développement front-end.",
-      "date": "2025-06-01",
-      "duree": "2 mois",
-      "prix": 400
+      "title": "Formation React",
+      "description": "Devenez expert en React et développez des applications interactives.",
+      "date": "2025-05-02",
+      "price": 249.99
     }
   ]
 }
