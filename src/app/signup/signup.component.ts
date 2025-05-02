@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { SignupService } from '../services/signup.service';
 import { Router } from '@angular/router';
 import { User } from '../model/class/user';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -131,7 +132,16 @@ export class SignupComponent {
 
   isSubmitting = false;
   showErrors = false;
-
+  loginWithGoogle() {
+      const clientId = environment.clientId;
+      const redirectUri = encodeURIComponent(environment.redirectUri);
+      const scope = encodeURIComponent('email profile openid');
+      const responseType = 'code';
+    
+      const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&prompt=consent`;
+      console.log("Clicked!")
+      window.location.href = googleAuthUrl;
+    }
   onSubmit() {
     this.isSubmitting = true;
     this.showErrors = true;

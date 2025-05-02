@@ -222,7 +222,7 @@
                   style="height: 30px"
                 >
                   <option value="learner">Learner</option>
-                  <option value="hrCompany">HR Company</option>
+                  <option value="hr">HR Company</option>
                   <option value="employee">Employee</option>
                 </select>
                 <!-- <div
@@ -235,7 +235,7 @@
 
               <!-- Company Code -->
               <div
-                *ngIf="user.type === 'hrCompany' || user.type === 'employee'"
+                *ngIf="user.type === 'hr' || user.type === 'employee'"
                 class="col-md-6 mb-3"
               >
                 <label for="companyCode" class="form-label">Company Code</label>
@@ -289,6 +289,7 @@
               <button
                 type="button"
                 class="btn btn-outline-dark continue-google-btn w-100"
+                (click)="loginWithGoogle()"
               >
                 <img
                   src="google (1).png"

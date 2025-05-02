@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { TransactionService } from '../../services/transaction.service';
+import { MessagingService } from '../../services/messaging.service';
 
 import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
@@ -35,12 +36,15 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private transactionService: TransactionService,
-    private router: Router
+    private router: Router,
+    private messagingService: MessagingService
   ) {}
   toggleCode() {
     this.showCode = !this.showCode;
   }
   ngOnInit(): void {
+      this.messagingService.requestPermission();
+      this.messagingService.listenForMessages();
       this.authService.getCurrentUserInfos().subscribe({
         next: (user) => {
           console.log('Utilisateur récupéré :', user);
@@ -63,6 +67,7 @@ export class DashboardComponent implements OnInit {
                 .slice(0, 3); // prend les 3 premières
               this.loading = false;
             },
+
             (error) => {
               console.error('Erreur lors de la récupération des transactions', error);
               this.loading = false;

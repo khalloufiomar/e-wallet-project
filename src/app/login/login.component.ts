@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Response } from 'express';
-
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-login',
   imports: [RouterLink, CommonModule, FormsModule],
@@ -78,8 +78,8 @@ export class LoginComponent {
       );
   }
   loginWithGoogle() {
-    const clientId = '702801246137-5qak9l8aul55he74p63ib2m2jsllvuft.apps.googleusercontent.com';
-    const redirectUri = encodeURIComponent('http://localhost:8069/api/googleAuth');
+    const clientId = environment.clientId;
+    const redirectUri = encodeURIComponent(environment.redirectUri);
     const scope = encodeURIComponent('email profile openid');
     const responseType = 'code';
   
