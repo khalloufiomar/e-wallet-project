@@ -129,9 +129,14 @@
                 routerLink="notifications"
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{ exact: true }"
-                class="d-flex align-items-center py-2 nav-item-link"
+                [ngClass]="{
+                  'd-flex align-items-center py-2 nav-item-link': true,
+                  'newNotif': showNotification
+                }"
+                (click)="resetNotificationState()"
+                
               >
-                <i class="bi bi-bell fs-6"></i>
+                <i class="bi bi-bell fs-6" ></i>
                 <span class="ms-2">Notifications</span>
               </a>
             </li>

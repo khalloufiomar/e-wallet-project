@@ -8,6 +8,7 @@ import {
 } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from '../../links/dashboard/dashboard.component';
+import { MessagingService } from '../../services/messaging.service';
 @Component({
   selector: 'app-user',
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
@@ -15,8 +16,9 @@ import { DashboardComponent } from '../../links/dashboard/dashboard.component';
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  showTransactions = false;
-
+  showTransactions = true;
+  notificationCount = 0;
+  showNotification = false;
   handleSeeAll() {
     this.showTransactions = true;
   }
@@ -32,7 +34,7 @@ export class UserComponent {
       }})
     }
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private messagingService: MessagingService) {}
 
   userName = '';
   userType = '';
@@ -41,6 +43,9 @@ export class UserComponent {
   userId: number = 1;
   companyCode = ""
   ngOnInit(): void {
+    this.messagingService.newMessageEvent.subscribe(() => {
+      this.showNotification = true;
+    });
     this.authService.getCurrentUserInfos().subscribe({
       next: (user) => {
         console.log('Utilisateur récupéré :', user); // <= ici
@@ -59,7 +64,9 @@ export class UserComponent {
     });
 
   }
-
+  resetNotificationState() {
+    this.showNotification = false;
+  }
   isHrCompany(): boolean {
     return this.userType === 'hr';
   }

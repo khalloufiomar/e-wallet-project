@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Messaging, getToken, onMessage } from '@angular/fire/messaging';
+import { EventEmitter, Output } from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +9,7 @@ import { Messaging, getToken, onMessage } from '@angular/fire/messaging';
 export class MessagingService {
 
   constructor(private messaging: Messaging) {}
+  @Output() newMessageEvent = new EventEmitter();
 
   // Ask permission and get token
   async requestPermission() {
@@ -24,6 +27,7 @@ export class MessagingService {
   listenForMessages() {
     onMessage(this.messaging, (payload) => {
       console.log('Message received:', payload);
+      this.newMessageEvent.emit();
       // Customize how you show the message (alert, toast, etc.)
     });
   }
