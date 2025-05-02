@@ -43,6 +43,8 @@ export class DashboardComponent implements OnInit {
     this.showCode = !this.showCode;
   }
   ngOnInit(): void {
+    this.messagingService.requestPermission();
+    this.messagingService.listenForMessages();
       this.authService.getCurrentUserInfos().subscribe({
         next: (user) => {
           console.log('Utilisateur récupéré :', user);
