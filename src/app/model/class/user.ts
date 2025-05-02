@@ -2,19 +2,17 @@
 export class User {
   name: string;
   email: string;
-  login:string;
+  login: string;
   type: string;
   companyCode: string; // optionnel, seulement si le rôle est 'employe'
   password: string;
-
 
   constructor(
     name: string,
     email: string,
     type: string,
     companyCode: string,
-    password: string,
-
+    password: string
   ) {
     this.name = name;
     this.email = email;
@@ -22,7 +20,6 @@ export class User {
     this.type = type;
     this.companyCode = companyCode;
     this.password = password;
-
   }
 }
 

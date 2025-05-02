@@ -1,51 +1,20 @@
 {
-  "users": [
+  "formations": [
     {
       "id": 1,
-      "name": "Karim Ben Ali",
-      "email": "karim.benali@company.com",
-      "type": "hrcompany",
-      "balance": 5000
+      "nom": "Formation Angular",
+      "description": "Apprenez à développer des applications avec Angular.",
+      "date": "2025-05-01",
+      "duree": "3 mois",
+      "prix": 500
     },
     {
       "id": 2,
-      "name": "Nour Jebali",
-      "email": "nour.jebali@employee.com",
-      "type": "employee",
-      "balance": 1200
-    },
-    {
-      "id": 3,
-      "name": "Youssef Messaoudi",
-      "email": "youssef.messaoudi@employee.com",
-      "type": "employee",
-      "balance": 950
-    },
-    {
-      "id": 4,
-      "name": "Asma Ben Said",
-      "email": "asma.bensaid@client.com",
-      "type": "client",
-      "balance": 750
+      "nom": "Formation React",
+      "description": "Maîtrisez React pour le développement front-end.",
+      "date": "2025-06-01",
+      "duree": "2 mois",
+      "prix": 400
     }
-  ],
-  "transactions": [
-    { "id": 1, "userId": 2, "name": "Achat formation", "amount": 200, "date": "2024-04-01" },
-    { "id": 2, "userId": 2, "name": "Recharge Wallet", "amount": 500, "date": "2024-04-05" },
-    { "id": 3, "userId": 1, "name": "Certificat AWS", "amount": 300, "date": "2024-04-10" },
-    { "id": 4, "userId": 1, "name": "Transaction autre user", "amount": 100, "date": "2024-04-11" },
-
-    { "id": 5, "userId": 1, "name": "Paiement abonnement entreprise", "amount": 1000, "date": "2024-04-12" },
-    { "id": 6, "userId": 1, "name": "Recharge Corporate Wallet", "amount": 2000, "date": "2024-04-13" },
-
-    { "id": 7, "userId": 3, "name": "Formation DevOps", "amount": 150, "date": "2024-04-14" },
-    { "id": 8, "userId": 3, "name": "Recharge personnelle", "amount": 300, "date": "2024-04-15" },
-    { "id": 11, "userId": 3, "name": "Inscription à formation Angular", "amount": 250, "date": "2024-04-16" },
-    { "id": 12, "userId": 3, "name": "Achat certificat Udemy", "amount": 100, "date": "2024-04-17" },
-    { "id": 13, "userId": 3, "name": "Recharge via carte bancaire", "amount": 400, "date": "2024-04-18" },
-    { "id": 14, "userId": 3, "name": "Participation atelier IA", "amount": 180, "date": "2024-04-19" },
-
-    { "id": 9, "userId": 4, "name": "Achat Sajada", "amount": 70, "date": "2024-04-10" },
-    { "id": 10, "userId": 4, "name": "Recharge Wallet", "amount": 150, "date": "2024-04-11" }
   ]
 }

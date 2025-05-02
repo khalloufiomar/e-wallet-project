@@ -43,12 +43,29 @@
         <div class="transaction-card" *ngFor="let transaction of transactions">
           <img src="logo.png" class="transaction-logo" alt="Transaction Logo" />
           <div class="transaction-info">
-            <p class="transaction-name">ID: {{ transaction.id }} Category: {{ transaction.category }}</p>
-            <p class="transaction-date">{{ transaction.create_date | date : "yyyy-MM-dd" }}</p>
+            <p class="transaction-name">
+              ID: {{ transaction.id }} Category: {{ transaction.category }}
+            </p>
+            <p class="transaction-date">
+              {{ transaction.create_date | date : "yyyy-MM-dd" }}
+            </p>
           </div>
           <div class="transaction-amount">
             <p class="amount-ct">{{ transaction.amount }} CT</p>
             <p class="amount-dt">{{ transaction.amount * 1 }} DT</p>
+          </div>
+        </div>
+        <!-- Cas où il n'y a aucune transaction -->
+        <div *ngIf="transactions.length === 0" class="empty-transactions">
+          <p class="no-transactions-message">
+            Vous n'avez pas de transactions.
+          </p>
+          <div class="action-buttons">
+            <button class="action-btn" *ngIf="isHrCompany()">Transfer</button>
+            <button class="action-btn" *ngIf="isHrCompany() || isLearner()">
+              Buy Coins
+            </button>
+            <button class="action-btn">Store</button>
           </div>
         </div>
       </div>
@@ -99,22 +116,35 @@
               <p class="full-name">{{ userName }}</p>
               <p class="user-type">{{ userType }}</p>
               <p class="email">{{ userEmail }}</p>
-        
+
               <!-- Company Code toggle (only for HR users) -->
-              <div *ngIf="userType === 'hr'" class="company-code-section text-center mt-2">
-                <p (click)="toggleCode()" class="company-code-toggle" style="cursor: pointer;">
+              <div
+                *ngIf="userType === 'hr'"
+                class="company-code-section text-center mt-2"
+              >
+                <p
+                  (click)="toggleCode()"
+                  class="company-code-toggle"
+                  style="cursor: pointer"
+                >
                   Company Code
-                  <i [ngClass]="{ 'bi bi-chevron-down': !showCode, 'bi bi-chevron-up': showCode }"></i>
+                  <i
+                    [ngClass]="{
+                      'bi bi-chevron-down': !showCode,
+                      'bi bi-chevron-up': showCode
+                    }"
+                  ></i>
                 </p>
                 <div *ngIf="showCode" class="company-code mt-1">
                   <p>{{ companyCode }}</p>
-                  <p class="company-code-tip">Share this code with your colleagues.</p>
+                  <p class="company-code-tip">
+                    Share this code with your colleagues.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
 
         <!-- Deuxième carte -->
         <div class="col-xs-12 mb-3">
@@ -192,5 +222,38 @@
     .profile-icon {
       margin-top: 15px;
     }
+  }
+  .empty-transactions {
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .no-transactions-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .action-btn {
+    padding: 12px 24px;
+    border-radius: 12px; /* Coins arrondis seulement */
+    border: none;
+    background: linear-gradient(135deg, #6c5df8, #ff43ba);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
 </style>

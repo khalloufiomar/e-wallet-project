@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   userEmail = '';
   userBalance = '';
   userId: number = 1;
-  companyCode = ""
+  companyCode = '';
   transactions: any[] = [];
   showCode: boolean = false;
   constructor(
@@ -41,41 +41,45 @@ export class DashboardComponent implements OnInit {
     this.showCode = !this.showCode;
   }
   ngOnInit(): void {
-      this.authService.getCurrentUserInfos().subscribe({
-        next: (user) => {
-          console.log('Utilisateur récupéré :', user);
-          this.userId = user.userID;
-          this.userName = user.userName;
-          this.userType = user.userType;
-          this.userEmail = user.userEmail;
-          this.userBalance = user.userBalance;
-          if (this.userType == "hr"){
-            this.companyCode = user.companyCode
+    this.authService.getCurrentUserInfos().subscribe({
+      next: (user) => {
+        console.log('Utilisateur récupéré :', user);
+        this.userId = user.userID;
+        this.userName = user.userName;
+        this.userType = user.userType;
+        this.userEmail = user.userEmail;
+        this.userBalance = user.userBalance;
+        if (this.userType == 'hr') {
+          this.companyCode = user.companyCode;
+        }
+        // ✅ Récupérer les 3 dernières transactions
+        this.transactionService.getSelfTransactions().subscribe(
+          (data) => {
+            console.log(data);
+            this.transactions = data
+              .sort(
+                (a, b) =>
+                  new Date(b.create_date).getTime() -
+                  new Date(a.create_date).getTime()
+              ) // tri décroissant
+              .slice(0, 3); // prend les 3 premières
+            this.loading = false;
+          },
+          (error) => {
+            console.error(
+              'Erreur lors de la récupération des transactions',
+              error
+            );
+            this.loading = false;
+            this.router.navigate(['/login']);
           }
-          // ✅ Récupérer les 3 dernières transactions
-          this.transactionService.getSelfTransactions().subscribe(
-            (data) => {
-              console.log(data);
-              this.transactions = data
-                .sort(
-                  (a, b) => new Date(b.create_date).getTime() - new Date(a.create_date).getTime()
-                ) // tri décroissant
-                .slice(0, 3); // prend les 3 premières
-              this.loading = false;
-            },
-            (error) => {
-              console.error('Erreur lors de la récupération des transactions', error);
-              this.loading = false;
-              this.router.navigate(['/login']);
-            }
-          );
-        },
-        error: (err) => {
-          console.error('Erreur lors de la récupération du user :', err);
-          this.router.navigate(['/login']);
-        },
-      });
-
+        );
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération du user :', err);
+        this.router.navigate(['/login']);
+      },
+    });
   }
 
   triggerSeeAll() {
@@ -91,5 +95,16 @@ export class DashboardComponent implements OnInit {
 
   goToTransactions() {
     this.router.navigate(['/user/transactions']);
+  }
+  isHrCompany(): boolean {
+    return this.userType === 'hr';
+  }
+
+  isEmployee(): boolean {
+    return this.userType === 'employee';
+  }
+
+  isLearner(): boolean {
+    return this.userType === 'learner';
   }
 }

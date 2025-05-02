@@ -59,7 +59,7 @@
         <!-- Logo -->
         <div class="d-flex align-items-center mb-4">
           <div class="circle-logo me-3">
-            <i class="bi bi-credit-card fs-4 text-white"></i>
+            <img src="coin.png" alt="Clevory Logo" class="circle-image" />
           </div>
           <span class="titre text-white fs-5">Clevory</span>
         </div>
@@ -142,8 +142,19 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 class="d-flex align-items-center py-2 nav-item-link"
               >
-                <i class="bi bi-bell fs-6"></i>
+                <i class="bi bi-receipt"></i>
                 <span class="ms-2">invoices</span>
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="store"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="d-flex align-items-center py-2 nav-item-link"
+              >
+                <i class="bi bi-shop"></i>
+                <span class="ms-2">Store</span>
               </a>
             </li>
           </ul>
@@ -243,5 +254,18 @@
     .mobile-nav-item {
       min-width: 60px;
     }
+  }
+  .circle-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    overflow: hidden; /* Pour que l'image reste bien ronde */
+    background-color: white; /* Optionnel : tu peux retirer si tu veux pas de fond */
+  }
+
+  .circle-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 </style>
