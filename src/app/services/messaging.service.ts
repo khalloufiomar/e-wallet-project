@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Messaging, getToken, onMessage } from '@angular/fire/messaging';
 import { EventEmitter, Output } from '@angular/core';
 
-
 @Injectable({
   providedIn: 'root',
 })
