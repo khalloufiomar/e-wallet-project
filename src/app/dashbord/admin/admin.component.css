@@ -1,0 +1,75 @@
+.nav-card {
+    background: #1C1C1E;
+    /* Dégradé de fond */
+    border-top-right-radius: 20px;
+    /* Coin supérieur droit arrondi 20*/
+    border-bottom-right-radius: 20px;
+    /* Coin inférieur droit arrondi 20*/
+    height: 100vh;
+    position: fixed;
+    width: 230px;
+    /* 18% */
+}
+
+.newNotif {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.circle-logo {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titre {
+    font-weight: "inter", "semi-serif";
+}
+
+
+
+.nav-links a {
+    text-decoration: none;
+    cursor: pointer;
+    min-width: 180px;
+    padding: 3px 15px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #fff;
+    gap: 3px;
+}
+
+.nav-item-link {
+    color: white;
+    padding: 8px 12px;
+    border-radius: 50px;
+    transition: background 0.3s ease;
+    gap: 0px;
+}
+
+.nav-item-link i {
+    color: white;
+}
+
+.active-link {
+    background-color: rgb(74, 74, 74) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 50px !important;
+}
+
+.active-link i {
+    color: black !important;
+    color: rgb(255, 255, 255) !important;
+
+}
+
+:host {
+    display: block;
+    background-color: #f4f6f9 !important;
+    /* Fond général du composant */
+    min-height: 100vh;
+}

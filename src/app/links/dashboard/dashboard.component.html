@@ -61,11 +61,21 @@
             Vous n'avez pas de transactions.
           </p>
           <div class="action-buttons">
-            <button class="action-btn" *ngIf="isHrCompany()">Transfer</button>
-            <button class="action-btn" *ngIf="isHrCompany() || isLearner()">
+            <button
+              class="action-btn"
+              *ngIf="isHrCompany()"
+              (click)="triggerTransfer()"
+            >
+              Transfer
+            </button>
+            <button
+              class="action-btn"
+              *ngIf="isHrCompany() || isLearner()"
+              (click)="triggerBuyCoins()"
+            >
               Buy Coins
             </button>
-            <button class="action-btn">Store</button>
+            <button class="action-btn" (click)="triggerStore()">Store</button>
           </div>
         </div>
       </div>

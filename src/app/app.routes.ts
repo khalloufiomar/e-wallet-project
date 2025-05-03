@@ -64,7 +64,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [authGuard], // 🔒 Protège aussi la page admin
+    // canActivate: [authGuard], // 🔒 Protège aussi la page admin
   },
   {
     path: 'enteremail',

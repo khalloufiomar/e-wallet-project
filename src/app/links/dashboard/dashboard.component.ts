@@ -110,4 +110,13 @@ export class DashboardComponent implements OnInit {
   isLearner(): boolean {
     return this.userType === 'learner';
   }
+  triggerTransfer() {
+    this.router.navigate(['/user/transfer']);
+  }
+  triggerStore() {
+    this.router.navigate(['/user/store']);
+  }
+  triggerBuyCoins() {
+    this.router.navigate(['/user/BuyCoins']);
+  }
 }
