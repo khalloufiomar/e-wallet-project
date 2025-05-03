@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin',
-  imports: [RouterOutlet, RouterLinkActive, NgClass, CommonModule],
+  imports: [RouterOutlet, RouterLinkActive, CommonModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
