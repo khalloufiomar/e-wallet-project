@@ -9,6 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from '../../links/dashboard/dashboard.component';
 import { MessagingService } from '../../services/messaging.service';
+import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'app-user',
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
@@ -34,7 +35,7 @@ export class UserComponent {
       }})
     }
 
-  constructor(private authService: AuthService, private router: Router, private messagingService: MessagingService) {}
+  constructor(private authService: AuthService, private router: Router, private messagingService: MessagingService, private notificationService: NotificationService) {}
 
   userName = '';
   userType = '';
@@ -45,7 +46,11 @@ export class UserComponent {
   ngOnInit(): void {
     this.messagingService.newMessageEvent.subscribe(() => {
       this.showNotification = true;
+      this.getNotifCount();
     });
+   
+    this.getNotifCount();
+
     this.authService.getCurrentUserInfos().subscribe({
       next: (user) => {
         console.log('Utilisateur récupéré :', user); // <= ici
@@ -64,7 +69,20 @@ export class UserComponent {
     });
 
   }
+  getNotifCount() {
+    this.notificationService.getCountUnreadNotifications().subscribe(
+      (data) => {
+        this.notificationCount = data.notifCount;
+        this.showNotification = this.notificationCount > 0;
+        console.log(this.notificationCount);
+      },
+      (error) => {
+        console.error('Erreur', error);
+      }
+    );
+  }
   resetNotificationState() {
+    this.notificationCount = 0;
     this.showNotification = false;
   }
   isHrCompany(): boolean {
