@@ -6,6 +6,7 @@ import { TransactionService } from '../../services/transaction.service';
 import { MessagingService } from '../../services/messaging.service';
 import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,8 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   // transactions: any[] = [];
-
+  notificationCount = 10;
+  showNotification = false;
   tndAmount: number = 50; // Montant en TND
   ctAmount: number = 50; // Montant en CT
   loading: boolean = true;
@@ -36,12 +38,19 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     private transactionService: TransactionService,
     private router: Router,
-    private messagingService: MessagingService
+    private messagingService: MessagingService,
+    private notificationservice: NotificationService
   ) {}
   toggleCode() {
     this.showCode = !this.showCode;
   }
   ngOnInit(): void {
+    this.messagingService.newMessageEvent.subscribe(() => {
+      this.showNotification = true;
+      this.getNotifCount();
+    });
+
+    this.getNotifCount();
     this.messagingService.requestPermission();
     this.messagingService.listenForMessages();
     this.authService.getCurrentUserInfos().subscribe({
@@ -84,7 +93,22 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
-
+  getNotifCount() {
+    this.notificationservice.getCountUnreadNotifications().subscribe(
+      (data) => {
+        this.notificationCount = data.notifCount;
+        this.showNotification = this.notificationCount > 0;
+        console.log(this.notificationCount);
+      },
+      (error) => {
+        console.error('Erreur', error);
+      }
+    );
+  }
+  resetNotificationState() {
+    this.notificationCount = 0;
+    this.showNotification = false;
+  }
   triggerSeeAll() {
     this.router.navigate(['/user/transactions']);
   }

@@ -5,8 +5,13 @@
   <!-- Header -->
   <div class="header d-flex justify-content-between align-items-center p-3">
     <h2 class="hello-text">Hello, {{ userName }}</h2>
-    <div class="header-icons d-flex align-items-center">
-      <i class="bi bi-bell notification-icon"></i>
+    <div class="header-icons d-flex align-items-center position-relative">
+      <div class="position-relative me-3">
+        <i class="bi bi-bell fs-4 text-dark"></i>
+        <span *ngIf="notificationCount > 0" class="notification-badge">{{
+          notificationCount
+        }}</span>
+      </div>
       <i class="bi bi-person-circle fs-4 text-dark"></i>
     </div>
   </div>
