@@ -123,6 +123,9 @@ export class DashboardComponent implements OnInit {
   goToTransactions() {
     this.router.navigate(['/user/transactions']);
   }
+  goToNotifications() {
+    this.router.navigate(['/user/notifications']);
+  }
   isHrCompany(): boolean {
     return this.userType === 'hr';
   }
