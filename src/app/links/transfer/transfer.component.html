@@ -1,10 +1,40 @@
 <div class="transfer-container">
-  <div class="transfer-header">
+  <div
+    class="transfer-header d-flex justify-content-between align-items-center"
+  >
     <h1 class="header-title">Transfer</h1>
-    <!-- <img src="icone.png" alt="Profile" class="profile-icon" /> -->
-    <i class="bi bi-person-circle fs-4 text-dark"></i>
-  </div>
 
+    <div class="d-flex align-items-center position-relative">
+      <!-- Icône de notification avec badge -->
+      <div class="position-relative me-3">
+        <i class="bi bi-bell fs-4 text-dark"></i>
+        <span *ngIf="notificationCount > 0" class="notification-badge">
+          {{ notificationCount }}
+        </span>
+      </div>
+
+      <!-- Icône de profil -->
+      <i class="bi bi-person-circle fs-4 text-dark"></i>
+    </div>
+  </div>
+  <style>
+    .notification-badge {
+      position: absolute;
+      top: -2px;
+      right: 9px;
+      background-color: rgb(255, 0, 0); /* rouge vif */
+      color: white;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      cursor: pointer;
+    }
+  </style>
   <div class="transfer-content">
     <!-- Left Side (Transfer Form) -->
     <div class="transfer-card expanded">
@@ -86,18 +116,18 @@
           </label>
           <div class="input-with-icon">
             <i class="bi bi-person"></i>
-            <select 
+            <select
               type="text"
               class="form-control"
               id="recipient-wallet-id"
               placeholder="Enter Recipient Wallet ID"
               formControlName="recipientWalletId"
             >
-            <option *ngFor="let emp of employees" [value]="emp.walletId">
-              {{ emp.userName }}
-              - Current Balance: {{ emp.balance }} CT
-            </option>
-          </select>
+              <option *ngFor="let emp of employees" [value]="emp.walletId">
+                {{ emp.userName }}
+                - Current Balance: {{ emp.balance }} CT
+              </option>
+            </select>
           </div>
         </div>
 

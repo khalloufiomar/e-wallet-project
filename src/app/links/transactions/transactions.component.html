@@ -1,12 +1,40 @@
 <div class="container-fluid">
   <!-- Header section -->
-  <div class="header">
+  <div class="header d-flex justify-content-between align-items-center">
     <div class="title">Transactions</div>
-    <div class="profile">
-      <!-- <img src="icone.png" alt="Profile" class="profile-image" /> -->
+
+    <div class="profile d-flex align-items-center position-relative">
+      <!-- Icône de notification avec badge -->
+      <div class="position-relative me-3" (click)="resetNotificationState()">
+        <i class="bi bi-bell fs-4 text-dark"></i>
+        <span *ngIf="notificationCount > 0" class="notification-badge">
+          {{ notificationCount }}
+        </span>
+      </div>
+
+      <!-- Icône de profil -->
       <i class="bi bi-person-circle fs-4 text-dark"></i>
     </div>
   </div>
+
+  <style>
+    .notification-badge {
+      position: absolute;
+      top: -2px;
+      right: 9px;
+      background-color: rgb(255, 0, 0); /* rouge vif */
+      color: white;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      cursor: pointer;
+    }
+  </style>
 
   <div *ngIf="transactions.length === 0" class="no-transactions-card">
     <i class="bi bi-receipt fs-1 text-secondary mb-3"></i>

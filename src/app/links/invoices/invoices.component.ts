@@ -200,4 +200,7 @@ export class InvoicesComponent {
     this.notificationCount = 0;
     this.showNotification = false;
   }
+  goToNotifications() {
+    this.router.navigate(['/user/notifications']);
+  }
 }

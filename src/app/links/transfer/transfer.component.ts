@@ -5,6 +5,8 @@ import { FormGroup } from '@angular/forms';
 import { TransferService, Employee } from '../../services/transfer.service';
 import { Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-transfer',
@@ -13,6 +15,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './transfer.component.css',
 })
 export class TransferComponent implements OnInit {
+  notificationCount = 0;
+  showNotification = false;
   transferForm!: FormGroup;
   submitted = false;
   successMessage = '';
@@ -29,7 +33,9 @@ export class TransferComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private transferService: TransferService,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private router: Router,
+    private notificationservice: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +81,22 @@ export class TransferComponent implements OnInit {
       description: [''],
     });
   }
-
+  getNotifCount() {
+    this.notificationservice.getCountUnreadNotifications().subscribe(
+      (data) => {
+        this.notificationCount = data.notifCount;
+        this.showNotification = this.notificationCount > 0;
+        console.log(this.notificationCount);
+      },
+      (error) => {
+        console.error('Erreur', error);
+      }
+    );
+  }
+  resetNotificationState() {
+    this.notificationCount = 0;
+    this.showNotification = false;
+  }
   get f() {
     return this.transferForm.controls;
   }
@@ -153,5 +174,8 @@ export class TransferComponent implements OnInit {
         console.error('Erreur lors du chargement des transferts récents', err);
       },
     });
+  }
+  goToNotifications() {
+    this.router.navigate(['/user/notifications']);
   }
 }
