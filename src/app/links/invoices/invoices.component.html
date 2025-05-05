@@ -1,45 +1,83 @@
-<table
-  class="table table-bordered table-hover mt-4"
-  *ngIf="invoices.length > 0"
->
-  <thead class="table-dark">
-    <tr>
-      <th>Réf</th>
-      <th>Date</th>
-      <th>Montant</th>
-      <th>Devise</th>
-      <th>État du Paiement</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let invoice of invoices"
-      (click)="invoice.payment_state !== 'paid' && openInvoiceDetails(invoice)"
-      [ngClass]="{
-        'table-row-disabled': invoice.payment_state === 'paid'
-      }"
-      style="cursor: pointer"
-    >
-      <td>{{ invoice.ref }}</td>
-      <td>{{ invoice.date }}</td>
-      <td>{{ invoice.amount }}</td>
-      <td>{{ invoice.currency }}</td>
-      <td>
-        <span
-          [ngClass]="{
-            'badge bg-danger': invoice.payment_state === 'not_paid',
-            'badge bg-success': invoice.payment_state === 'paid'
-          }"
-        >
-          {{ invoice.payment_state === "paid" ? "Payée" : "Non payée" }}
-        </span>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container-fluid">
+  <!-- Header section -->
+  <div class="header">
+    <div class="title">Factures</div>
+    <div class="profile">
+      <i class="bi bi-person-circle fs-4 text-dark"></i>
+    </div>
+  </div>
 
-<div *ngIf="invoices.length === 0" class="alert alert-info mt-4">
-  Aucune facture disponible.
+  <!-- Card section -->
+  <div class="card">
+    <div class="header-card">
+      <div class="transaction-history">
+        <i class="fa fa-file-invoice"></i> Invoices
+      </div>
+    </div>
+
+    <!-- Spinner affiché pendant le chargement -->
+    <div *ngIf="loading" class="text-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+    </div>
+
+    <!-- Table affichée seulement quand loading = false -->
+    <table *ngIf="!loading && invoices.length > 0" class="transactions-table">
+      <thead>
+        <tr>
+          <th>Réf</th>
+          <th>Date</th>
+          <th>Montant</th>
+          <th>Devise</th>
+          <th>État du Paiement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let invoice of invoices"
+          (click)="
+            invoice.payment_state !== 'paid' && openInvoiceDetails(invoice)
+          "
+          [ngClass]="{ 'table-row-disabled': invoice.payment_state === 'paid' }"
+          style="cursor: pointer"
+        >
+          <td>{{ invoice.ref }}</td>
+          <td>{{ invoice.date }}</td>
+          <td>{{ invoice.amount }}</td>
+          <td>{{ invoice.currency }}</td>
+          <td>
+            <span
+              [ngClass]="{
+                'badge bg-danger': invoice.payment_state === 'not_paid',
+                'badge bg-success': invoice.payment_state === 'paid'
+              }"
+            >
+              {{ invoice.payment_state === "paid" ? "Payée" : "Non payée" }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div
+      *ngIf="!loading && invoices.length === 0"
+      class="alert alert-info mt-4"
+    >
+      Aucune facture disponible.
+    </div>
+
+    <!-- Pagination affichée seulement quand loading = false -->
+    <div *ngIf="!loading && invoices.length > 0" class="pagination">
+      <div class="showing">Affichage de 1 à {{ invoices.length }} factures</div>
+      <div class="pagination-buttons">
+        <button class="prev-btn"><i class="fa fa-chevron-left"></i></button>
+        <button class="page-btn current-page">1</button>
+        <button class="page-btn next-page">2</button>
+        <button class="next-btn"><i class="fa fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Modal -->
@@ -81,9 +119,7 @@
               }"
             >
               {{
-                invoiceDetails.payment_state === "paid"
-                  ? "Payée"
-                  : "Non payée"
+                invoiceDetails.payment_state === "paid" ? "Payée" : "Non payée"
               }}
             </span>
           </p>

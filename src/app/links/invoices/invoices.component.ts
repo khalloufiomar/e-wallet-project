@@ -17,6 +17,7 @@ export class InvoicesComponent {
   invoiceDetails: any = null; // Détails de la facture à afficher
   invoices: any[] = [];
   selectedInvoice: any = null;
+  loading: boolean = true;
 
   constructor(
     private incoicesService: InvoicesService,
@@ -25,6 +26,7 @@ export class InvoicesComponent {
   ) {}
   public payPalConfig?: IPayPalConfig;
   ngOnInit(): void {
+    this.loading = true;
     this.loadInvoices();
     // Récupérer l'ID de la facture depuis l'URL
     this.invoiceId = this.route.snapshot.paramMap.get('id')!;
@@ -39,6 +41,7 @@ export class InvoicesComponent {
       (data) => {
         this.invoiceDetails = data;
         console.log('Détails de la facture chargés:', this.invoiceDetails);
+        this.loading = false;
       },
       (error) => {
         console.error(
