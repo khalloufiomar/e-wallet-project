@@ -16,6 +16,18 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadNotifications();
+    this.markAllAsRead();
+  }
+
+  markAllAsRead(): void {
+    this.notificationService.markAllNotificationsAsRead().subscribe(
+      () => {
+        
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour des notifications', error);
+      }
+    );
   }
 
   loadNotifications(): void {
@@ -23,8 +35,11 @@ export class NotificationsComponent implements OnInit {
 
     this.notificationService.getNotifications().subscribe(
       (data) => {
-        this.notifications = data;
+        this.notifications = data.sort(
+          (a, b) => new Date(b.create_date).getTime() - new Date(a.create_date).getTime()
+        );
         this.isLoading = false;
+        console.log(data);
       },
       (error) => {
         console.error('Erreur de récupération des notifications', error);
@@ -32,4 +47,5 @@ export class NotificationsComponent implements OnInit {
       }
     );
   }
+  
 }

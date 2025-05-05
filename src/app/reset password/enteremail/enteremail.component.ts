@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
-
+import { UpdatepasswordService } from '../../services/updatepassword.service';
 @Component({
   selector: 'app-enteremail',
   imports: [FormsModule, NgClass, CommonModule, FormsModule, RouterLink],
@@ -19,7 +19,7 @@ export class EnteremailComponent {
   showAlert: boolean = false; // Contrôle l'affichage de l'alerte
   isLoading: boolean = false; // Indique si une requête est en cours
 
-  constructor(private http: HttpClient, private location: Location) {}
+  constructor(private http: HttpClient, private location: Location, private UpdatepasswordService: UpdatepasswordService) {}
 
   onSubmit() {
     // ➤ Réinitialisation des anciennes alertes
@@ -40,38 +40,35 @@ export class EnteremailComponent {
 
     this.isLoading = true;
 
-    this.http
-      .post<{ success: boolean }>('http://localhost:3000/reset-password', {
-        email: this.email,
-      })
-      .subscribe({
-        next: (response) => {
-          this.isLoading = false;
-          this.showAlert = true;
-
-          if (response.success) {
-            this.alertMessage =
-              "<strong>Check your email.</strong><br>We've sent a password reset link to your email address.";
-            this.alertType = 'success';
-            this.alertColor = '#04A421';
-            this.showForm = false;
-          } else {
-            this.alertMessage =
-              '<strong>Error</strong><br>This email address is not registered in our system. Please check your email or sign up for a new account.';
-            this.alertType = 'error';
-            this.alertColor = '#FFDADA';
-          }
-        },
-        error: (error) => {
-          this.isLoading = false;
-          this.showAlert = true;
+    this.UpdatepasswordService.sendPasswordResetRequest(this.email).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        this.showAlert = true;
+    
+        if (response.success) {
           this.alertMessage =
-            '<strong>Error</strong><br>Unable to process your request. Please try again later.';
+            "<strong>Check your email.</strong><br>We've sent a password reset link to your email address.";
+          this.alertType = 'success';
+          this.alertColor = '#04A421';
+          this.showForm = false;
+        } else {
+          this.alertMessage =
+            '<strong>Error</strong><br>This email address is not registered in our system. Please check your email or sign up for a new account.';
           this.alertType = 'error';
           this.alertColor = '#FFDADA';
-          console.error('Erreur:', error);
-        },
-      });
+        }
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.showAlert = true;
+        this.alertMessage =
+          '<strong>Error</strong><br>Unable to process your request. Please try again later.';
+        this.alertType = 'error';
+        this.alertColor = '#FFDADA';
+        console.error('Erreur:', error);
+      },
+    });
+    
   }
 
   // ➤ Validation d'email simple (à ajouter dans la même classe)

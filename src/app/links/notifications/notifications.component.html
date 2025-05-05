@@ -17,7 +17,6 @@
         <button class="btn btn-outline-dark rounded-pill px-3 py-1 fs-6">
           <i class="bi bi-funnel"></i> Filter
         </button>
-        <span class="text-muted small fw-medium">Mark all as read</span>
       </div>
     </div>
 
@@ -44,6 +43,7 @@
         [ngClass]="{
           'bg-purple': notif.status === 'urgent',
           'bg-red': notif.status === 'alert',
+          'unread-notification' : notif.is_read === false,
           border: notif.status === 'info'
         }"
       >
@@ -57,9 +57,9 @@
 
         <!-- Contenu -->
         <div>
-          <h6 class="fw-semibold mb-1 fs-6">{{ notif.name }}</h6>
-          <p class="text-muted mb-1 small">{{ notif.subtext }}</p>
-          <small class="text-secondary">{{ notif.date }}</small>
+          <h6 class="fw-semibold mb-1 fs-6">{{ notif.title }}</h6>
+          <p class="text-muted mb-1 small">{{ notif.body }}</p>
+          <small class="text-secondary">{{ notif.create_date | date : "yyyy-MM-dd HH:mm" }}</small>
         </div>
 
         <!-- Statut badge -->

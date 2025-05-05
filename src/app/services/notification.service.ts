@@ -6,11 +6,30 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationService {
-  private apiUrl = 'https://5c1979a5-503b-44a7-8e4d-44aeb44843c0.mock.pstmn.io'; // Remplace par l'URL de ton API
+  private baseApiUrl = 'http://localhost:8069/api'; // Remplace par l'URL de ton API
 
   constructor(private http: HttpClient) {}
 
   getNotifications(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(`${this.baseApiUrl}/getUserNotifications`, {
+      withCredentials: true,
+    });
+  }
+  getCountUnreadNotifications(): Observable<{ notifCount: number }> {
+    return this.http.get<{ notifCount: number }>(`${this.baseApiUrl}/countNotifications`, {
+      withCredentials: true,
+    });
+  }
+  markAllNotificationsAsRead(): Observable<{ notifCount: number }> {
+    return this.http.post<{ notifCount: number }>(`${this.baseApiUrl}/markAllAsRead`, {
+      withCredentials: true,
+    });
+  }
+  addDeviceToken(token: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${this.baseApiUrl}/addDeviceToken`,
+      { DeviceToken: token },
+      { withCredentials: true }
+    );
   }
 }

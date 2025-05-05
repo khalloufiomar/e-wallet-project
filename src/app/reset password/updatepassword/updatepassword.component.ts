@@ -1,5 +1,5 @@
 import { CommonModule, Location, NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UpdatepasswordService } from '../../services/updatepassword.service';
 import {
   FormBuilder,
@@ -8,6 +8,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-updatepassword',
@@ -15,7 +17,7 @@ import {
   templateUrl: './updatepassword.component.html',
   styleUrl: './updatepassword.component.css',
 })
-export class UpdatepasswordComponent {
+export class UpdatepasswordComponent implements OnInit {
   passwordForm: FormGroup;
   submitted = false;
   showNew = false;
@@ -26,11 +28,19 @@ export class UpdatepasswordComponent {
     lowerCase: false,
     number: false,
   };
+  successMessage = '';
+  errorMessage = '';
+  showRedirectButton = false;
+  tokenValid = false;
+  tokenInvalidMessage = '';
+  private token = '';
 
   constructor(
     private fb: FormBuilder,
     private UpdatepasswordService: UpdatepasswordService,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute,
+    public router: Router
   ) {
     this.passwordForm = this.fb.group({
       newPassword: [
@@ -54,10 +64,38 @@ export class UpdatepasswordComponent {
     });
   }
 
+  ngOnInit(): void {
+    // Extract token from URL
+    this.route.queryParams.subscribe((params) => {
+      this.token = params['token'];
+      if (this.token) {
+        this.validateToken(this.token);
+      } else {
+        this.tokenInvalidMessage = 'Missing token in the URL.';
+      }
+    });
+  }
+
+  validateToken(token: string): void {
+    this.UpdatepasswordService.validateToken(token).subscribe({
+      next: (res) => {
+        // Handle a valid token
+        if (res.response) {
+          this.tokenValid = true;
+        } else {
+          this.tokenInvalidMessage = 'This password reset link is invalid or has expired.';
+        }
+      },
+      error: (err) => {
+        this.tokenInvalidMessage = 'An error occurred while validating the token.';
+        console.error(err);
+      },
+    });
+  }
+
   onSubmit() {
     this.submitted = true;
 
-    // Vérification si le formulaire est valide et si les mots de passe correspondent
     if (
       this.passwordForm.valid &&
       this.passwordForm.controls['newPassword'].value ===
@@ -65,26 +103,35 @@ export class UpdatepasswordComponent {
     ) {
       const newPassword = this.passwordForm.controls['newPassword'].value;
 
-      // Appel au service pour mettre à jour le mot de passe
-      this.UpdatepasswordService.updatePassword(newPassword).subscribe(
-        (response) => {
-          console.log('Mot de passe mis à jour avec succès!', response);
-          // Optionnel: Afficher un message de succès à l'utilisateur
+      // Example: Call service to update the password with the token
+      this.UpdatepasswordService.updatePassword(this.token, newPassword).subscribe({
+        next: (res) => {
+          if (res.response === true) {
+            console.log(res);
+            this.tokenValid = true;
+            this.successMessage = 'Password updated successfully.';
+            this.errorMessage = '';
+            this.showRedirectButton = true;
+          } else {
+            console.log(res);
+            this.tokenValid = false;
+            this.successMessage = '';
+            this.errorMessage = res.message || 'Token invalid or expired.';
+          }
         },
-        (error) => {
-          console.log('Erreur lors de la mise à jour du mot de passe:', error);
-          // Optionnel: Afficher un message d'erreur à l'utilisateur
-        }
-      );
+        error: (err) => {
+          console.error('Error updating password:', err);
+          this.tokenValid = false;
+          this.successMessage = '';
+          this.errorMessage = 'An error occurred while updating the password.';
+        },
+      });
     } else {
-      console.log(
-        'Formulaire invalide ou les mots de passe ne correspondent pas'
-      );
+      console.log('Invalid form or passwords do not match');
     }
   }
 
   onCancel() {
-    // Réinitialisation ou annulation du formulaire
     this.passwordForm.reset();
     this.submitted = false;
   }
@@ -96,6 +143,7 @@ export class UpdatepasswordComponent {
   toggleShowConfirmPassword() {
     this.showConfirm = !this.showConfirm;
   }
+
   goBack(): void {
     this.location.back();
   }

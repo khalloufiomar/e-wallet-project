@@ -56,7 +56,20 @@
     border-radius: 50%;
     background-color: #7e22ce;
 }
-
+.unread-notification {
+    background-color: #f0f8ff; /* light blue-ish background */
+    border-left: 4px solid #007bff; /* blue accent on the left */
+    font-weight: 500; /* slightly bolder text */
+    padding: 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .unread-notification:hover {
+    background-color: #e6f0ff;
+    cursor: pointer;
+  }
+  
 
 /* Styles responsifs */
 @media (max-width: 1300px) {

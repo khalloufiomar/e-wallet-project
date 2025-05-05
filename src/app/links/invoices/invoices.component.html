@@ -14,7 +14,10 @@
   <tbody>
     <tr
       *ngFor="let invoice of invoices"
-      (click)="openInvoiceDetails(invoice)"
+      (click)="invoice.payment_state !== 'paid' && openInvoiceDetails(invoice)"
+      [ngClass]="{
+        'table-row-disabled': invoice.payment_state === 'paid'
+      }"
       style="cursor: pointer"
     >
       <td>{{ invoice.ref }}</td>
@@ -39,7 +42,6 @@
   Aucune facture disponible.
 </div>
 
-<!-- Modal -->
 <!-- Modal -->
 <div
   class="modal fade"
@@ -79,7 +81,9 @@
               }"
             >
               {{
-                invoiceDetails.payment_state === "paid" ? "Payée" : "Non payée"
+                invoiceDetails.payment_state === "paid"
+                  ? "Payée"
+                  : "Non payée"
               }}
             </span>
           </p>
