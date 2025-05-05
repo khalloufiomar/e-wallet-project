@@ -1,8 +1,9 @@
 <div class="container-fluid">
   <!-- Header section -->
   <div class="header">
-    <div class="title">Factures</div>
+    <div class="title">Invoices</div>
     <div class="profile">
+      <!-- <img src="icone.png" alt="Profile" class="profile-image" /> -->
       <i class="bi bi-person-circle fs-4 text-dark"></i>
     </div>
   </div>
@@ -11,65 +12,66 @@
   <div class="card">
     <div class="header-card">
       <div class="transaction-history">
-        <i class="fa fa-file-invoice"></i> Invoices
+        <i class="fa fa-exchange-alt"></i> Invoices History
+      </div>
+      <div class="right-section">
+        <div class="buttons">
+          <button class="filter-btn">
+            <i class="fa fa-filter"></i> Filter
+          </button>
+        </div>
       </div>
     </div>
 
     <!-- Spinner affiché pendant le chargement -->
     <div *ngIf="loading" class="text-center my-4">
       <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Chargement...</span>
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
 
     <!-- Table affichée seulement quand loading = false -->
-    <table *ngIf="!loading && invoices.length > 0" class="transactions-table">
+    <table *ngIf="!loading" class="transactions-table">
       <thead>
         <tr>
-          <th>Réf</th>
+          <th><input type="checkbox" /></th>
+          <th>Ref</th>
           <th>Date</th>
-          <th>Montant</th>
-          <th>Devise</th>
-          <th>État du Paiement</th>
+          <th>Amount</th>
+          <th>Device</th>
+          <th>payment_state</th>
         </tr>
       </thead>
       <tbody>
         <tr
           *ngFor="let invoice of invoices"
-          (click)="
-            invoice.payment_state !== 'paid' && openInvoiceDetails(invoice)
-          "
-          [ngClass]="{ 'table-row-disabled': invoice.payment_state === 'paid' }"
-          style="cursor: pointer"
+          [ngClass]="{ 'not-paid-row': invoice.payment_state === 'not_paid' }"
+          (click)="openInvoiceDetails(invoice)"
         >
+          <td><input type="checkbox" /></td>
           <td>{{ invoice.ref }}</td>
-          <td>{{ invoice.date }}</td>
-          <td>{{ invoice.amount }}</td>
-          <td>{{ invoice.currency }}</td>
-          <td>
-            <span
-              [ngClass]="{
-                'badge bg-danger': invoice.payment_state === 'not_paid',
-                'badge bg-success': invoice.payment_state === 'paid'
-              }"
-            >
-              {{ invoice.payment_state === "paid" ? "Payée" : "Non payée" }}
-            </span>
+
+          <td>{{ invoice.date | date : "yyyy-MM-dd HH:mm" }}</td>
+          <td>{{ invoice.montant }}</td>
+          <td>{{ invoice.device }}</td>
+          <!-- Etat de paiement avec ngClass pour changer de fond -->
+          <td
+            [ngClass]="{
+              'status-completed': invoice.payment_state === 'paid',
+              'status-pending': invoice.payment_state === 'not_paid'
+            }"
+          >
+            <div class="status-text">{{ invoice.payment_state }}</div>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div
-      *ngIf="!loading && invoices.length === 0"
-      class="alert alert-info mt-4"
-    >
-      Aucune facture disponible.
-    </div>
-
     <!-- Pagination affichée seulement quand loading = false -->
-    <div *ngIf="!loading && invoices.length > 0" class="pagination">
-      <div class="showing">Affichage de 1 à {{ invoices.length }} factures</div>
+    <div *ngIf="!loading && invoices.length > 5" class="pagination">
+      <div class="showing">
+        Showing 1 to 5 of {{ invoices.length }} invoices
+      </div>
       <div class="pagination-buttons">
         <button class="prev-btn"><i class="fa fa-chevron-left"></i></button>
         <button class="page-btn current-page">1</button>
@@ -80,60 +82,86 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal: Invoice Details -->
 <div
   class="modal fade"
   id="invoiceModal"
-  tabindex="10"
+  tabindex="-1"
   aria-labelledby="invoiceModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="invoiceModalLabel">
-          Détails de la facture
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow rounded-4">
+      <div class="modal-header border-0 pb-1">
+        <h5 class="modal-title fw-bold" id="invoiceModalLabel">
+          Invoice Details
         </h5>
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
-          aria-label="Fermer"
+          aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
-        <div *ngIf="invoiceDetails">
-          <h2>Détails de la Facture</h2>
-          <p><strong>Référence :</strong> {{ invoiceDetails.ref }}</p>
-          <p><strong>Date :</strong> {{ invoiceDetails.date }}</p>
-          <p>
-            <strong>Montant :</strong> {{ invoiceDetails.amount }}
-            {{ invoiceDetails.currency }}
-          </p>
-          <p>
-            <strong>Statut :</strong>
-            <span
-              [ngClass]="{
-                'badge bg-success': invoiceDetails.payment_state === 'paid',
-                'badge bg-danger': invoiceDetails.payment_state === 'not_paid'
-              }"
-            >
-              {{
-                invoiceDetails.payment_state === "paid" ? "Payée" : "Non payée"
-              }}
-            </span>
-          </p>
-          <p>
-            <strong>Détails supplémentaires :</strong>
-            {{ invoiceDetails.details }}
-          </p>
 
-          <!-- Paypal Payment Buttons -->
-          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+      <div class="px-4 d-flex justify-content-between align-items-center mb-2">
+        <div class="fw-bold text-uppercase">{{ selectedInvoice.ref }}</div>
+        <div class="text-primary fs-4"><i class="fas fa-euro-sign"></i></div>
+      </div>
+
+      <hr class="my-0 text-secondary opacity-25" />
+
+      <div class="modal-body" *ngIf="selectedInvoice">
+        <!-- Date -->
+        <div class="mb-3">
+          <p class="mb-1 text-muted">Date</p>
+          <p class="fw-medium mb-0">
+            {{ selectedInvoice.date | date : "dd/MM/yyyy" }}
+          </p>
         </div>
 
-        <div *ngIf="!invoiceDetails">
-          <p>Chargement des détails...</p>
+        <!-- Amount + Currency -->
+        <div class="d-flex justify-content-between mb-3">
+          <div>
+            <p class="mb-1 text-muted">Amount</p>
+            <p class="fw-bold fs-5 mb-0">
+              {{ selectedInvoice.montant | number : "1.2-2" }} €
+            </p>
+          </div>
+          <div class="text-end">
+            <p class="mb-1 text-muted">Currency</p>
+            <p class="fw-medium mb-0">{{ selectedInvoice.device }}</p>
+          </div>
+        </div>
+
+        <!-- Payment Status -->
+        <div class="mb-3">
+          <p class="mb-1 text-muted">Payment Status</p>
+          <p
+            [ngClass]="{
+              'text-success fw-bold': selectedInvoice.payment_state === 'paid',
+              'text-danger fw-bold':
+                selectedInvoice.payment_state === 'not_paid'
+            }"
+          >
+            {{ selectedInvoice.payment_state === "paid" ? "Paid" : "Not Paid" }}
+          </p>
+        </div>
+
+        <hr class="my-0 text-secondary opacity-25" />
+
+        <!-- PayPal Button (if not paid) -->
+        <div class="d-grid gap-2 mt-3">
+          <ngx-paypal
+            *ngIf="selectedInvoice.payment_state === 'not_paid'"
+            [config]="payPalConfig"
+          ></ngx-paypal>
+          <button
+            class="btn btn-outline-secondary rounded-pill"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>
