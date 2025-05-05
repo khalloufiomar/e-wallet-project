@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 declare var bootstrap: any;
 import { ActivatedRoute } from '@angular/router';
 import { IPayPalConfig, NgxPayPalModule } from 'ngx-paypal';
+import { MessagingService } from '../../services/messaging.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-invoices',
@@ -13,6 +15,8 @@ import { IPayPalConfig, NgxPayPalModule } from 'ngx-paypal';
   styleUrl: './invoices.component.css',
 })
 export class InvoicesComponent {
+  notificationCount = 0;
+  showNotification = false;
   invoiceId: string = ''; // Pour stocker l'ID de la facture
   invoiceDetails: any = null; // Détails de la facture à afficher
   invoices: any[] = [];
@@ -22,10 +26,18 @@ export class InvoicesComponent {
   constructor(
     private incoicesService: InvoicesService,
     private route: ActivatedRoute, // Injecter ActivatedRoute pour accéder à l'ID de la facture
-    private router: Router
+    private router: Router,
+    private messagingService: MessagingService,
+    private notificationservice: NotificationService
   ) {}
   public payPalConfig?: IPayPalConfig;
   ngOnInit(): void {
+    this.messagingService.newMessageEvent.subscribe(() => {
+      this.showNotification = true;
+      this.getNotifCount();
+    });
+
+    this.getNotifCount();
     this.loading = true;
     this.loadInvoices();
     // Récupérer l'ID de la facture depuis l'URL
@@ -171,5 +183,21 @@ export class InvoicesComponent {
         console.log('onClick', data, actions);
       },
     };
+  }
+  getNotifCount() {
+    this.notificationservice.getCountUnreadNotifications().subscribe(
+      (data) => {
+        this.notificationCount = data.notifCount;
+        this.showNotification = this.notificationCount > 0;
+        console.log(this.notificationCount);
+      },
+      (error) => {
+        console.error('Erreur', error);
+      }
+    );
+  }
+  resetNotificationState() {
+    this.notificationCount = 0;
+    this.showNotification = false;
   }
 }
