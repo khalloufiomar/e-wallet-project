@@ -8,8 +8,30 @@
     </div>
   </div>
 
+  <div *ngIf="invoices.length === 0" class="no-transactions-card">
+    <i class="bi bi-receipt fs-1 text-secondary mb-3"></i>
+    <h5 class="fw-bold mb-2">Aucune transaction</h5>
+    <p class="text-muted">
+      Vous n'avez pas encore de transactions.<br />
+      Elles apparaîtront ici lorsqu'elles seront créées.
+    </p>
+  </div>
+
+  <style>
+    .no-transactions-card {
+      background-color: white;
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      color: #444;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      max-width: 500px;
+      margin: 40px auto;
+    }
+  </style>
+
   <!-- Card section -->
-  <div class="card">
+  <div class="card" *ngIf="invoices">
     <div class="header-card">
       <div class="transaction-history">
         <i class="fa fa-exchange-alt"></i> Invoices History
