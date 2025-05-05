@@ -25,4 +25,16 @@ export class StoreComponent implements OnInit {
       }
     );
   }
+  purchaseCourse(courseId: string) {
+    this.storeService.purchaseCourse(courseId).subscribe(
+      (response) => {
+        console.log('Achat effectué avec succès', response);
+        alert('Purchase successfully completed!');
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Erreur lors de lachat du cours', error);
+      }
+    );
+  }
 }
