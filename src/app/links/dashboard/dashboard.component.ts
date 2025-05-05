@@ -16,7 +16,7 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class DashboardComponent implements OnInit {
   // transactions: any[] = [];
-  notificationCount = 10;
+  notificationCount = 0;
   showNotification = false;
   tndAmount: number = 50; // Montant en TND
   ctAmount: number = 50; // Montant en CT

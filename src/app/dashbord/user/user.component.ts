@@ -32,23 +32,29 @@ export class UserComponent {
         console.error('Logout failed:', err);
         // Optionally handle errors (e.g. show a notification)
         this.router.navigate(['/login']); // fallback redirect just in case
-      }})
-    }
+      },
+    });
+  }
 
-  constructor(private authService: AuthService, private router: Router, private messagingService: MessagingService, private notificationService: NotificationService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private messagingService: MessagingService,
+    private notificationService: NotificationService
+  ) {}
 
   userName = '';
   userType = '';
   userEmail = '';
   userBalance = '';
   userId: number = 1;
-  companyCode = ""
+  companyCode = '';
   ngOnInit(): void {
     this.messagingService.newMessageEvent.subscribe(() => {
       this.showNotification = true;
       this.getNotifCount();
     });
-   
+
     this.getNotifCount();
 
     this.authService.getCurrentUserInfos().subscribe({
@@ -59,15 +65,14 @@ export class UserComponent {
         this.userType = user.userType;
         this.userEmail = user.userEmail;
         this.userBalance = user.userBalance;
-        if (this.userType == "hr"){
-          this.companyCode = user.companyCode
+        if (this.userType == 'hr') {
+          this.companyCode = user.companyCode;
         }
       },
       error: (err) => {
         console.error('Erreur lors de la récupération du user :', err);
       },
     });
-
   }
   getNotifCount() {
     this.notificationService.getCountUnreadNotifications().subscribe(
