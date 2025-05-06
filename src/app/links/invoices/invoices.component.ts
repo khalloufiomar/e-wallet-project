@@ -81,7 +81,9 @@ export class InvoicesComponent {
 
   openInvoiceDetailss(invoice: any) {
     this.selectedInvoice = invoice;
-    const modal = new bootstrap.Modal(document.getElementById('invoiceModal'));
+    const modal = new bootstrap.Modal(
+      document.getElementById('simpleInvoiceModal')
+    );
     modal.show();
   }
 

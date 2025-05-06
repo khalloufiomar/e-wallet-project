@@ -23,9 +23,9 @@
 
   <div *ngIf="invoices.length === 0" class="no-transactions-card">
     <i class="bi bi-receipt fs-1 text-secondary mb-3"></i>
-    <h5 class="fw-bold mb-2">Aucune transaction</h5>
+    <h5 class="fw-bold mb-2">Aucune Facture</h5>
     <p class="text-muted">
-      Vous n'avez pas encore de transactions.<br />
+      Vous n'avez pas encore de Factures.<br />
       Elles apparaîtront ici lorsqu'elles seront créées.
     </p>
   </div>
@@ -85,7 +85,6 @@
         >
           <td><input type="checkbox" /></td>
           <td>{{ invoice.ref }}</td>
-
           <td>{{ invoice.date | date : "yyyy-MM-dd HH:mm" }}</td>
           <td>{{ invoice.montant }}</td>
           <td>{{ invoice.device }}</td>
@@ -101,6 +100,13 @@
         </tr>
       </tbody>
     </table>
+    <!-- Message en gris au-dessus de la pagination -->
+    <div class="invoice-info" style="margin-top: 10px; font-size: 12px">
+      <p style="color: gray">
+        * Cliquez sur une ligne pour voir les détails ou payer une facture en
+        attente
+      </p>
+    </div>
 
     <!-- Pagination affichée seulement quand loading = false -->
     <div *ngIf="!loading && invoices.length > 5" class="pagination">
@@ -116,88 +122,78 @@
     </div>
   </div>
 </div>
-
-<!-- Modal: Invoice Details -->
+<!-- Modal: Détails de la facture -->
 <div
   class="modal fade"
-  id="invoiceModal"
+  id="simpleInvoiceModal"
   tabindex="-1"
-  aria-labelledby="invoiceModalLabel"
+  aria-labelledby="simpleInvoiceModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0 shadow rounded-4">
-      <div class="modal-header border-0 pb-1">
-        <h5 class="modal-title fw-bold" id="invoiceModalLabel">
-          Invoice Details
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+    <div
+      class="modal-content p-4 rounded-4 shadow-sm position-relative"
+      *ngIf="selectedInvoice"
+    >
+      <!-- Bouton croix en haut à droite -->
+      <button
+        type="button"
+        class="btn-close position-absolute top-0 end-0 m-3"
+        data-bs-dismiss="modal"
+        aria-label="Fermer"
+      ></button>
+
+      <!-- Titre -->
+      <div class="mb-2">
+        <h5 class="fw-bold m-0">Détails de la facture</h5>
       </div>
 
-      <div class="px-4 d-flex justify-content-between align-items-center mb-2">
-        <div class="fw-bold text-uppercase">{{ selectedInvoice.ref }}</div>
-        <div class="text-primary fs-4"><i class="fas fa-euro-sign"></i></div>
-      </div>
+      <!-- Réf -->
+      <div class="mb-3 text-muted small">Réf : {{ selectedInvoice.ref }}</div>
 
-      <hr class="my-0 text-secondary opacity-25" />
+      <!-- Ligne grise -->
+      <hr class="text-secondary opacity-25" />
 
-      <div class="modal-body" *ngIf="selectedInvoice">
-        <!-- Date -->
-        <div class="mb-3">
-          <p class="mb-1 text-muted">Date</p>
-          <p class="fw-medium mb-0">
-            {{ selectedInvoice.date | date : "dd/MM/yyyy" }}
-          </p>
+      <!-- Contenu -->
+      <div class="mb-3">
+        <div class="d-flex justify-content-between mb-2">
+          <div><strong>Date :</strong></div>
+          <div>{{ selectedInvoice.date | date : "dd/MM/yyyy" }}</div>
         </div>
-
-        <!-- Amount + Currency -->
-        <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex justify-content-between mb-2">
+          <div><strong>Montant :</strong></div>
+          <div class="fw-bold">{{ selectedInvoice.montant }}</div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div><strong>Devise :</strong></div>
+          <div>{{ selectedInvoice.device }}</div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div><strong>État du paiement :</strong></div>
           <div>
-            <p class="mb-1 text-muted">Amount</p>
-            <p class="fw-bold fs-5 mb-0">
-              {{ selectedInvoice.montant | number : "1.2-2" }} €
-            </p>
+            <span
+              [ngClass]="{
+                'text-success': selectedInvoice.payment_state === 'paid',
+                'text-danger': selectedInvoice.payment_state === 'not_paid'
+              }"
+              class="fw-semibold"
+            >
+              {{
+                selectedInvoice.payment_state === "paid" ? "Payée" : "Non payée"
+              }}
+            </span>
           </div>
-          <div class="text-end">
-            <p class="mb-1 text-muted">Currency</p>
-            <p class="fw-medium mb-0">{{ selectedInvoice.device }}</p>
-          </div>
         </div>
+      </div>
 
-        <!-- Payment Status -->
-        <div class="mb-3">
-          <p class="mb-1 text-muted">Payment Status</p>
-          <p
-            [ngClass]="{
-              'text-success fw-bold': selectedInvoice.payment_state === 'paid',
-              'text-danger fw-bold':
-                selectedInvoice.payment_state === 'not_paid'
-            }"
-          >
-            {{ selectedInvoice.payment_state === "paid" ? "Paid" : "Not Paid" }}
-          </p>
-        </div>
+      <!-- Ligne grise -->
+      <hr class="text-secondary opacity-25" />
 
-        <hr class="my-0 text-secondary opacity-25" />
-
-        <!-- PayPal Button (if not paid) -->
-        <div class="d-grid gap-2 mt-3">
-          <ngx-paypal
-            *ngIf="selectedInvoice.payment_state === 'not_paid'"
-            [config]="payPalConfig"
-          ></ngx-paypal>
-          <button
-            class="btn btn-outline-secondary rounded-pill"
-            data-bs-dismiss="modal"
-          >
-            Cancel
-          </button>
-        </div>
+      <!-- Options de paiement + PayPal -->
+      <div *ngIf="selectedInvoice.payment_state === 'not_paid'">
+        <p class="fw-semibold mb-2 text-start">Options de paiement</p>
+        <!-- Paypal Buttons -->
+        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
       </div>
     </div>
   </div>
