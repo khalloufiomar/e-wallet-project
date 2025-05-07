@@ -109,7 +109,27 @@
           class="icon bg-light rounded-circle d-flex justify-content-center align-items-center"
           style="width: 40px; height: 40px"
         >
-          <img [src]="notif.icon" alt="icon" width="24" height="24" />
+          <img
+            *ngIf="notif.title === 'transfer recorded'"
+            src="transfercoins.png"
+            alt="icon"
+            width="24"
+            height="24"
+          />
+          <img
+            *ngIf="notif.title === 'payment recorded'"
+            src="payment.png"
+            alt="icon"
+            width="24"
+            height="24"
+          />
+          <img
+            *ngIf="notif.title === 'purchase recorded'"
+            src="transfer.png"
+            alt="icon"
+            width="24"
+            height="24"
+          />
         </div>
 
         <!-- Contenu -->
