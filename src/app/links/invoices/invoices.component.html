@@ -73,8 +73,8 @@
           <th>Ref</th>
           <th>Date</th>
           <th>Amount</th>
-          <th>Device</th>
-          <th>payment_state</th>
+          <th>Currency</th>
+          <th>Payment State</th>
         </tr>
       </thead>
       <tbody>
@@ -86,8 +86,8 @@
           <td><input type="checkbox" /></td>
           <td>{{ invoice.ref }}</td>
           <td>{{ invoice.date | date : "yyyy-MM-dd HH:mm" }}</td>
-          <td>{{ invoice.montant }}</td>
-          <td>{{ invoice.device }}</td>
+          <td>{{ invoice.amount }}</td>
+          <td>{{ invoice.currency }}</td>
           <!-- Etat de paiement avec ngClass pour changer de fond -->
           <td
             [ngClass]="{
@@ -145,7 +145,7 @@
 
       <!-- Titre -->
       <div class="mb-2">
-        <h5 class="fw-bold m-0">Détails de la facture</h5>
+        <h5 class="fw-bold m-0">Invoice details</h5>
       </div>
 
       <!-- Réf -->
@@ -161,15 +161,15 @@
           <div>{{ selectedInvoice.date | date : "dd/MM/yyyy" }}</div>
         </div>
         <div class="d-flex justify-content-between mb-2">
-          <div><strong>Montant :</strong></div>
-          <div class="fw-bold">{{ selectedInvoice.montant }}</div>
+          <div><strong>Amount :</strong></div>
+          <div class="fw-bold">{{ selectedInvoice.amount }}</div>
         </div>
         <div class="d-flex justify-content-between mb-2">
-          <div><strong>Devise :</strong></div>
-          <div>{{ selectedInvoice.device }}</div>
+          <div><strong>Currency :</strong></div>
+          <div>{{ selectedInvoice.currency }}</div>
         </div>
         <div class="d-flex justify-content-between mb-2">
-          <div><strong>État du paiement :</strong></div>
+          <div><strong>Payment State:</strong></div>
           <div>
             <span
               [ngClass]="{
@@ -179,7 +179,7 @@
               class="fw-semibold"
             >
               {{
-                selectedInvoice.payment_state === "paid" ? "Payée" : "Non payée"
+                selectedInvoice.payment_state === "paid" ? "Paid" : "Non Paid"
               }}
             </span>
           </div>

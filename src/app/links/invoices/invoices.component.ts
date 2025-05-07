@@ -24,7 +24,7 @@ export class InvoicesComponent {
   loading: boolean = true;
 
   constructor(
-    private incoicesService: InvoicesService,
+    private invoicesService: InvoicesService,
     private route: ActivatedRoute, // Injecter ActivatedRoute pour accéder à l'ID de la facture
     private router: Router,
     private messagingService: MessagingService,
@@ -44,12 +44,12 @@ export class InvoicesComponent {
     this.invoiceId = this.route.snapshot.paramMap.get('id')!;
 
     // Charger les détails de la facture avec cet ID
-    this.loadInvoiceDetails(this.invoiceId);
+    
     this.initConfig();
     console.log(this.invoiceId);
   }
   loadInvoiceDetails(invoiceId: string): void {
-    this.incoicesService.getInvoiceById(invoiceId).subscribe(
+    this.invoicesService.getInvoiceById(invoiceId).subscribe(
       (data) => {
         this.invoiceDetails = data;
         console.log('Détails de la facture chargés:', this.invoiceDetails);
@@ -64,22 +64,19 @@ export class InvoicesComponent {
     );
   }
   loadInvoices(): void {
-    this.incoicesService.getAllInvoices().subscribe(
+    this.invoicesService.getAllInvoices().subscribe(
       (data) => {
         this.invoices = data;
         console.log('Factures chargées:', this.invoices);
+        this.loading = false;
       },
       (error) => {
         console.error('Erreur lors du chargement des factures :', error);
       }
     );
   }
-  openInvoiceDetails(invoice: any): void {
-    // Naviguer vers la page de détails de la facture en passant l'ID dans l'URL
-    this.router.navigate(['user/invoice-details/', invoice.id]);
-  }
 
-  openInvoiceDetailss(invoice: any) {
+  openInvoiceDetails(invoice: any) {
     this.selectedInvoice = invoice;
     const modal = new bootstrap.Modal(
       document.getElementById('simpleInvoiceModal')
@@ -96,7 +93,7 @@ export class InvoicesComponent {
         'AdkAgKhLGFuGf9K3hiBKvdat45f4wBbUuJU7Zm26Sx_C4PsrjMtzNrSCw4HWaJS-w2oHwlGLmWcLpRIn',
       createOrderOnServer: () => {
         return fetch(
-          `http://localhost:8069/fund_wallet/${this.invoiceId}/pay_invoice`,
+          `http://localhost:8069/fund_wallet/${this.selectedInvoice.id}/pay_invoice`,
           {
             method: 'POST',
             headers: {
