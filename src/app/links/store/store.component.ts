@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-store',
@@ -18,7 +19,8 @@ export class StoreComponent implements OnInit {
 
   constructor(
     private storeService: StoreService,
-    private notificationservice: NotificationService
+    private notificationservice: NotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -89,5 +91,8 @@ export class StoreComponent implements OnInit {
         this.isLoading = false;
       }
     );
+  }
+  goToNotifications() {
+    this.router.navigate(['/user/notifications']);
   }
 }

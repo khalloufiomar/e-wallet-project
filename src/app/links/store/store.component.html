@@ -12,7 +12,11 @@
     <div class="d-flex align-items-center">
       <!-- Notification avec image et badge -->
       <div class="position-relative">
-        <i class="bi bi-bell fs-4 text-dark"></i>
+        <i
+          class="bi bi-bell fs-4 text-dark"
+          (click)="resetNotificationState()"
+          (click)="goToNotifications()"
+        ></i>
 
         <!-- Badge affiché uniquement si le nombre de notifications est > 0 -->
         <span
