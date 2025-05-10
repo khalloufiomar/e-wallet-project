@@ -136,16 +136,25 @@
                 (click)="resetNotificationState()"
               >
                 <span class="d-flex align-items-center">
-                  <i class="bi bi-bell fs-6"></i>
+                  <!-- Icône de notification -->
+                  <i class="bi bi-bell fs-6 position-relative">
+                    <!-- Rond violet au-dessus de l'icône -->
+                    <span
+                      *ngIf="notificationCount > 0"
+                      class="position-absolute top-0 start-100 translate-middle rounded-circle"
+                      style="
+                        width: 10px;
+                        height: 10px;
+                        background-color: #893cac;
+                        position: absolute;
+                        top: -5px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                      "
+                    ></span>
+                  </i>
                   <span class="ms-2">Notifications</span>
                 </span>
-                <span
-                  *ngIf="notificationCount > 0"
-                  class="notification-dot"
-                ></span>
-                <span *ngIf="notificationCount === 0">{{
-                  notificationCount
-                }}</span>
               </a>
             </li>
 

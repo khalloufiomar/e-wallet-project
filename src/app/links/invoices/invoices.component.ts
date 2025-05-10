@@ -44,7 +44,7 @@ export class InvoicesComponent {
     this.invoiceId = this.route.snapshot.paramMap.get('id')!;
 
     // Charger les détails de la facture avec cet ID
-    
+
     this.initConfig();
     console.log(this.invoiceId);
   }

@@ -5,17 +5,44 @@
   <!-- Header -->
   <div class="header d-flex justify-content-between align-items-center p-3">
     <h2 class="hello-text">Hello, {{ userName }}</h2>
-    <div class="header-icons d-flex align-items-center position-relative">
+
+    <div class="d-flex align-items-center">
+      <!-- Notification avec icône et badge -->
       <div
         class="position-relative me-3"
-        (click)="resetNotificationState()"
-        (click)="goToNotifications()"
+        (click)="resetNotificationState(); goToNotifications()"
+        style="cursor: pointer"
       >
-        <i class="bi bi-bell-fill"></i>
-        <span *ngIf="notificationCount > 0" class="notification-badge">{{
-          notificationCount
-        }}</span>
+        <i
+          class="bi bi-bell-fill"
+          style="font-size: 1.4rem !important"
+          (click)="resetNotificationState()"
+          (click)="goToNotifications()"
+        ></i>
+
+        <!-- Badge affiché uniquement si le nombre de notifications est > 0 -->
+        <span
+          *ngIf="notificationCount > 0"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+          style="
+            font-size: 0.6rem;
+            color: white;
+            background-color: #893cac;
+            min-width: 1.8rem;
+            height: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.1rem 0.5rem;
+            top: 90%;
+            transform: translateY(-50%) translateX(20%);
+          "
+        >
+          {{ notificationCount }}
+        </span>
       </div>
+
+      <!-- Icône profil -->
       <i class="bi bi-person-circle fs-4 text-dark"></i>
     </div>
   </div>

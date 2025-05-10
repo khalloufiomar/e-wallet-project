@@ -3,6 +3,7 @@ import { StoreService } from '../../services/store.service';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
+import { Course } from '../../model/class/user';
 
 @Component({
   selector: 'app-store',
@@ -15,7 +16,7 @@ export class StoreComponent implements OnInit {
   notificationCount = 0;
   showNotification = false;
   isLoading = true;
-  data: any; // Variable pour stocker les données
+  data: Course[] = []; // Variable pour stocker les données
 
   constructor(
     private storeService: StoreService,

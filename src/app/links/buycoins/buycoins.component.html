@@ -1,7 +1,42 @@
 <div class="purchase-container">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="page-title mb-0">Purchase Coins</h2>
-    <i class="bi bi-person-circle fs-4 text-dark"></i>
+
+    <div class="d-flex align-items-center">
+      <!-- Notification icon with badge -->
+      <div class="position-relative me-3">
+        <i
+          class="bi bi-bell-fill"
+          style="font-size: 1.4rem !important"
+          (click)="resetNotificationState()"
+          (click)="goToNotifications()"
+        ></i>
+
+        <!-- Badge displayed only if notificationCount > 0 -->
+        <span
+          *ngIf="notificationCount > 0"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+          style="
+            font-size: 0.6rem;
+            color: white;
+            background-color: #893cac;
+            min-width: 1.8rem;
+            height: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.1rem 0.5rem;
+            top: 90%;
+            transform: translateY(-50%) translateX(20%);
+          "
+        >
+          {{ notificationCount }}
+        </span>
+      </div>
+
+      <!-- Profile icon -->
+      <i class="bi bi-person-circle fs-4 text-dark"></i>
+    </div>
   </div>
 
   <div class="content-wrapper">
@@ -54,7 +89,7 @@
         Proceed to Payment
       </button>
     </div>
-    
+
     <!-- Right: Wallet Card -->
     <div class="wallet-card">
       <div class="wallet-header">

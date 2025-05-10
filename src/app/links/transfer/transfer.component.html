@@ -7,8 +7,31 @@
     <div class="d-flex align-items-center position-relative">
       <!-- Icône de notification avec badge -->
       <div class="position-relative me-3">
-        <i class="bi bi-bell fs-4 text-dark"></i>
-        <span *ngIf="notificationCount > 0" class="notification-badge">
+        <i
+          class="bi bi-bell-fill"
+          style="font-size: 1.4rem !important"
+          (click)="resetNotificationState()"
+          (click)="goToNotifications()"
+        ></i>
+
+        <!-- Badge affiché uniquement si le nombre de notifications est > 0 -->
+        <span
+          *ngIf="notificationCount > 0"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+          style="
+            font-size: 0.6rem;
+            color: white;
+            background-color: #893cac;
+            min-width: 1.8rem;
+            height: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.1rem 0.5rem;
+            top: 90%;
+            transform: translateY(-50%) translateX(20%);
+          "
+        >
           {{ notificationCount }}
         </span>
       </div>

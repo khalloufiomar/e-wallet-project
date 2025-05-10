@@ -3,7 +3,7 @@
     <div>
       <h1 class="fw-bold mb-2">Courses</h1>
       <!-- Texte gris sous le titre -->
-      <p class="text-muted mb-0">
+      <p class="text-muted mb-0" *ngIf="data.length">
         Enhance your skills with our professional training programs
       </p>
     </div>
@@ -13,7 +13,8 @@
       <!-- Notification avec image et badge -->
       <div class="position-relative">
         <i
-          class="bi bi-bell fs-4 text-dark"
+          class="bi bi-bell-fill"
+          style="font-size: 1.4rem !important"
           (click)="resetNotificationState()"
           (click)="goToNotifications()"
         ></i>
@@ -46,8 +47,17 @@
   </div>
 
   <p class="mb-4">
-    <span class="fw-semibold text-dark">All Courses</span>
+    <span class="fw-semibold text-dark" *ngIf="data.length">All Courses</span>
   </p>
+
+  <div *ngIf="data.length === 0" class="no-transactions-card">
+    <i class="bi bi-shop fs-1 text-secondary mb-3"></i>
+    <h5 class="fw-bold mb-2">The store is empty</h5>
+    <p class="text-muted">
+      There are currently no courses available in the store.<br />
+      Please check back later to explore our training programs.
+    </p>
+  </div>
 
   <div class="row g-4">
     <div class="col-md-4" *ngFor="let course of data">
