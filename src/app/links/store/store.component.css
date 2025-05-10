@@ -1,0 +1,32 @@
+.card {
+    transition: transform 0.2s;
+}
+
+
+.badge {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.enroll-btn {
+    background-color: #93A2FF;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 10px;
+
+}
+
+.card-title {
+    font-weight: 400;
+    color: #000000;
+}
+
+
+.w-fit-content {
+    width: fit-content;
+    background-color: #C7D8FF;
+    color: #000000;
+    border-color: #BCBCBC;
+    font-weight: 400;
+}

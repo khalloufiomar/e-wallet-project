@@ -57,3 +57,10 @@ export interface IUser {
   confirmPassword: string;
   termsAccepted: boolean;
 }
+export interface Course {
+  id: number;
+  title: string;
+  author: string;
+  category: string;
+  imageUrl: string;
+}
