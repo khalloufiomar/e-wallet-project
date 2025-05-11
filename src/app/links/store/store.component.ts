@@ -31,14 +31,19 @@ export class StoreComponent implements OnInit {
     this.storeService.getData().subscribe(
       (response) => {
         this.data = response; // Stocke la réponse dans la variable data
-        console.log(this.data); // Affiche les données dans la console pour vérifier
+        console.log(this.data);
+        for (let course of this.data){
+          const base64String = course.image;
+          const imageSrc = `data:image/jpeg;base64,${base64String}`
+          course.imageUrl = imageSrc; // Met à jour l'image avec le format base64
+        } // Affiche les données dans la console pour vérifier
       },
       (error) => {
         console.error('Erreur de récupération des données', error);
       }
     );
   }
-  purchaseCourse(courseId: string) {
+  purchaseCourse(courseId: number) {
     this.storeService.purchaseCourse(courseId).subscribe(
       (response) => {
         console.log('Achat effectué avec succès', response);

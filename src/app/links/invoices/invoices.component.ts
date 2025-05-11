@@ -63,6 +63,22 @@ export class InvoicesComponent {
       }
     );
   }
+  downloadInvoicePdf(id: string, accessToken: string): void {
+  this.invoicesService.getInvoicePdf(id, accessToken).subscribe({
+    next: (blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `invoice_${id}.pdf`;
+      link.click();
+      window.URL.revokeObjectURL(url);
+    },
+    error: (err) => {
+      console.error('Failed to download invoice PDF', err);
+    },
+  });
+}
+
   loadInvoices(): void {
     this.invoicesService.getAllInvoices().subscribe(
       (data) => {

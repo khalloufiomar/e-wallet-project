@@ -21,4 +21,14 @@ export class InvoicesService {
       withCredentials: true,
     });
   }
+  getInvoicePdf(id: string, access_token: string): Observable<Blob> {
+  return this.http.get(`http://localhost:8069/my/invoices/${id}?access_token=${access_token}&report_type=pdf&download=true`, {
+    headers: {
+      'Authorization': `Bearer ${access_token}`,
+      'Accept': 'application/pdf',
+    },
+    withCredentials: true,
+    responseType: 'blob',
+  });
+}
 }
