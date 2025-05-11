@@ -13,7 +13,7 @@ export class StoreService {
   getData(): Observable<any> {
     return this.http.get<any>(`${this.baseApiUrl}/getCourses`,{ withCredentials: true });
   };
-  purchaseCourse(courseId: string): Observable<any> {
+  purchaseCourse(courseId: number): Observable<any> {
     const params = new HttpParams().set('courseId', courseId);
     return this.http.get<any>(`${this.baseApiUrl}/purchaseCourse`, {
       params,

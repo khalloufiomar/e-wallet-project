@@ -59,10 +59,14 @@ export interface IUser {
 }
 export interface Course {
   id: number;
-  title: string;
+  name: string;
   author: string;
   category: string;
   imageUrl: string;
+  is_purchased: boolean;
+  image: string;
+  price_lc: number;
+  description: string;
 }
 export interface Account {
   id: number;

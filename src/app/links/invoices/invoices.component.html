@@ -4,7 +4,7 @@
     <div class="title">Invoices</div>
 
     <div class="profile d-flex align-items-center position-relative">
-      <!-- Icône de notification avec badge -->
+      <!-- Notification icon with badge -->
       <div
         class="position-relative me-3"
         (click)="resetNotificationState()"
@@ -17,29 +17,17 @@
           (click)="goToNotifications()"
         ></i>
 
-        <!-- Badge affiché uniquement si le nombre de notifications est > 0 -->
+        <!-- Badge displayed only if the notification count > 0 -->
         <span
           *ngIf="notificationCount > 0"
           class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-          style="
-            font-size: 0.6rem;
-            color: white;
-            background-color: #893cac;
-            min-width: 1.8rem;
-            height: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0.1rem 0.5rem;
-            top: 90%;
-            transform: translateY(-50%) translateX(20%);
-          "
+          style="font-size: 0.6rem; color: white; background-color: #893cac; min-width: 1.8rem; height: 1rem; display: flex; justify-content: center; align-items: center; padding: 0.1rem 0.5rem; top: 90%; transform: translateY(-50%) translateX(20%);"
         >
           {{ notificationCount }}
         </span>
       </div>
 
-      <!-- Icône de profil -->
+      <!-- Profile icon -->
       <i class="bi bi-person-circle fs-4 text-dark"></i>
     </div>
   </div>
@@ -81,14 +69,14 @@
       </div>
     </div>
 
-    <!-- Spinner affiché pendant le chargement -->
+    <!-- Spinner shown during loading -->
     <div *ngIf="loading" class="text-center my-4">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
 
-    <!-- Table affichée seulement quand loading = false -->
+    <!-- Table displayed only when loading = false -->
     <table *ngIf="!loading" class="transactions-table">
       <thead>
         <tr>
@@ -111,7 +99,7 @@
           <td>{{ invoice.date | date : "yyyy-MM-dd HH:mm" }}</td>
           <td>{{ invoice.amount }}</td>
           <td>{{ invoice.currency }}</td>
-          <!-- Etat de paiement avec ngClass pour changer de fond -->
+          <!-- Payment state with ngClass to change background -->
           <td
             [ngClass]="{
               'status-completed': invoice.payment_state === 'paid',
@@ -120,10 +108,12 @@
           >
             <div class="status-text">{{ invoice.payment_state }}</div>
           </td>
+          
         </tr>
       </tbody>
     </table>
-    <!-- Message en gris au-dessus de la pagination -->
+
+    <!-- Message in gray above pagination -->
     <div class="invoice-info" style="margin-top: 10px; font-size: 12px">
       <p style="color: gray">
         * Cliquez sur une ligne pour voir les détails ou payer une facture en
@@ -131,7 +121,7 @@
       </p>
     </div>
 
-    <!-- Pagination affichée seulement quand loading = false -->
+    <!-- Pagination displayed only when loading = false -->
     <div *ngIf="!loading && invoices.length > 5" class="pagination">
       <div class="showing">
         Showing 1 to 5 of {{ invoices.length }} invoices
@@ -145,7 +135,7 @@
     </div>
   </div>
 </div>
-<!-- Modal: Détails de la facture -->
+<!-- Modal: Invoice details -->
 <div
   class="modal fade"
   id="simpleInvoiceModal"
@@ -158,26 +148,26 @@
       class="modal-content p-4 rounded-4 shadow-sm position-relative"
       *ngIf="selectedInvoice"
     >
-      <!-- Bouton croix en haut à droite -->
+      <!-- Close button -->
       <button
         type="button"
         class="btn-close position-absolute top-0 end-0 m-3"
         data-bs-dismiss="modal"
-        aria-label="Fermer"
+        aria-label="Close"
       ></button>
 
-      <!-- Titre -->
+      <!-- Title -->
       <div class="mb-2">
         <h5 class="fw-bold m-0">Invoice details</h5>
       </div>
 
-      <!-- Réf -->
-      <div class="mb-3 text-muted small">Réf : {{ selectedInvoice.ref }}</div>
+      <!-- Ref -->
+      <div class="mb-3 text-muted small">Ref : {{ selectedInvoice.ref }}</div>
 
-      <!-- Ligne grise -->
+      <!-- Gray line -->
       <hr class="text-secondary opacity-25" />
 
-      <!-- Contenu -->
+      <!-- Content -->
       <div class="mb-3">
         <div class="d-flex justify-content-between mb-2">
           <div><strong>Date :</strong></div>
@@ -201,22 +191,28 @@
               }"
               class="fw-semibold"
             >
-              {{
-                selectedInvoice.payment_state === "paid" ? "Paid" : "Non Paid"
-              }}
+              {{"paid" === selectedInvoice.payment_state ? "Paid" : "Not Paid"}}
             </span>
           </div>
         </div>
       </div>
 
-      <!-- Ligne grise -->
+      <!-- Gray line -->
       <hr class="text-secondary opacity-25" />
-
-      <!-- Options de paiement + PayPal -->
-      <div *ngIf="selectedInvoice.payment_state === 'not_paid'">
-        <p class="fw-semibold mb-2 text-start">Options de paiement</p>
-        <!-- Paypal Buttons -->
-        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+      <!-- Payment options + PayPal -->
+      <div>
+        <div *ngIf="selectedInvoice.payment_state === 'not_paid'">
+          <p class="fw-semibold mb-2 text-start">Payment Options</p>
+          <!-- Paypal Buttons -->
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+        <td *ngIf="selectedInvoice.payment_state === 'paid'">
+          <button
+            class="btn btn-primary"
+            (click)="downloadInvoicePdf(selectedInvoice.id, selectedInvoice.access_token)">
+            Download PDF
+          </button>
+          </td> <!-- Conditional button to download invoice PDF -->
       </div>
     </div>
   </div>
