@@ -64,3 +64,10 @@ export interface Course {
   category: string;
   imageUrl: string;
 }
+export interface Account {
+  id: number;
+  name: string;
+  email: string;
+  type: string;
+  balance: number;
+}

@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 import { RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-admin',
-  imports: [RouterOutlet, RouterLinkActive, CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })

@@ -1,0 +1,63 @@
+<div class="accounts-page container">
+  <h1>Accounts</h1>
+  <p class="subtitle">Manage Accounts</p>
+  <p class="description">View and manage all users accounts</p>
+
+  <!-- Summary cards (en haut) -->
+  <div class="account-summary row">
+    <div class="summary-card learner col">
+      <div class="header">
+        <span class="count">{{ learnerCount }}</span>
+        <span class="title">Learner</span>
+      </div>
+      <div class="footer">
+        <p>Active accounts with regular transactions</p>
+      </div>
+    </div>
+
+    <div class="summary-card hrcompany col">
+      <div class="header">
+        <span class="count">{{ hrCompanyCount }}</span>
+        <span class="title">HrCompany</span>
+      </div>
+      <div class="footer">
+        <p>Dormants accounts with no recent activities</p>
+      </div>
+    </div>
+
+    <div class="summary-card employee col">
+      <div class="header">
+        <span class="count">{{ employeeCount }}</span>
+        <span class="title">Employee</span>
+      </div>
+      <div class="footer">
+        <p>Accounts suspended due to policy violations</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <table class="accounts-table">
+      <thead>
+        <tr>
+          <th>Names</th>
+          <th>Email</th>
+          <th>Type</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+          <td>{{ account.name }}</td>
+          <td>{{ account.email }}</td>
+          <td>{{ account.type }}</td>
+          <td>{{ account.balance }}Ct</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="table-footer">
+      <p style="font-weight: 10px">Showing {{ accounts.length }} accounts</p>
+    </div>
+  </div>
+</div>

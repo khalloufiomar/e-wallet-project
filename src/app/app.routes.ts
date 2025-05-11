@@ -18,6 +18,7 @@ import { authGuard } from './auth.guard';
 import { InvoicesComponent } from './links/invoices/invoices.component';
 import { InvoiceDetailsComponent } from './links/invoice-details/invoice-details.component';
 import { StoreComponent } from './links/store/store.component';
+import { AccountsComponent } from './dashbord/Links admin/accounts/accounts.component';
 
 export const routes: Routes = [
   {
@@ -40,7 +41,7 @@ export const routes: Routes = [
   {
     path: 'user',
     component: UserComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'transactions', component: TransactionsComponent },
@@ -64,7 +65,8 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    // canActivate: [authGuard], // 🔒 Protège aussi la page admin
+    //canActivate: [authGuard], // 🔒 Protège aussi la page admin
+    children: [{ path: 'accounts', component: AccountsComponent }],
   },
   {
     path: 'enteremail',

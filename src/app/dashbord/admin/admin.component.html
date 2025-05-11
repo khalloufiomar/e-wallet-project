@@ -7,12 +7,12 @@
     <div class="mobile-menu-links">
       <div class="d-flex justify-content-around py-2">
         <a
-          routerLink="dashboard"
+          routerLink="accounts"
           routerLinkActive="active-link"
           class="mobile-nav-item"
         >
-          <i class="bi bi-grid"></i>
-          <span class="mobile-menu-text">Dashboard</span>
+          <i class="bi bi-people"></i>
+          <span class="mobile-menu-text">Accounts</span>
         </a>
 
         <a
@@ -55,24 +55,13 @@
           <ul class="list-unstyled">
             <li>
               <a
-                routerLink="dashboard"
+                routerLink="accounts"
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{ exact: true }"
                 class="d-flex align-items-center py-2 nav-item-link"
               >
-                <i class="bi bi-grid fs-6"></i>
-                <span class="ms-2 menu-text">Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a
-                routerLink="AllUsers"
-                routerLinkActive="active-link"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="d-flex align-items-center py-2 nav-item-link"
-              >
-                <i class="bi bi-arrow-left-right fs-6"></i>
-                <span class="ms-2">All Users</span>
+                <i class="bi bi-people fs-6"></i>
+                <span class="ms-2">Accounts</span>
               </a>
             </li>
           </ul>
@@ -116,6 +105,13 @@
 </div>
 
 <style>
+  .notification-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+  }
   /* Styles pour la responsivité */
   @media (max-width: 1000px) {
     .sidebar {

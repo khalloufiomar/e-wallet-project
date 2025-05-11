@@ -1,0 +1,173 @@
+.accounts-page {
+    padding: 20px;
+}
+
+.subtitle {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.description {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+/* Summary cards */
+.account-summary {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    /* Pour une distribution égale des cartes */
+}
+
+.summary-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 110px;
+    /* Hauteur réduite pour minimiser la taille des cartes */
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    position: relative;
+}
+
+/* Half-colored top */
+.summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    /* La moitié supérieure colorée */
+    background-color: inherit;
+    /* La couleur de fond héritée de chaque carte */
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* Footer (second half) */
+.summary-card .footer {
+    flex: 1;
+    padding: 10px;
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Aligner le texte à gauche */
+    padding-bottom: 5px;
+    /* Un petit padding supplémentaire pour l'aligner un peu plus bas */
+}
+
+/* Header styling */
+.summary-card .header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+    /* Pour s'assurer que le texte du header soit devant */
+    top: 10%;
+    left: 10%;
+}
+
+/* Count styling */
+.summary-card .count {
+    background: #e5e7eb;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-weight: bold;
+}
+
+/* Specific card styles */
+.summary-card.learner::before {
+    background-color: #d1fae5;
+    /* Green background */
+}
+
+.summary-card.learner .count {
+    background-color: #86FFBA;
+    color: #3A6D33;
+}
+
+.summary-card.hrcompany::before {
+    background-color: #E9E9E9;
+    /* Light gray background */
+}
+
+.summary-card.hrcompany .count {
+    background-color: #DEDEDE;
+    color: rgb(0, 0, 0);
+}
+
+.summary-card.employee::before {
+    background-color: #FACECE;
+    /* Red background */
+}
+
+.summary-card.employee .count {
+    background-color: #FFBABA;
+    color: #713333;
+}
+
+.summary-card p {
+    color: #6b7280;
+    margin: 0;
+    font-size: 0.8rem;
+    padding-left: 10px;
+    /* Ajout d'un léger padding pour donner un peu d'espace à gauche */
+    margin-top: 5px;
+    /* Légère marge pour décaler un peu le texte vers le bas */
+}
+
+/* TABLE CARD */
+.table-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+}
+
+/* TABLE STYLING */
+.accounts-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* Pour répartir uniformément les colonnes */
+}
+
+.accounts-table th,
+.accounts-table td {
+    padding: 12px 15px;
+    /* Même padding horizontal (15px) + vertical (12px) */
+    text-align: left;
+}
+
+.accounts-table th {
+    color: #6b7280;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.accounts-table td {
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.95rem;
+    padding-top: 14px;
+    /* Augmenter légèrement la marge entre lignes */
+    padding-bottom: 14px;
+}
+
+/* Footer */
+.table-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
