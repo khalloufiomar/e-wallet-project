@@ -39,4 +39,14 @@ export class AuthService {
   logoutCurrentUser(): Observable<any> {
     return this.http.get(`${this.baseUrl}web/session/logout`, { withCredentials: true });
   }
+
+  updateUserInfo(name: string, email: string, phone: string): Observable<any> {
+    const payload = {
+      name,
+      email,
+      phone
+    };
+    console.log('Payload for update:', payload);
+    return this.http.post(`${this.baseUrl}api/changeUserInfos`, payload);
+  }
 }

@@ -6,7 +6,7 @@
 
 <!-- Avatar + Form Layout -->
 <div class="row g-4 align-items-start">
-  <!-- Avatar à gauche -->
+  <!-- Avatar -->
   <div class="col-md-3 d-flex flex-column align-items-center text-center">
     <img
       src="https://via.placeholder.com/100"
@@ -16,16 +16,18 @@
     <button class="btn btn-outline-secondary btn-sm">Change Avatar</button>
   </div>
 
-  <!-- Formulaire à droite -->
+  <!-- Form -->
   <div class="col-md-9">
     <div class="row mb-3">
       <div class="col-md-6">
-        <label for="firstName" class="form-label">First Name</label>
-        <input type="text" id="firstName" class="form-control" value="John" />
-      </div>
-      <div class="col-md-6">
-        <label for="lastName" class="form-label">Last Name</label>
-        <input type="text" id="lastName" class="form-control" value="Doe" />
+        <label for="fullName" class="form-label">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          class="form-control"
+          [(ngModel)]="userName"
+          name="fullName"
+        />
       </div>
     </div>
 
@@ -35,7 +37,8 @@
         type="email"
         id="email"
         class="form-control"
-        value="john.doe@example.com"
+        [(ngModel)]="userEmail"
+        name="email"
       />
     </div>
 
@@ -45,10 +48,14 @@
         type="text"
         id="phone"
         class="form-control"
-        value="+1 (555) 123-4567"
+        [(ngModel)]="phone"
+        name="phone"
+        [value]="phone || '+216'"
       />
     </div>
 
-    <button class="btn btn-primary px-4">Save Changes</button>
+    <button class="btn btn-primary px-4" (click)="updateUserInfos(userName, userEmail, phone)">
+      Save Changes
+    </button>
   </div>
 </div>
