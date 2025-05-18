@@ -1,18 +1,94 @@
 {
-  "products": [
+  "transfers": [
     {
-      "id": 1,
-      "title": "Formation Angular",
-      "description": "Apprenez Angular pour créer des applications web modernes.",
-      "date": "2025-05-01",
-      "price": 199.99
+      "id": "1",
+      "recipientWalletId": "wallet123",
+      "amount": 150,
+      "description": "Payment for services",
+      "create_date": "2025-05-15T10:00:00Z"
     },
     {
-      "id": 2,
-      "title": "Formation React",
-      "description": "Devenez expert en React et développez des applications interactives.",
-      "date": "2025-05-02",
-      "price": 249.99
+      "id": "2",
+      "recipientWalletId": "wallet456",
+      "amount": 200,
+      "description": "Bonus transfer",
+      "create_date": "2025-05-14T14:30:00Z"
+    },
+    {
+      "id": "fa40",
+      "recipientWalletId": "wallet456",
+      "amount": 10000,
+      "description": ""
+    },
+    {
+      "id": "b4e3",
+      "recipientWalletId": "wallet123",
+      "amount": 2100,
+      "description": ""
+    },
+    {
+      "id": "1211",
+      "recipientWalletId": "wallet123",
+      "amount": 2100,
+      "description": ""
+    },
+    {
+      "id": "895d",
+      "recipientWalletId": "wallet123",
+      "amount": 58,
+      "description": ""
+    },
+    {
+      "id": "fad2",
+      "recipientWalletId": "wallet123",
+      "amount": 500,
+      "description": ""
+    },
+    {
+      "id": "cd84",
+      "recipientWalletId": "wallet456",
+      "amount": 10000,
+      "description": ""
+    },
+    {
+      "id": "bdb6",
+      "recipientWalletId": "wallet456",
+      "amount": 10000,
+      "description": ""
+    },
+    {
+      "id": "8f62",
+      "recipientWalletId": "wallet456",
+      "amount": 2100,
+      "description": ""
+    },
+    {
+      "id": "0cf4",
+      "recipientWalletId": "wallet456",
+      "amount": 10000,
+      "description": ""
+    },
+    {
+      "id": "332b",
+      "recipientWalletId": "wallet456",
+      "amount": 10000,
+      "description": ""
+    }
+  ],
+  "employees": [
+    {
+      "id": "1",
+      "name": "Ali Ben Ahmed",
+      "walletId": "wallet123",
+      "email": "ali.benahmed@example.com",
+      "balance": 1000
+    },
+    {
+      "id": "2",
+      "name": "Mouna Trabelsi",
+      "walletId": "wallet456",
+      "email": "mouna.trabelsi@example.com",
+      "balance": 1500
     }
   ]
 }

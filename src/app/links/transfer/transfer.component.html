@@ -503,3 +503,92 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-box">
+    <h2>Confirm Order</h2>
+
+    <div class="modal-line">
+      <strong>Send Mode</strong> <span>Clevory Transfer</span>
+    </div>
+    <div class="modal-line">
+      <strong>Send to</strong>
+      <span>{{ transferForm.value.recipientWalletId }}</span>
+    </div>
+    <div class="modal-line">
+      <strong>Recipient Name</strong>
+      <span>{{ modalUserName }}</span>
+    </div>
+    <div class="modal-line">
+      <strong>You send</strong>
+      <span>{{ transferForm.value.amount }} USDT</span>
+    </div>
+    <div class="modal-line">
+      <strong>Payee Receives</strong>
+      <span>{{ transferForm.value.amount }} USDT</span>
+    </div>
+    <div class="modal-line"><strong>Fees</strong> <span>0 fees</span></div>
+
+    <hr />
+    <ul class="modal-warning">
+      <li>✔ Ensure that the recipient’s information is correct</li>
+      <li>✔ Funds will be sent immediately and are not refundable</li>
+    </ul>
+
+    <button class="confirm-button" (click)="confirmTransfer()">Continue</button>
+    <button class="cancel-button" (click)="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-backdrop" *ngIf="showSuccessModal">
+  <div class="modal-box success-style">
+    <div class="modal-check-circle">
+      <img
+        *ngIf="!isLoading"
+        src="checkmark.png"
+        alt="Success"
+        class="checkmark-img"
+      />
+      <img
+        *ngIf="isLoading"
+        src="loading.png"
+        alt="Success"
+        class="checkmark-img"
+      />
+    </div>
+    <h2 class="modal-title">Recipient Amount</h2>
+    <p class="modal-subtitle">CT</p>
+    <p class="modal-desc">
+      The recipient can check his balance in the funding wallet.
+    </p>
+
+    <!-- Info Section -->
+    <div class="modal-info">
+      <p><strong>Send Mode</strong> <span>Clevory Transfer</span></p>
+      <p>
+        <strong>Send To</strong>
+        <span>{{ transferForm.value.recipientWalletId }}</span>
+      </p>
+      <p>
+        <strong>Nickname</strong> <span>{{ modalUserName }}</span>
+      </p>
+      <p>
+        <strong>Total Paid</strong>
+        <span>{{ transferForm.value.amount }} USDT</span>
+      </p>
+      <p><strong>Send From</strong> <span>Spot Wallet, Funding wallet</span></p>
+      <p><strong>Note</strong> <span>--</span></p>
+      <p>
+        <strong>Order ID</strong> <span>{{ 147852369 }}</span>
+      </p>
+      <p>
+        <strong>Time Created</strong>
+        <span>{{ 14 / 78 / 9523 }}</span>
+      </p>
+    </div>
+
+    <button class="confirm-button" (click)="closeSuccessModal()">OK</button>
+  </div>
+</div>
