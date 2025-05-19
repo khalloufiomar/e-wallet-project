@@ -21,7 +21,7 @@ export class ProfileSettingsComponentComponent {
         console.log('User info:', res);
         this.userName = res.userName;
         this.userEmail = res.userEmail;
-        this.phone = res.phone;
+        this.phone = res.phone || '+216';
       },
       error: (err) => {
         console.error('Error fetching user info:', err);

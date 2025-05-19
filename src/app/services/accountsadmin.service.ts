@@ -7,11 +7,11 @@ import { Account } from '../model/class/user';
   providedIn: 'root',
 })
 export class AccountsadminService {
-  private apiUrl = 'http://localhost:8080/api/accounts'; // 👉 Modifie l’URL selon ton backend
+  private apiUrl = 'http://localhost:8069/api'; // 👉 Modifie l’URL selon ton backend
 
   constructor(private http: HttpClient) {}
 
-  getAllAccounts(): Observable<Account[]> {
-    return this.http.get<Account[]>(this.apiUrl);
+  getAllAccounts(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getAllUsers`, { withCredentials: true } );
   }
 }

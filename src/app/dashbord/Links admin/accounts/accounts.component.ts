@@ -44,7 +44,7 @@ export class AccountsComponent implements OnInit {
     for (let account of this.accounts) {
       if (account.type.toLowerCase() === 'learner') {
         this.learnerCount++;
-      } else if (account.type.toLowerCase() === 'hrcompany') {
+      } else if (account.type.toLowerCase() === 'hr') {
         this.hrCompanyCount++;
       } else if (account.type.toLowerCase() === 'employee') {
         this.employeeCount++;
