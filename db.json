@@ -1,94 +1,40 @@
 {
-  "transfers": [
-    {
-      "id": "1",
-      "recipientWalletId": "wallet123",
-      "amount": 150,
-      "description": "Payment for services",
-      "create_date": "2025-05-15T10:00:00Z"
-    },
+  "accounts": [
     {
       "id": "2",
-      "recipientWalletId": "wallet456",
-      "amount": 200,
-      "description": "Bonus transfer",
-      "create_date": "2025-05-14T14:30:00Z"
+      "name": "Sarah Smith",
+      "email": "sarah@example.com",
+      "type": "hrcompany",
+      "status": "Active",
+      "balance": 0,
+      "createdAt": "2023-03-22"
     },
     {
-      "id": "fa40",
-      "recipientWalletId": "wallet456",
-      "amount": 10000,
-      "description": ""
+      "id": "3",
+      "name": "Robert Brown",
+      "email": "robert@example.com",
+      "type": "hrcompany",
+      "status": "Active",
+      "balance": 50,
+      "createdAt": "2023-05-08"
     },
     {
-      "id": "b4e3",
-      "recipientWalletId": "wallet123",
-      "amount": 2100,
-      "description": ""
+      "id": "4",
+      "name": "Emily Johnson",
+      "email": "emily@example.com",
+      "type": "learner",
+      "status": "Inactive",
+      "balance": 12500,
+      "createdAt": "2023-02-19"
     },
     {
-      "id": "1211",
-      "recipientWalletId": "wallet123",
-      "amount": 2100,
-      "description": ""
-    },
-    {
-      "id": "895d",
-      "recipientWalletId": "wallet123",
-      "amount": 58,
-      "description": ""
-    },
-    {
-      "id": "fad2",
-      "recipientWalletId": "wallet123",
-      "amount": 500,
-      "description": ""
-    },
-    {
-      "id": "cd84",
-      "recipientWalletId": "wallet456",
-      "amount": 10000,
-      "description": ""
-    },
-    {
-      "id": "bdb6",
-      "recipientWalletId": "wallet456",
-      "amount": 10000,
-      "description": ""
-    },
-    {
-      "id": "8f62",
-      "recipientWalletId": "wallet456",
-      "amount": 2100,
-      "description": ""
-    },
-    {
-      "id": "0cf4",
-      "recipientWalletId": "wallet456",
-      "amount": 10000,
-      "description": ""
-    },
-    {
-      "id": "332b",
-      "recipientWalletId": "wallet456",
-      "amount": 10000,
-      "description": ""
-    }
-  ],
-  "employees": [
-    {
-      "id": "1",
-      "name": "Ali Ben Ahmed",
-      "walletId": "wallet123",
-      "email": "ali.benahmed@example.com",
-      "balance": 1000
-    },
-    {
-      "id": "2",
-      "name": "Mouna Trabelsi",
-      "walletId": "wallet456",
-      "email": "mouna.trabelsi@example.com",
-      "balance": 1500
+      "id": "5",
+      "name": "Omar Khalloufi",
+      "email": "omar@example.com",
+      "type": "admin",
+      "status": "Active",
+      "balance": 9999,
+      "createdAt": "2023-04-01"
     }
   ]
 }

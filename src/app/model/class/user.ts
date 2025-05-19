@@ -1,10 +1,9 @@
-// user.model.ts
 export class User {
   name: string;
   email: string;
   login: string;
   type: string;
-  companyCode: string; // optionnel, seulement si le rôle est 'employe'
+  companyCode: string;
   password: string;
 
   constructor(
@@ -52,11 +51,12 @@ export interface IUser {
   email: string;
   type: string;
   balance: number;
-  companyCode: string; // optionnel, seulement si le rôle est 'employe'
+  companyCode: string;
   password: string;
   confirmPassword: string;
   termsAccepted: boolean;
 }
+
 export interface Course {
   id: number;
   name: string;
@@ -68,10 +68,14 @@ export interface Course {
   price_lc: number;
   description: string;
 }
+
 export interface Account {
   id: number;
   name: string;
   email: string;
   type: string;
+  status: 'Active' | 'Inactive';
   balance: number;
+  createdAt: string;
+  loading?: boolean; // ✅ facultatif
 }

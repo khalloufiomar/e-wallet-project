@@ -19,6 +19,7 @@ import { InvoicesComponent } from './links/invoices/invoices.component';
 import { InvoiceDetailsComponent } from './links/invoice-details/invoice-details.component';
 import { StoreComponent } from './links/store/store.component';
 import { AccountsComponent } from './dashbord/Links admin/accounts/accounts.component';
+import { DashadminComponent } from './dashbord/Links admin/dashadmin/dashadmin.component';
 
 export const routes: Routes = [
   {
@@ -66,7 +67,10 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     //canActivate: [authGuard], // 🔒 Protège aussi la page admin
-    children: [{ path: 'accounts', component: AccountsComponent }],
+    children: [
+      { path: 'accounts', component: AccountsComponent },
+      { path: 'dashboard', component: DashadminComponent },
+    ],
   },
   {
     path: 'enteremail',

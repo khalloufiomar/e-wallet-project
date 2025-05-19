@@ -1,14 +1,32 @@
 <div class="accounts-page container">
   <h1>Accounts</h1>
-  <p class="subtitle">Manage Accounts</p>
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <p class="subtitle m-0">Manage Accounts</p>
+    <div class="position-relative">
+      <button class="btn btn-filter" (click)="toggleFilterDropdown()">
+        <i class="fa fa-filter me-1"></i> Filter by Type
+      </button>
+
+      <!-- Dropdown -->
+      <div class="filter-dropdown" *ngIf="showFilter">
+        <h6 class="filter-title">Account Types</h6>
+        <ul class="filter-list">
+          <li (click)="filterByType('all')">All Types</li>
+          <li (click)="filterByType('hrcompany')">HrCompany</li>
+          <li (click)="filterByType('employee')">Employee</li>
+          <li (click)="filterByType('learner')">Learner</li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <p class="description">View and manage all users accounts</p>
 
-  <!-- Summary cards (en haut) -->
+  <!-- Summary cards -->
   <div class="account-summary row">
     <div class="summary-card learner col">
       <div class="header">
-        <span class="count">{{ learnerCount }}</span>
-        <span class="title">Learner</span>
+        <span class="count">{{ activeaccount }}</span>
+        <span class="title">Active</span>
       </div>
       <div class="footer">
         <p>Active accounts with regular transactions</p>
@@ -17,25 +35,16 @@
 
     <div class="summary-card hrcompany col">
       <div class="header">
-        <span class="count">{{ hrCompanyCount }}</span>
-        <span class="title">HrCompany</span>
+        <span class="count">{{ inactiveaccount }}</span>
+        <span class="title">Inactive</span>
       </div>
       <div class="footer">
         <p>Dormants accounts with no recent activities</p>
       </div>
     </div>
-
-    <div class="summary-card employee col">
-      <div class="header">
-        <span class="count">{{ employeeCount }}</span>
-        <span class="title">Employee</span>
-      </div>
-      <div class="footer">
-        <p>Accounts suspended due to policy violations</p>
-      </div>
-    </div>
   </div>
 
+  <!-- Table -->
   <div class="table-card">
     <table class="accounts-table">
       <thead>
@@ -43,21 +52,79 @@
           <th>Names</th>
           <th>Email</th>
           <th>Type</th>
+          <th>Status</th>
           <th>Balance</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let account of accounts">
+        <tr *ngFor="let account of filteredAccounts">
           <td>{{ account.name }}</td>
           <td>{{ account.email }}</td>
           <td>{{ account.type }}</td>
-          <td>{{ account.balance }}Ct</td>
+
+          <!-- Status avec couleurs dynamiques -->
+          <td>
+            <span
+              [ngClass]="{
+                'status-badge': true,
+                active: account.status === 'Active',
+                inactive: account.status === 'Inactive',
+              }"
+            >
+              {{ account.status }}
+            </span>
+          </td>
+
+          <td>{{ account.balance }} CT</td>
+
+          <!-- Actions -->
+          <td>
+            <div class="d-flex gap-0">
+              <button
+                [disabled]="account.loading"
+                class="btn btn-action btn-same-width"
+                (click)="toggleStatus(account)"
+              >
+                {{
+                  account.loading
+                    ? "..."
+                    : account.status === "Active"
+                    ? "Deactivate"
+                    : "Activate"
+                }}
+              </button>
+              <button
+                class="btn btn-delete btn-same-width"
+                (click)="openDeleteModal(account)"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
 
     <div class="table-footer">
-      <p style="font-weight: 10px">Showing {{ accounts.length }} accounts</p>
+      <p>Showing {{ accounts.length }} accounts</p>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Fenêtre modale -->
+<div class="modal-overlay" *ngIf="showDeleteModal">
+  <div class="modal-box">
+    <h2 class="modal-title">Confirm Deletion</h2>
+    <p class="modal-text">
+      Are you sure you want to delete this account? This action cannot be
+      undone.
+    </p>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+      <button class="btn-delete-confirm" (click)="confirmDelete()">
+        Delete
+      </button>
     </div>
   </div>
 </div>

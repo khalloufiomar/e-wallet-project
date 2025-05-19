@@ -14,4 +14,14 @@ export class AccountsadminService {
   getAllAccounts(): Observable<Account[]> {
     return this.http.get<Account[]>(this.apiUrl);
   }
+
+  private baseUrl = 'http://localhost:3001/accounts'; // Remplacez par votre URL
+
+  updateStatus(accountId: string, status: string): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/${accountId}`, { status });
+  }
+
+  deleteAccount(accountId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${accountId}`);
+  }
 }

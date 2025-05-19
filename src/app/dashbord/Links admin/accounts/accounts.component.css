@@ -154,11 +154,12 @@
 .accounts-table th {
     color: #6b7280;
     border-bottom: 1px solid #e5e7eb;
+
 }
 
 .accounts-table td {
     border-bottom: 1px solid #f3f4f6;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     padding-top: 14px;
     /* Augmenter légèrement la marge entre lignes */
     padding-bottom: 14px;
@@ -170,4 +171,201 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    font-size: 12px;
+}
+
+.status-badge {
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.status-badge.active {
+    background-color: #e6f9ec;
+    color: #0f9d58;
+}
+
+.status-badge.inactive {
+    background-color: #f0f0f0;
+    color: #888;
+}
+
+
+/* Aligner les boutons sur la même ligne */
+td .btn {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+/* Bouton Activer / Désactiver : fond blanc + bord noir */
+.btn.btn-success.btn-sm,
+.btn.btn-secondary.btn-sm {
+    background-color: white;
+    color: black;
+    border: 1px solid #000;
+}
+
+.btn-action,
+.btn-delete {
+    height: 24px;
+    min-width: 70px;
+    font-size: 12px !important;
+    padding: 1px 1px;
+    border-radius: 10px;
+
+    display: flex;
+    /* nouveau */
+    justify-content: center;
+    /* nouveau */
+    align-items: center;
+    /* nouveau */
+
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1;
+}
+
+.btn-action {
+    background-color: white;
+    color: black;
+    border: 1px solid black !important;
+    padding-right: 5px !important;
+}
+
+.btn-delete {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+}
+
+.btn-same-width {
+    min-width: 80px;
+}
+
+
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 12px;
+}
+
+.modal-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-cancel {
+    padding: 8px 16px;
+    background-color: white;
+    border: 1px solid rgb(148, 143, 143);
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-delete-confirm {
+    padding: 8px 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+
+
+.btn-filter {
+    background-color: #7f56d9;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.filter-dropdown {
+    position: absolute;
+    right: 0;
+    top: 36px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    padding: 8px;
+    width: 120px;
+    z-index: 100;
+    font-size: 12px;
+}
+
+.filter-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.filter-list {
+    list-style: none;
+    /* ✅ Supprime les puces */
+    padding: 0;
+    margin: 0;
+}
+
+.filter-list li {
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #333;
+}
+
+.filter-list li:hover {
+    background-color: #f3f3f3;
 }
