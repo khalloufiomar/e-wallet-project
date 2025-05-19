@@ -145,6 +145,7 @@
               id="recipient-wallet-id"
               placeholder="Enter Recipient Wallet ID"
               formControlName="recipientWalletId"
+              #selectRef
             >
               <option *ngFor="let emp of employees" [value]="emp.walletId">
                 {{ emp.userName }}
