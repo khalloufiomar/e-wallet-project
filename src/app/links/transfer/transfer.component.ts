@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
+import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-transfer',
@@ -15,6 +16,8 @@ import { NotificationService } from '../../services/notification.service';
   styleUrl: './transfer.component.css',
 })
 export class TransferComponent implements OnInit {
+  @ViewChild('selectRef') selectRef!: ElementRef;
+
   notificationCount = 0;
   showNotification = false;
   transferForm!: FormGroup;
@@ -23,11 +26,14 @@ export class TransferComponent implements OnInit {
   errorMessages: string[] = [];
   isLoading = false;
   recentTransfers: any[] = [];
+  showModal = false;
+  selectedEmployeeName: string = '';
+  matchedEmployee: Employee[] = [];
 
   userName = '';
   userType = '';
   userEmail = '';
-  userBalance = '';
+  userBalance: number = 0;
   userId: number = 1;
   employees: Employee[] = [];
   constructor(
@@ -100,7 +106,9 @@ export class TransferComponent implements OnInit {
   get f() {
     return this.transferForm.controls;
   }
-
+  modalUserName = '';
+  modalAmount: number = 0;
+  modalWalletId = '';
   onSubmit(): void {
     this.submitted = true;
     this.errorMessages = [];
@@ -121,7 +129,39 @@ export class TransferComponent implements OnInit {
       if (this.f['amount'].errors?.['pattern']) {
         this.errorMessages.push('Amount must be a valid number.');
       }
+      if (this.errorMessages.length > 0) {
+        setTimeout(() => {
+          this.errorMessages = [];
+        }, 4000);
+        return;
+      }
       return;
+    }
+
+    const amountToTransfer = +this.transferForm.value.amount;
+
+    // Vérification du solde
+    if (amountToTransfer > this.userBalance) {
+      this.errorMessages.push('Insufficient balance for this transfer.');
+      return;
+    }
+
+    if (this.errorMessages.length === 0) {
+      // Récupérer texte de l'option sélectionnée
+      const selectElement = this.selectRef.nativeElement as HTMLSelectElement;
+      const selectedOptionText =
+        selectElement.options[selectElement.selectedIndex].text;
+
+      // Extraire la partie avant le "-"
+      const userName = selectedOptionText.split('-')[0].trim();
+
+      // Stocker les infos pour le modal
+      this.modalUserName = userName;
+      this.modalWalletId = this.transferForm.value.recipientWalletId;
+      this.modalAmount = this.transferForm.value.amount;
+
+      // Ouvrir le modal
+      this.showModal = true;
     }
 
     this.isLoading = true;
@@ -177,5 +217,54 @@ export class TransferComponent implements OnInit {
   }
   goToNotifications() {
     this.router.navigate(['/user/notifications']);
+  }
+  showSuccessModal: boolean = false;
+
+  confirmTransfer() {
+    this.isLoading = true;
+
+    const formData = {
+      recipientWalletId: this.transferForm.value.recipientWalletId,
+      amount: +this.transferForm.value.amount,
+      description: this.transferForm.value.description,
+    };
+
+    this.transferService.sendCoins(formData).subscribe({
+      next: () => {
+        this.successMessage = 'Transfer successful!';
+        this.transferForm.reset();
+        this.submitted = false;
+        this.isLoading = false;
+
+        setTimeout(() => {
+          this.successMessage = '';
+        }, 10000);
+      },
+      error: (err) => {
+        this.errorMessages = ['Transfer failed. Please try again.'];
+        this.isLoading = false;
+
+        setTimeout(() => {
+          this.errorMessages = [];
+        }, 4000);
+
+        console.error(err);
+      },
+    });
+    console.log(formData);
+    setTimeout(() => {
+      window.location.reload();
+    }, 10000);
+    // Effectue ici le transfert (ex: appel à un service ou traitement)
+    this.showModal = false;
+    this.showSuccessModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  closeSuccessModal() {
+    this.showSuccessModal = false;
   }
 }

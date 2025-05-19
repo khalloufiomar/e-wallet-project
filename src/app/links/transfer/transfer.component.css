@@ -265,3 +265,491 @@
         margin-left: -1px !important;
     }
 }
+
+
+.wallet-card-custom {
+    background: linear-gradient(to top left, #c800fa, #c269fc, #daccd3);
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    min-height: 160px;
+    position: relative;
+    /* Permet de positionner l’image par rapport à cette div */
+    overflow: hidden;
+    /* Évite les débordements */
+    width: 86%;
+}
+
+.info-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 18rem;
+    /* équivaut à ~288px */
+    min-height: 9rem;
+    /* équivaut à ~144px */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajout de style pour l'alerte et les messages d'erreur */
+.transfer-container {
+    width: 90%;
+    margin: auto;
+}
+
+.transfer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.header-title {
+    font-size: 45px;
+    font-weight: 500;
+    margin: 0;
+    color: black;
+}
+
+/* .profile-icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+        } */
+
+.transfer-content {
+    display: flex;
+    gap: 20px;
+}
+
+.transfer-card.expanded {
+    flex: 3;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #d2d9e0;
+}
+
+.transfer-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.send-icon {
+    font-size: 24px;
+    color: black;
+}
+
+.transfer-subtitle {
+    color: #767676;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.form-label h5 {
+    margin-bottom: 5px;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 12px;
+    color: #999999;
+    font-size: 18px;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #999999;
+    background: white;
+    color: #999999;
+    font-size: 16px;
+    padding-left: 35px;
+    width: 100%;
+}
+
+#description.form-control {
+    padding-left: 15px;
+    /* Spécifique à l'input sans icône */
+}
+
+.send-button {
+    width: 100%;
+    padding: 8px;
+    /* Réduction de la hauteur */
+    background: #a272fb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.recent-transfers.minimized {
+    flex: 1;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.form-group.mb-3 {
+    margin-bottom: 30px !important;
+    /* Augmenter l'espace entre les groupes de formulaires */
+}
+
+.transfer-list {
+    padding: 0;
+    margin: 0;
+}
+
+.recent-title {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.transfer-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    margin-bottom: 5px;
+}
+
+.employee-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+
+.transfer-date {
+    font-size: 13px;
+    color: #767676;
+}
+
+.transfer-info p {
+    margin: 0;
+}
+
+.transfer-amount {
+    font-size: 15px;
+    font-weight: 500;
+    color: #fa3939;
+}
+
+.divider {
+    border-top: 1px solid #767676;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.transfer-item:last-child .divider {
+    display: none;
+}
+
+.wallet-image-bottom {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    /* Ajuste la taille */
+    height: auto;
+    z-index: 0;
+}
+
+
+
+
+
+
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    /* plus léger */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background-color: #fff;
+    /* blanc */
+    color: #333;
+    border-radius: 12px;
+    padding: 24px;
+    width: 420px;
+    max-width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    /* effet card */
+    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    color: #222;
+}
+
+.modal-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.modal-line strong {
+    font-weight: 600;
+    color: #000;
+}
+
+hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+.modal-warning {
+    list-style: none;
+    padding-left: 0;
+    font-size: 13px;
+    margin-bottom: 20px;
+    color: #d9534f;
+}
+
+.modal-warning li {
+    margin-bottom: 6px;
+}
+
+.confirm-button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.confirm-button:hover {
+    background-color: #0b5ed7;
+}
+
+.cancel-button {
+    background: none;
+    color: #666;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box.success-style {
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+    width: 360px;
+    max-width: 90%;
+    border-radius: 12px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-check-circle {
+    width: 50px;
+    height: 50px;
+    background-color: #00c853;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkmark {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.modal-subtitle {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.modal-desc {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.modal-banner {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.modal-banner-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.modal-banner-link {
+    color: #f0b90b;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.modal-banner-icon {
+    font-size: 18px;
+    color: #f0b90b;
+    align-self: center;
+}
+
+.modal-info {
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.modal-info p {
+    margin: 6px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-info strong {
+    color: #555;
+}
+
+.modal-link {
+    display: block;
+    font-size: 12px;
+    color: #f0b90b;
+    margin-bottom: 15px;
+    text-decoration: none;
+}
+
+.confirm-button {
+    background-color: #f0b90b;
+    color: black;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.confirm-button {
+    background-color: #f0b90b;
+    /* Jaune Binance */
+    color: black;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+
+    /* Supprimer effets visuels au survol/clic */
+    transition: none;
+}
+
+.confirm-button:hover,
+.confirm-button:active,
+.confirm-button:focus {
+    background-color: #f6c112;
+    /* Même couleur */
+    color: black;
+    box-shadow: none;
+    outline: none;
+}
+
+.modal-check-circle {
+    width: 60px;
+    height: 60px;
+    background-color: #a8ffd5;
+    /* Vert clair */
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+    /* Légère lueur verte */
+}
+
+.checkmark-img {
+    width: 50px;
+    /* Taille de l'image */
+    height: 50px;
+    object-fit: contain;
+}
