@@ -171,33 +171,7 @@ export class TransferComponent implements OnInit {
       amount: +this.transferForm.value.amount,
       description: this.transferForm.value.description,
     };
-
-    this.transferService.sendCoins(formData).subscribe({
-      next: () => {
-        this.successMessage = 'Transfer successful!';
-        this.transferForm.reset();
-        this.submitted = false;
-        this.isLoading = false;
-
-        setTimeout(() => {
-          this.successMessage = '';
-        }, 4000);
-      },
-      error: (err) => {
-        this.errorMessages = ['Transfer failed. Please try again.'];
-        this.isLoading = false;
-
-        setTimeout(() => {
-          this.errorMessages = [];
-        }, 4000);
-
-        console.error(err);
-      },
-    });
     console.log(formData);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
   }
   getRecentTransfers(): void {
     this.transferService.getLastTransfers().subscribe({
@@ -252,9 +226,6 @@ export class TransferComponent implements OnInit {
       },
     });
     console.log(formData);
-    setTimeout(() => {
-      window.location.reload();
-    }, 10000);
     // Effectue ici le transfert (ex: appel à un service ou traitement)
     this.showModal = false;
     this.showSuccessModal = true;
@@ -262,9 +233,13 @@ export class TransferComponent implements OnInit {
 
   closeModal() {
     this.showModal = false;
+    this.isLoading = false;
   }
 
   closeSuccessModal() {
     this.showSuccessModal = false;
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 }
