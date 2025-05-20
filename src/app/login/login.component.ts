@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Response } from 'express';
 import { environment } from '../../environments/environment';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-login',
   imports: [RouterLink, CommonModule, FormsModule],
@@ -22,7 +23,11 @@ export class LoginComponent {
   showPassword: boolean = false;
   submitted: boolean = false;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private location: Location
+  ) {}
 
   //Disabled this for testing purposes (Aziz)
   // Valide le format de l'email
@@ -62,7 +67,17 @@ export class LoginComponent {
       .subscribe(
         (response) => {
           console.log('Connexion réussie:', response);
-          this.router.navigate(['/user/dashboard']);
+
+          if (response.status === 'Active') {
+            this.router.navigate(['/user/dashboard']);
+          } else {
+            this.errorMessages.push(
+              'your acount is inactive, please contact clevory support'
+            );
+            setTimeout(() => {
+              this.errorMessages = [];
+            }, 4000);
+          }
         },
         (error) => {
           console.error('Erreur lors de la connexion:', error);
@@ -82,12 +97,12 @@ export class LoginComponent {
     const redirectUri = encodeURIComponent(environment.redirectUri);
     const scope = encodeURIComponent('email profile openid');
     const responseType = 'code';
-  
+
     const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&prompt=consent`;
-    console.log("Clicked!")
+    console.log('Clicked!');
     window.location.href = googleAuthUrl;
   }
-  
+
   // Afficher/Masquer le mot de passe
   togglePassword(): void {
     this.showPassword = !this.showPassword;
@@ -95,5 +110,8 @@ export class LoginComponent {
   goHome(): void {
     // Redirection vers la page d'accueil
     this.router.navigate(['/']);
+  }
+  goBack(): void {
+    this.location.back();
   }
 }

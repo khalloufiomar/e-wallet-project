@@ -6,7 +6,7 @@ import { SignupService } from '../services/signup.service';
 import { Router } from '@angular/router';
 import { User } from '../model/class/user';
 import { environment } from '../../environments/environment';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-signup',
   imports: [RouterLink, FormsModule, CommonModule],
@@ -47,7 +47,11 @@ export class SignupComponent {
   // Messages d’erreur temporaires
   errorMessages: string[] = [];
 
-  constructor(private signupService: SignupService, private router: Router) {}
+  constructor(
+    private signupService: SignupService,
+    private router: Router,
+    private location: Location
+  ) {}
 
   togglePasswordVisibility(field: string) {
     if (field === 'password') {
@@ -80,7 +84,7 @@ export class SignupComponent {
 
   validateCompanyCode() {
     const type = this.user.type?.toLowerCase().trim();
-    const requiresCompanyCode = ['hrcompany', 'employee'].includes(type);
+    const requiresCompanyCode = ['hr', 'employee'].includes(type);
 
     if (requiresCompanyCode) {
       this.companyCodeError =
@@ -133,15 +137,15 @@ export class SignupComponent {
   isSubmitting = false;
   showErrors = false;
   loginWithGoogle() {
-      const clientId = environment.clientId;
-      const redirectUri = encodeURIComponent(environment.redirectUri);
-      const scope = encodeURIComponent('email profile openid');
-      const responseType = 'code';
-    
-      const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&prompt=consent`;
-      console.log("Clicked!")
-      window.location.href = googleAuthUrl;
-    }
+    const clientId = environment.clientId;
+    const redirectUri = encodeURIComponent(environment.redirectUri);
+    const scope = encodeURIComponent('email profile openid');
+    const responseType = 'code';
+
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&prompt=consent`;
+    console.log('Clicked!');
+    window.location.href = googleAuthUrl;
+  }
   onSubmit() {
     this.isSubmitting = true;
     this.showErrors = true;
@@ -153,20 +157,35 @@ export class SignupComponent {
       return;
     }
 
-    this.signupService.createUser(new User(this.user.name,this.user.email,this.user.type,this.user.companyCode,this.user.password)).subscribe(
-      (response) => {
-        console.log('Utilisateur créé avec succès:', response);
-        this.router.navigate(['/login']);
-        this.isSubmitting = false;
-      },
-      (error) => {
-        this.errorMessages.push("Erreur lors de la création de l'utilisateur");
-        console.error("Erreur lors de la création de l'utilisateur:", error);
-        this.isSubmitting = false;
-        setTimeout(() => {
-          this.errorMessages = [];
-        }, 4000);
-      }
-    );
+    this.signupService
+      .createUser(
+        new User(
+          this.user.name,
+          this.user.email,
+          this.user.type,
+          this.user.companyCode,
+          this.user.password
+        )
+      )
+      .subscribe(
+        (response) => {
+          console.log('Utilisateur créé avec succès:', response);
+          this.router.navigate(['/login']);
+          this.isSubmitting = false;
+        },
+        (error) => {
+          this.errorMessages.push(
+            "Erreur lors de la création de l'utilisateur"
+          );
+          console.error("Erreur lors de la création de l'utilisateur:", error);
+          this.isSubmitting = false;
+          setTimeout(() => {
+            this.errorMessages = [];
+          }, 4000);
+        }
+      );
+  }
+  goBack(): void {
+    this.location.back();
   }
 }

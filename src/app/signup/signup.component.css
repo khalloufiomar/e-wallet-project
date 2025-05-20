@@ -105,7 +105,7 @@
 
 /* Bouton de connexion via Google */
 .continue-google-btn {
-    height: 32px;
+    height: 35px;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 13px;
@@ -113,9 +113,22 @@
     color: rgb(0, 0, 0);
     background-color: #ffffff;
     border-color: #ffffff;
-    width: 80%;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    margin-top: 0px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Change la couleur du bouton et l'ombre au survol */
+.continue-google-btn:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: scale(1.03);
+}
+
+/* Effet lors du clic pour un petit effet de profondeur */
+.continue-google-btn:active {
+    background-color: #e0e0e0;
+    border-color: #e0e0e0;
+    color: rgb(0, 0, 0);
 }
 
 
@@ -164,13 +177,11 @@
     font-weight: 500 !important;
 }
 
-/* Style pour les champs invalides */
+/* Style pour les champs invalides 
 .input-field.ng-invalid.ng-touched {
     border-color: #dc3545;
-    /* Bordure rouge pour les champs invalides */
     background-color: #f8d7da;
-    /* Fond rose clair pour les champs invalides */
-}
+}*/
 
 
 
