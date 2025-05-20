@@ -51,9 +51,9 @@ export class DashadminComponent implements OnInit {
     this.inactiveaccount = 0;
 
     for (let account of this.accounts) {
-      if (account.status === 'Active') {
+      if (account.active === true) {
         this.activeaccount++;
-      } else if (account.status === 'Inactive') {
+      } else if (account.active === false) {
         this.inactiveaccount++;
       }
     }

@@ -15,13 +15,14 @@ export class AccountsadminService {
     return this.http.get<any>(`${this.apiUrl}/getAllUsers`, { withCredentials: true } );
   }
 
-  private baseUrl = 'http://localhost:3001/accounts'; // Remplacez par votre URL
 
-  updateStatus(accountId: string, status: string): Observable<any> {
-    return this.http.patch(`${this.baseUrl}/${accountId}`, { status });
-  }
+  updateStatus(user_id: string, action: string): Observable<any> {
+  return this.http.post(
+    `${this.apiUrl}/AdminActions`,
+    { user_id, action },
+    { withCredentials: true }
+  );
+}
 
-  deleteAccount(accountId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${accountId}`);
-  }
+  
 }

@@ -74,7 +74,7 @@ export interface Account {
   name: string;
   email: string;
   type: string;
-  status: 'Active' | 'Inactive';
+  active: boolean;
   balance: number;
   createdAt: string;
   loading?: boolean; // ✅ facultatif

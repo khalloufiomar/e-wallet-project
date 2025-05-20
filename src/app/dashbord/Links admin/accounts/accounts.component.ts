@@ -43,9 +43,9 @@ export class AccountsComponent {
     this.inactiveaccount = 0;
 
     for (let account of this.filteredAccounts) {
-      if (account.status === 'Active') {
+      if (account.active === true) {
         this.activeaccount++;
-      } else if (account.status === 'Inactive') {
+      } else if (account.active === false) {
         this.inactiveaccount++;
       }
     }
@@ -54,15 +54,15 @@ export class AccountsComponent {
   toggleStatus(account: any): void {
     account.loading = true;
 
-    const newStatus = account.status === 'Active' ? 'Inactive' : 'Active';
+    const newStatus = account.active === true ? 'Active' : 'Inactive';
     console.log(
       `🔄 Tentative de changement de statut pour ${account.id} → ${newStatus}`
     );
 
-    this.AccountsadminService.updateStatus(account.id, newStatus).subscribe({
+    this.AccountsadminService.updateStatus(account.id,"active").subscribe({
       next: (response) => {
         console.log('✅ Réponse du serveur :', response);
-        account.status = newStatus;
+        account.active = newStatus;
         account.loading = false;
         this.countUserTypes();
       },
@@ -87,7 +87,7 @@ export class AccountsComponent {
   }
 
   confirmDelete(): void {
-    this.AccountsadminService.deleteAccount(this.selectedAccount.id).subscribe({
+    this.AccountsadminService.updateStatus(this.selectedAccount.id,"delete").subscribe({
       next: () => {
         this.accounts = this.accounts.filter(
           (a: any) => a.id !== this.selectedAccount.id

@@ -12,7 +12,7 @@
         <h6 class="filter-title">Account Types</h6>
         <ul class="filter-list">
           <li (click)="filterByType('all')">All Types</li>
-          <li (click)="filterByType('hrcompany')">HrCompany</li>
+          <li (click)="filterByType('hr')">HrCompany</li>
           <li (click)="filterByType('employee')">Employee</li>
           <li (click)="filterByType('learner')">Learner</li>
         </ul>
@@ -66,15 +66,16 @@
           <!-- Status avec couleurs dynamiques -->
           <td>
             <span
-              [ngClass]="{
+                [ngClass]="{
                 'status-badge': true,
-                active: account.status === 'Active',
-                inactive: account.status === 'Inactive',
+                'active': account.active,
+                'inactive': !account.active
               }"
-            >
-              {{ account.status }}
+              >
+                {{ account.active ? 'Active' : 'Inactive' }}
             </span>
           </td>
+
 
           <td>{{ account.balance }} CT</td>
 
@@ -89,7 +90,7 @@
                 {{
                   account.loading
                     ? "..."
-                    : account.status === "Active"
+                    : account.active
                     ? "Deactivate"
                     : "Activate"
                 }}
