@@ -66,16 +66,15 @@
           <!-- Status avec couleurs dynamiques -->
           <td>
             <span
-                [ngClass]="{
+              [ngClass]="{
                 'status-badge': true,
-                'active': account.active,
-                'inactive': !account.active
+                active: account.active,
+                inactive: !account.active
               }"
-              >
-                {{ account.active ? 'Active' : 'Inactive' }}
+            >
+              {{ account.active ? "Active" : "Inactive" }}
             </span>
           </td>
-
 
           <td>{{ account.balance }} CT</td>
 
@@ -95,12 +94,12 @@
                     : "Activate"
                 }}
               </button>
-              <button
+              <!-- <button
                 class="btn btn-delete btn-same-width"
                 (click)="openDeleteModal(account)"
               >
                 Delete
-              </button>
+              </button> -->
             </div>
           </td>
         </tr>
@@ -114,7 +113,7 @@
 </div>
 
 <!-- ✅ Fenêtre modale -->
-<div class="modal-overlay" *ngIf="showDeleteModal">
+<!-- <div class="modal-overlay" *ngIf="showDeleteModal">
   <div class="modal-box">
     <h2 class="modal-title">Confirm Deletion</h2>
     <p class="modal-text">
@@ -128,4 +127,4 @@
       </button>
     </div>
   </div>
-</div>
+</div> -->

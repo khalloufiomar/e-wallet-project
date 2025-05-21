@@ -1,75 +1,158 @@
-<div class="container mt-4">
-  <!-- Titre -->
-  <h2 class="fw-bold mb-4">Settings</h2>
+<div class="header d-flex justify-content-between align-items-center">
+  <div class="title">Settings</div>
 
-  <div class="card p-4 shadow-sm rounded">
-    <h5 class="mb-3"><i class="bi bi-gear me-2"></i>Settings</h5>
-
-    <!-- Onglets -->
+  <div class="profile d-flex align-items-center position-relative">
+    <!-- Icône de notification avec badge -->
     <div
-      class="d-flex justify-content-between align-items-center mb-4 bg-body-tertiary rounded"
-      style="background-color: #f1f5f9"
+      class="position-relative me-3"
+      (click)="resetNotificationState()"
+      (click)="goToNotifications()"
     >
-      <a
-        routerLink="profile"
-        routerLinkActive="active-tab"
-        class="flex-fill text-center py-2 small nav-tab"
-      >
-        <i class="bi bi-person"></i> Profile
-      </a>
-      <a
-        routerLink="notifications"
-        routerLinkActive="active-tab"
-        class="flex-fill text-center py-2 small nav-tab"
-      >
-        <i class="bi bi-bell"></i> Notifications
-      </a>
-      <a
-        routerLink="security"
-        routerLinkActive="active-tab"
-        class="flex-fill text-center py-2 small nav-tab"
-      >
-        <i class="bi bi-shield-lock"></i> Security
-      </a>
-      <a
-        routerLink="payment"
-        routerLinkActive="active-tab"
-        class="flex-fill text-center py-2 small nav-tab"
-      >
-        <i class="bi bi-credit-card"></i> Payment Methods
-      </a>
-      <a
-        routerLink="support"
-        routerLinkActive="active-tab"
-        class="flex-fill text-center py-2 small nav-tab"
-      >
-        <i class="bi bi-info-circle"></i> Help & Support
-      </a>
-    </div>
+      <i
+        class="bi bi-bell-fill"
+        style="font-size: 1.4rem !important; cursor: pointer"
+        (click)="resetNotificationState()"
+        (click)="goToNotifications()"
+      ></i>
 
-    <!-- Contenu dynamique -->
-    <router-outlet></router-outlet>
+      <!-- Badge affiché uniquement si le nombre de notifications est > 0 -->
+      <span
+        *ngIf="notificationCount > 0"
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+        style="
+          font-size: 0.6rem;
+          color: white;
+          background-color: #893cac;
+          min-width: 1.8rem;
+          height: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0.1rem 0.5rem;
+          top: 90%;
+          transform: translateY(-50%) translateX(20%);
+        "
+      >
+        {{ notificationCount }}
+      </span>
+    </div>
+    <style>
+      .notification-badge {
+        position: absolute;
+        top: -2px;
+        right: 9px;
+        background-color: rgb(255, 0, 0); /* rouge vif */
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        cursor: pointer;
+      }
+    </style>
+
+    <!-- Icône de profil -->
+    <i class="bi bi-person-circle fs-4 text-dark"></i>
   </div>
 </div>
 
-<style>
-  .nav-tab {
-    background-color: #f1f5f9;
-    border: none;
-    text-decoration: none;
-    color: #333;
-    transition: all 0.2s ease-in-out;
-    font-size: 13px;
-  }
+<div class="settings-container">
+  <div class="card shadow settings-card">
+    <div class="card-header text-start d-flex align-items-center header-custom">
+      <i class="material-icons me-2 icon-custom">settings</i>
+      <span class="fw-semibold text-custom">User Settings</span>
+    </div>
 
-  .nav-tab:hover {
-    background-color: #e2e8f0;
-    color: #000;
-  }
+    <div class="card-body">
+      <!-- Toast d'erreur -->
+      <div
+        *ngIf="errorMessages.length > 0"
+        class="toast-container position-fixed top-0 end-0 p-3"
+      >
+        <div
+          class="toast text-bg-danger show"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div class="toast-body">
+            <div class="d-flex gap-3 align-items-center">
+              <i class="fa-solid fa-circle-exclamation fa-lg"></i>
+              <div
+                class="flex-grow-1 d-flex justify-content-between align-items-center"
+              >
+                <!-- Affiche tous les messages -->
+                <div class="fw-normal small">
+                  <div *ngFor="let message of errorMessages">
+                    {{ message }}
+                  </div>
+                </div>
 
-  .active-tab {
-    background-color: white !important;
-    font-weight: 600;
-    border-radius: 6px;
-  }
-</style>
+                <button
+                  type="button"
+                  class="btn-close btn-close-white"
+                  aria-label="Close"
+                  (click)="errorMessages = []"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form>
+        <div class="mb-3">
+          <label for="fullName" class="form-label text-label">
+            <i class="material-icons me-1 icon-custom">person</i>
+            Full Name
+          </label>
+          <input
+            type="text"
+            id="fullName"
+            class="form-control"
+            placeholder="John Doe"
+            [value]="userName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label text-label">
+            <i class="material-icons me-1 icon-custom">email</i>
+            Email Address
+          </label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="john.doe@example.com"
+            [value]="userEmail"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label text-label">
+            <i class="material-icons me-1 icon-custom">phone</i>
+            Phone Number
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            class="form-control"
+            placeholder="+216 11 111 111"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary w-100 btn-custom"
+          (click)="updateUserInfos(userName, userEmail, phone)"
+        >
+          Save Changes
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

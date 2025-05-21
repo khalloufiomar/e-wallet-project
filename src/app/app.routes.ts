@@ -20,6 +20,7 @@ import { InvoiceDetailsComponent } from './links/invoice-details/invoice-details
 import { StoreComponent } from './links/store/store.component';
 import { AccountsComponent } from './dashbord/Links admin/accounts/accounts.component';
 import { DashadminComponent } from './dashbord/Links admin/dashadmin/dashadmin.component';
+import { AddcompanyComponent } from './dashbord/Links admin/addcompany/addcompany.component';
 
 export const routes: Routes = [
   {
@@ -52,15 +53,7 @@ export const routes: Routes = [
       { path: 'invoices', component: InvoicesComponent },
       { path: 'invoice-details/:id', component: InvoiceDetailsComponent },
       { path: 'store', component: StoreComponent },
-
-      {
-        path: 'settings',
-        component: SettingsComponent,
-        children: [
-          { path: '', redirectTo: 'profile', pathMatch: 'full' },
-          { path: 'profile', component: ProfileSettingsComponentComponent },
-        ],
-      },
+      { path: 'settings', component: SettingsComponent },
     ],
   },
   {
@@ -70,6 +63,7 @@ export const routes: Routes = [
     children: [
       { path: 'accounts', component: AccountsComponent },
       { path: 'dashboard', component: DashadminComponent },
+      { path: 'addcompany', component: AddcompanyComponent },
     ],
   },
   {

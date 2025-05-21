@@ -1,0 +1,87 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+    margin-top: 40px;
+}
+
+.title {
+    font-size: 40px;
+    /* Légèrement augmenté pour une taille plus grande */
+    font-weight: 600;
+    margin-left: 50px;
+
+}
+
+.profile-image {
+    width: 45px;
+    /* Légèrement agrandi */
+    height: 45px;
+    /* Légèrement agrandi */
+    border-radius: 50%;
+}
+
+
+.settings-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    margin-top: -70px;
+    /* ⬆️ Décalage vers le haut */
+}
+
+.settings-card {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.header-custom {
+    background-color: #f0f0f0;
+    padding: 24px 20px;
+    /* ⬆️ Augmenté de 16px à 24px */
+}
+
+.text-label {
+    color: #555;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    /* ⬇️ Réduction de la taille des labels */
+}
+
+.icon-custom {
+    font-size: 20px;
+    color: #666;
+    /* gris doux */
+}
+
+
+
+.text-custom {
+    color: #444;
+    font-size: 16px;
+}
+
+.form-control {
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btn-custom {
+    background-color: #a78bfa;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-custom:hover {
+    background-color: #8b5cf6;
+}
