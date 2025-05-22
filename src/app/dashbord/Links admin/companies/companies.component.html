@@ -1,0 +1,170 @@
+<div class="container-fluid">
+  <!-- Header section -->
+  <div class="header d-flex justify-content-between align-items-center">
+    <div class="title">Company Directory</div>
+
+    <!-- <div class="profile d-flex align-items-center position-relative">
+      <div class="position-relative me-3">
+        <i class="bi bi-bell-fill" style="font-size: 1.4rem !important"></i>
+
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+          style="
+            font-size: 0.6rem;
+            color: white;
+            background-color: #893cac;
+            min-width: 1.8rem;
+            height: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.1rem 0.5rem;
+            top: 90%;
+            transform: translateY(-50%) translateX(20%);
+          "
+        >
+          {{ 10 }}
+        </span>
+      </div> 
+
+      <i class="bi bi-person-circle fs-4 text-dark"></i>
+    </div>-->
+  </div>
+
+  <style>
+    .notification-badge {
+      position: absolute;
+      top: -2px;
+      right: 9px;
+      background-color: rgb(255, 0, 0); /* rouge vif */
+      color: white;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      cursor: pointer;
+    }
+  </style>
+
+  <div *ngIf="companies.length === 0" class="no-transactions-card">
+    <i class="bi bi-building fs-1 text-secondary mb-3"></i>
+    <h5 class="fw-bold mb-2">Aucune entreprise</h5>
+    <p class="text-muted">
+      Vous n'avez pas encore ajouté d'entreprise.<br />
+      Elles apparaîtront ici dès qu'elles seront créées.
+    </p>
+  </div>
+  <style>
+    .no-transactions-card {
+      background-color: white;
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      color: #444;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      max-width: 500px;
+      margin: 40px auto;
+    }
+  </style>
+  <!-- Card section -->
+  <div class="card" style="margin-bottom: 20px" *ngIf="companies.length">
+    <div
+      class="header-card d-flex justify-content-between align-items-center px-3 py-2"
+    >
+      <!-- Partie gauche : Titre + sous-titre -->
+      <div class="transaction-history d-flex flex-column">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-building fs-5"></i>
+          <h5 class="mb-0">Companies</h5>
+        </div>
+        <small class="text-muted" style="font-size: 0.9rem">
+          {{ companies.length }} registered companies
+        </small>
+      </div>
+
+      <!-- Partie droite : Search + Add -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- Search Bar -->
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="Search company..."
+          [(ngModel)]="searchTerm"
+          (input)="filterCompanies()"
+          style="
+            width: 200px;
+            background-color: white;
+            border: 1px solid #ced4da;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+          "
+        />
+
+        <!-- Bouton Add Company -->
+        <button
+          class="btn btn-sm"
+          (click)="onAddCompany()"
+          style="background-color: #7f56d9; color: white"
+        >
+          <i class="bi bi-plus-circle me-1"></i> Add Company
+        </button>
+      </div>
+    </div>
+
+    <!-- Table affichée seulement quand loading = false -->
+    <table class="transactions-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Code</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of paginatedCompanies; let i = index">
+          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td>{{ company.name }}</td>
+          <td>{{ company.companyEmail }}</td>
+          <td>{{ company.companyCode }}</td>
+          <td>{{ company.createdAt | date : "yyyy-MM-dd" }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center mt-3">
+      <nav>
+        <ul class="pagination mb-0">
+          <!-- Previous -->
+          <li
+            class="page-item"
+            [class.disabled]="currentPage === 1"
+            (click)="changePage(currentPage - 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">Previous</a>
+          </li>
+
+          <!-- Current Page -->
+          <li class="page-item active">
+            <a class="page-link" href="javascript:void(0)">{{ currentPage }}</a>
+          </li>
+
+          <!-- Next -->
+          <li
+            class="page-item"
+            [class.disabled]="currentPage === totalPages"
+            (click)="changePage(currentPage + 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

@@ -79,3 +79,10 @@ export interface Account {
   createdAt: string;
   loading?: boolean; // ✅ facultatif
 }
+
+export interface Company {
+  name: string;
+  companyCode: string;
+  companyEmail: string;
+  createdAt: Date;
+}

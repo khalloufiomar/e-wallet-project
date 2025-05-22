@@ -1,6 +1,17 @@
 <div class="accounts-page container">
   <h1>Accounts</h1>
-  <div class="d-flex justify-content-between align-items-center mb-2">
+  <div *ngIf="accounts.length === 0" class="no-transactions-card">
+    <i class="bi bi-building fs-1 text-secondary mb-3"></i>
+    <h5 class="fw-bold mb-2">Aucun compte</h5>
+    <p class="text-muted">
+      Aucun compte utilisateur n'a encore été créé.<br />
+      Les comptes apparaîtront ici dès qu'ils seront disponibles.
+    </p>
+  </div>
+  <div
+    class="d-flex justify-content-between align-items-center mb-2"
+    *ngIf="accounts.length"
+  >
     <p class="subtitle m-0">Manage Accounts</p>
     <div class="position-relative">
       <button class="btn btn-filter" (click)="toggleFilterDropdown()">
@@ -19,10 +30,12 @@
       </div>
     </div>
   </div>
-  <p class="description">View and manage all users accounts</p>
+  <p class="description" *ngIf="accounts.length">
+    View and manage all users accounts
+  </p>
 
   <!-- Summary cards -->
-  <div class="account-summary row">
+  <div class="account-summary row" *ngIf="accounts.length">
     <div class="summary-card learner col">
       <div class="header">
         <span class="count">{{ activeaccount }}</span>
@@ -45,7 +58,7 @@
   </div>
 
   <!-- Table -->
-  <div class="table-card">
+  <div class="table-card" *ngIf="accounts.length">
     <table class="accounts-table">
       <thead>
         <tr>

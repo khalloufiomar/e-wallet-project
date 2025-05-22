@@ -1,1 +1,95 @@
-<p>addcompany works!</p>
+<div class="card shadow-sm p-4 bg-white rounded">
+  <h5 class="mb-3 d-flex align-items-center">
+    <i class="bi bi-building me-2"></i> Add New Company
+  </h5>
+  <hr />
+
+  <form (ngSubmit)="addCompany()" #companyForm="ngForm">
+    <div
+      *ngIf="errorMessages.length > 0"
+      class="toast-container position-fixed top-0 end-0 p-3"
+    >
+      <div
+        class="toast text-bg-danger show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-body">
+          <div class="d-flex gap-3 align-items-center">
+            <i class="fa-solid fa-circle-exclamation fa-lg"></i>
+            <div
+              class="flex-grow-1 d-flex justify-content-between align-items-center"
+            >
+              <!-- Affiche tous les messages -->
+              <div class="fw-normal small">
+                <div *ngFor="let message of errorMessages">
+                  <span class="fw-bold me-1">•</span>{{ message }}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                aria-label="Close"
+                (click)="errorMessages = []"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Company Name -->
+    <div class="mb-3">
+      <label for="companyName" class="form-label fw-semibold">
+        <i class="bi bi-plus"></i>
+        Company Name
+      </label>
+      <input
+        type="text"
+        id="companyName"
+        class="form-control"
+        placeholder="Enter company name"
+        name="companyName"
+        [(ngModel)]="companyName"
+        required
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="companyEmail" class="form-label fw-semibold">
+        <i class="bi bi-envelope"></i>
+        Company Email
+      </label>
+      <input
+        type="email"
+        id="companyEmail"
+        class="form-control"
+        placeholder="Enter company email"
+        name="companyEmail"
+        [(ngModel)]="companyEmail"
+        required
+        email
+      />
+    </div>
+
+    <!-- Success Alert -->
+    <div *ngIf="companyCreated" class="alert alert-success py-2">
+      <strong>Company Code: {{ createdCompany.companyCode }}</strong
+      ><br />
+      <strong>Company Name: {{ createdCompany.name }}</strong
+      ><br />
+      <small>This code was automatically generated</small>
+    </div>
+
+    <button
+      class="btn btn-primary px-4 w-100"
+      style="background-color: #a78bfa; border: none"
+      (click)="addCompany()"
+    >
+      Add Company
+    </button>
+  </form>
+</div>

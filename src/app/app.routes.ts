@@ -20,6 +20,7 @@ import { InvoiceDetailsComponent } from './links/invoice-details/invoice-details
 import { StoreComponent } from './links/store/store.component';
 import { AccountsComponent } from './dashbord/Links admin/accounts/accounts.component';
 import { DashadminComponent } from './dashbord/Links admin/dashadmin/dashadmin.component';
+import { CompaniesComponent } from './dashbord/Links admin/companies/companies.component';
 import { AddcompanyComponent } from './dashbord/Links admin/addcompany/addcompany.component';
 
 export const routes: Routes = [
@@ -63,6 +64,7 @@ export const routes: Routes = [
     children: [
       { path: 'accounts', component: AccountsComponent },
       { path: 'dashboard', component: DashadminComponent },
+      { path: 'companies', component: CompaniesComponent },
       { path: 'addcompany', component: AddcompanyComponent },
     ],
   },

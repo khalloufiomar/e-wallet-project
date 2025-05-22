@@ -146,14 +146,35 @@
     </table>
 
     <!-- Pagination affichée seulement quand loading = false -->
-    <div *ngIf="!loading" class="pagination">
-      <div class="showing">Showing 1 to 5 of 8 transactions</div>
-      <div class="pagination-buttons">
-        <button class="prev-btn"><i class="fa fa-chevron-left"></i></button>
-        <button class="page-btn current-page">1</button>
-        <button class="page-btn next-page">2</button>
-        <button class="next-btn"><i class="fa fa-chevron-right"></i></button>
-      </div>
+    <div class="d-flex justify-content-center mt-3">
+      <nav>
+        <ul class="pagination">
+          <li
+            class="page-item"
+            [class.disabled]="currentPage === 1"
+            (click)="changePage(currentPage - 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">Previous</a>
+          </li>
+
+          <li
+            class="page-item"
+            *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="i + 1 === currentPage"
+            (click)="changePage(i + 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">{{ i + 1 }}</a>
+          </li>
+
+          <li
+            class="page-item"
+            [class.disabled]="currentPage === totalPages"
+            (click)="changePage(currentPage + 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </div>

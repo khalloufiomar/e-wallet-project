@@ -72,9 +72,6 @@ export class TransactionsComponent {
 
   searchText = '';
 
-  changePage(direction: string) {
-    console.log('Change page: ', direction);
-  }
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
@@ -97,5 +94,23 @@ export class TransactionsComponent {
   }
   goToNotifications() {
     this.router.navigate(['/user/notifications']);
+  }
+  // Pagination
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+
+  get paginatedTransaction(): Transaction[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.transactions.slice(start, start + this.itemsPerPage);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.transactions.length / this.itemsPerPage);
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
   }
 }

@@ -1,0 +1,16 @@
+.card {
+    max-width: 500px;
+    margin: 40px auto;
+    border: 1px solid #eee;
+}
+
+input.form-control {
+    height: 45px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background-color: #e6ffed;
+    border: 1px solid #b2f2bb;
+    color: #1f513f;
+}
