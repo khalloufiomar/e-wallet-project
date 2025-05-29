@@ -80,7 +80,7 @@
   </div>
 
   <!-- Ligne 2 : Graphiques -->
-  <div class="dashboard-row" *ngIf="accounts.length">
+  <div class="dashboard-row">
     <!-- Graphique par type -->
     <div class="card card-half">
       <div class="card-header">
@@ -112,13 +112,22 @@
     </div>
 
     <!-- Deuxième graphique (copie ou autre) -->
-    <div class="card card-half" *ngIf="accounts.length">
-      <div class="chart-container">
+    <!-- Deuxième graphique : Monthly Transaction Volume -->
+    <div class="card card-half">
+      <!-- Titre avec icône -->
+      <div class="card-header">
+        <i class="bi bi-bar-chart icon"></i>
+        <span class="card-header-title">Monthly Transaction Volume</span>
+      </div>
+
+      <!-- Contenu graphique -->
+      <div class="chart-container" style="padding: 1rem">
         <p-chart
-          type="pie"
-          [data]="data"
-          [options]="options"
-          style="max-width: 320px; width: 100%"
+          *ngIf="basicData"
+          type="bar"
+          [data]="basicData"
+          [options]="basicOptions"
+          style="width: 100%; height: 300px"
         ></p-chart>
       </div>
     </div>

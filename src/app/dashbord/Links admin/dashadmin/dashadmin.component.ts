@@ -42,6 +42,8 @@ export class DashadminComponent implements OnInit {
     this.transactionService.getAllTransactions().subscribe((data) => {
       this.transactions = data;
       this.todayTransactionCount = this.countTodayTransactions(data);
+      const monthlyData = this.getMonthlyTransactionData(data); // 🟡 calcule les données dynamiquement
+      this.initChart(monthlyData); // 🟢 passe-les au graphique
     });
 
     // 👉 Forcer rechargement du dashboard si on clique à nouveau dessus
@@ -206,5 +208,92 @@ export class DashadminComponent implements OnInit {
       this.accounts = res;
       this.countUserTypes();
     });
+  }
+
+  basicData: any;
+  basicOptions: any;
+
+  initChart(monthlyTransactionCounts: number[]) {
+    if (isPlatformBrowser(this.platformId)) {
+      const documentStyle = getComputedStyle(document.documentElement);
+      const textColor = documentStyle.getPropertyValue('--p-text-color');
+      const textColorSecondary = documentStyle.getPropertyValue(
+        '--p-text-muted-color'
+      );
+      const surfaceBorder = documentStyle.getPropertyValue(
+        '--p-content-border-color'
+      );
+
+      this.basicData = {
+        labels: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
+        datasets: [
+          {
+            label: 'Monthly Transactions',
+            data: monthlyTransactionCounts, // 👉 données dynamiques ici
+            backgroundColor: '#3b82f6',
+            borderColor: '#1d4ed8',
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      this.basicOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor,
+            },
+          },
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: textColorSecondary,
+            },
+            grid: {
+              color: surfaceBorder,
+            },
+          },
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: textColorSecondary,
+            },
+            grid: {
+              color: surfaceBorder,
+            },
+          },
+        },
+      };
+
+      this.cd.markForCheck();
+      console.log('✅ Monthly chart updated:', monthlyTransactionCounts);
+    }
+  }
+  getMonthlyTransactionData(transactions: Transaction[]): number[] {
+    const monthlyCounts = new Array(12).fill(0); // Initialise un tableau avec 12 mois
+
+    transactions.forEach((tx) => {
+      const date = new Date(tx.create_date);
+      const month = date.getMonth(); // 0 = janvier, 11 = décembre
+      monthlyCounts[month]++;
+    });
+
+    return monthlyCounts;
   }
 }

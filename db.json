@@ -1,52 +1,67 @@
 {
-  "accounts": [
+  "transactions": [
     {
       "id": 1,
-      "name": "Alice Ben Salem",
-      "email": "alice.bensalem@example.com",
-      "type": "hr",
-      "status": "Active",
-      "balance": 1200
+      "transaction": "TXN1001",
+      "date": "2025-05-01",
+      "category": "Shopping",
+      "sender": "John Doe",
+      "receiver": "Amazon",
+      "amount": 250.50
     },
     {
       "id": 2,
-      "name": "Mohamed Trabelsi",
-      "email": "mohamed.trabelsi@example.com",
-      "type": "employee",
-      "status": "Active",
-      "balance": 800
+      "transaction": "TXN1002",
+      "date": "2025-05-02",
+      "category": "Food",
+      "sender": "Jane Smith",
+      "receiver": "Uber Eats",
+      "amount": 35.75
     },
     {
       "id": 3,
-      "name": "Leila Mbarek",
-      "email": "leila.mbarek@example.com",
-      "type": "learner",
-      "status": "Inactive",
-      "balance": 0
+      "transaction": "TXN1003",
+      "date": "2025-05-03",
+      "category": "Entertainment",
+      "sender": "Alice Johnson",
+      "receiver": "Netflix",
+      "amount": 15.00
     },
     {
       "id": 4,
-      "name": "Youssef Ghannouchi",
-      "email": "youssef.ghannouchi@example.com",
-      "type": "learner",
-      "status": "Active",
-      "balance": 2000
+      "transaction": "TXN1004",
+      "date": "2025-05-04",
+      "category": "Rent",
+      "sender": "Bob Williams",
+      "receiver": "Landlord",
+      "amount": 1200.00
     },
     {
       "id": 5,
-      "name": "Sonia Gharbi",
-      "email": "sonia.gharbi@example.com",
-      "type": "learner",
-      "status": "Inactive",
-      "balance": 500
+      "transaction": "TXN1005",
+      "date": "2025-05-05",
+      "category": "Utilities",
+      "sender": "Charlie Brown",
+      "receiver": "Electric Company",
+      "amount": 85.30
     },
-       {
+    {
       "id": 6,
-      "name": "Omar Gharbi",
-      "email": "omar.gharbi@example.com",
-      "type": "hr",
-      "status": "Inactive",
-      "balance": 500
+      "transaction": "TXN1006",
+      "date": "2025-05-06",
+      "category": "Travel",
+      "sender": "Diana Prince",
+      "receiver": "Airline",
+      "amount": 450.00
+    },
+    {
+      "id": 7,
+      "transaction": "TXN1007",
+      "date": "2025-05-07",
+      "category": "Health",
+      "sender": "Evan Peters",
+      "receiver": "Pharmacy",
+      "amount": 60.20
     }
   ]
 }
