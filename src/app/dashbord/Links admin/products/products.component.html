@@ -83,6 +83,7 @@
       <button
         class="btn btn-sm"
         style="background-color: #7f56d9; color: white"
+        (click)="goToAddProduct()"
       >
         <i class="bi bi-plus-circle me-1"></i> Add Product
       </button>
@@ -111,7 +112,7 @@
             />
           </td>
           <td>
-            <strong>{{ product.title }}</strong>
+            <strong class="soft-strong">{{ product.title }}</strong>
           </td>
           <td>{{ product.description }}</td>
           <td class="fw-bold text-success">${{ product.price }}</td>
@@ -124,7 +125,7 @@
             </button>
             <button
               class="btn btn-sm btn-outline-danger"
-              (click)="deleteProduct(product)"
+              (click)="openDeleteModal(product)"
             >
               <i class="bi bi-trash"></i>
             </button>
@@ -134,23 +135,19 @@
     </table>
   </div>
 </div>
-
-<!-- 🔧 STYLES (optionnels si utilisés uniquement pour badge) -->
-<style>
-  .notification-badge {
-    position: absolute;
-    top: -2px;
-    right: 9px;
-    background-color: rgb(255, 0, 0);
-    color: white;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    cursor: pointer;
-  }
-</style>
+<div class="modal-overlay" *ngIf="showDeleteModal">
+  <div class="modal-box">
+    <h2 class="modal-title">Confirm Deletion</h2>
+    <p class="modal-text">
+      Are you sure you want to delete
+      <strong>{{ selectedProduct?.title || "this product" }}</strong
+      >?
+    </p>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+      <button class="btn-delete-confirm" (click)="confirmDelete()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

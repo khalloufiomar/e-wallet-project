@@ -2,14 +2,13 @@
   <h1>Admin Dashboard</h1>
   <p class="subtitle">Overview of platform performance and user statistics</p>
 
-  <!-- Ligne 1 : 4 cartes égales -->
-  <!-- Ligne 1 : 4 cartes égales -->
+  <!-- Ligne 1 : 4 cartes -->
   <div class="dashboard-row">
     <!-- Total Users -->
     <div class="card card-quarter">
       <div class="card-title">Total Users</div>
       <div class="card-value-row">
-        <div class="card-value">{{ accounts.length }}</div>
+        <div class="card-value">{{ accounts.length | number : "1.0-0" }}</div>
         <div class="icon-circle" style="background-color: #f3e8ff">
           <i class="bi bi-people" style="color: #be84f3"></i>
         </div>
@@ -21,7 +20,7 @@
     <div class="card card-quarter">
       <div class="card-title">Active Users</div>
       <div class="card-value-row">
-        <div class="card-value">{{ activeaccount }}</div>
+        <div class="card-value">{{ activeaccount | number : "1.0-0" }}</div>
         <div class="icon-circle" style="background-color: #dcfce7">
           <i class="bi bi-people" style="color: #75cd95"></i>
         </div>
@@ -32,9 +31,12 @@
           [style.width.%]="(activeaccount / accounts.length) * 100"
         ></div>
       </div>
-      <div class="card-subtext">
+      <div class="card-subtext" *ngIf="activeaccount">
         {{ (activeaccount / accounts.length) * 100 | number : "1.0-0" }}% of
         total users
+      </div>
+      <div class="card-subtext" *ngIf="activeaccount == 0">
+        0% of total users
       </div>
     </div>
 
@@ -42,13 +44,14 @@
     <div class="card card-quarter">
       <div class="card-title">Total Balance</div>
       <div class="card-value-row">
-        <div class="card-value">${{ totalBalance | number }}</div>
+        <div class="card-value">${{ totalBalance | number : "1.0-0" }}</div>
         <div class="icon-circle" style="background-color: #dbeafe">
           <i class="bi bi-wallet" style="color: #5a8af0"></i>
         </div>
       </div>
       <div class="card-subtext" *ngIf="0 < totalBalance">
-        Average: ${{ totalBalance / accounts.length }} per user
+        Average: ${{ totalBalance / accounts.length | number : "1.0-0" }} per
+        user
       </div>
       <div class="card-subtext" *ngIf="totalBalance == 0">
         Average: 0 per user
@@ -59,7 +62,9 @@
     <div class="card card-quarter">
       <div class="card-title">Today's Transactions</div>
       <div class="card-value-row">
-        <div class="card-value">{{ todayTransactionCount }}</div>
+        <div class="card-value">
+          {{ todayTransactionCount | number : "1.0-0" }}
+        </div>
         <div class="icon-circle" style="background-color: #ffedd5">
           <i class="bi bi-bar-chart-steps" style="color: #f29159"></i>
         </div>
@@ -74,9 +79,9 @@
     </div>
   </div>
 
-  <!-- Ligne 2 : 2 cartes graphiques égales -->
+  <!-- Ligne 2 : Graphiques -->
   <div class="dashboard-row" *ngIf="accounts.length">
-    <!-- Carte graphique 1 -->
+    <!-- Graphique par type -->
     <div class="card card-half">
       <div class="card-header">
         <i class="bi bi-pie-chart icon"></i>
@@ -100,13 +105,13 @@
               class="legend-color"
               [style.backgroundColor]="data.datasets[0].backgroundColor[i]"
             ></span>
-            <span>{{ item }}: {{ getPercentage(i) }}%</span>
+            <span>{{ item }}: {{ getPercentage(i) | number : "1.0-0" }}%</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Carte graphique 2 -->
+    <!-- Deuxième graphique (copie ou autre) -->
     <div class="card card-half" *ngIf="accounts.length">
       <div class="chart-container">
         <p-chart

@@ -45,23 +45,23 @@ export class DashadminComponent implements OnInit {
     });
 
     // 👉 Forcer rechargement du dashboard si on clique à nouveau dessus
-    this.router.events.subscribe((event) => {
-      if (
-        event instanceof NavigationEnd &&
-        event.urlAfterRedirects === '/dashboard'
-      ) {
-        // Tu peux ajouter un console.log pour confirmer
-        console.log('Dashboard clicked again – refreshing data...');
-        this.fetchAccounts();
-        this.countUserStatus();
-        this.loadAccounts();
+    // this.router.events.subscribe((event) => {
+    //   if (
+    //     event instanceof NavigationEnd &&
+    //     event.urlAfterRedirects === '/dashboard'
+    //   ) {
+    //     // Tu peux ajouter un console.log pour confirmer
+    //     console.log('Dashboard clicked again – refreshing data...');
+    //     this.fetchAccounts();
+    //     this.countUserStatus();
+    //     this.loadAccounts();
 
-        this.transactionService.getAllTransactions().subscribe((data) => {
-          this.transactions = data;
-          this.todayTransactionCount = this.countTodayTransactions(data);
-        });
-      }
-    });
+    //     this.transactionService.getAllTransactions().subscribe((data) => {
+    //       this.transactions = data;
+    //       this.todayTransactionCount = this.countTodayTransactions(data);
+    //     });
+    //   }
+    // });
   }
   fetchAccounts(): void {
     this.AccountsadminService.getAllAccounts().subscribe({
@@ -120,7 +120,8 @@ export class DashadminComponent implements OnInit {
       datasets: [
         {
           data: [this.hrcount, this.employeecount, this.learnercount],
-          backgroundColor: ['#6366f1', '#22c55e', '#facc15'],
+          backgroundColor: ['#8b5cf6', '#0ea5e9', '#f97316'],
+          // backgroundColor: ['#6366f1', '#22c55e', '#facc15'],
         },
       ],
     };
@@ -147,45 +148,45 @@ export class DashadminComponent implements OnInit {
 
   platformId = inject(PLATFORM_ID);
 
-  initChart(hrCount: number, employeeCount: number, learnerCount: number) {
-    if (isPlatformBrowser(this.platformId)) {
-      const documentStyle = getComputedStyle(document.documentElement);
-      const textColor =
-        documentStyle.getPropertyValue('--p-text-color') || '#000';
-      const textColorSecondary =
-        documentStyle.getPropertyValue('--p-text-muted-color') || '#777';
-      const surfaceBorder =
-        documentStyle.getPropertyValue('--p-content-border-color') || '#ccc';
+  // initChart(hrCount: number, employeeCount: number, learnerCount: number) {
+  //   if (isPlatformBrowser(this.platformId)) {
+  //     const documentStyle = getComputedStyle(document.documentElement);
+  //     const textColor =
+  //       documentStyle.getPropertyValue('--p-text-color') || '#000';
+  //     const textColorSecondary =
+  //       documentStyle.getPropertyValue('--p-text-muted-color') || '#777';
+  //     const surfaceBorder =
+  //       documentStyle.getPropertyValue('--p-content-border-color') || '#ccc';
 
-      this.data = {
-        labels: ['HR Companies', 'Employees', 'Learners'],
-        datasets: [
-          {
-            data: [hrCount, employeeCount, learnerCount],
-            backgroundColor: [
-              '#8b5cf6', // orange
-              '#0ea5e9', // cyan
-              '#f97316', // purple
-            ],
-            borderColor: ['#fff', '#fff', '#fff'],
-            borderWidth: 2,
-          },
-        ],
-      };
+  //     this.data = {
+  //       labels: ['HR', 'Employee', 'Learner'],
+  //       datasets: [
+  //         {
+  //           data: [hrCount, employeeCount, learnerCount],
+  //           backgroundColor: [
+  //             '#8b5cf6', // orange
+  //             '#0ea5e9', // cyan
+  //             '#f97316', // purple
+  //           ],
+  //           borderColor: ['#fff', '#fff', '#fff'],
+  //           borderWidth: 2,
+  //         },
+  //       ],
+  //     };
 
-      this.options = {
-        plugins: {
-          legend: {
-            labels: {
-              color: textColor,
-            },
-          },
-        },
-      };
+  //     this.options = {
+  //       plugins: {
+  //         legend: {
+  //           labels: {
+  //             color: textColor,
+  //           },
+  //         },
+  //       },
+  //     };
 
-      this.cd.markForCheck();
-    }
-  }
+  //     this.cd.markForCheck();
+  //   }
+  // }
 
   getPercentage(index: number): string {
     const dataArray: number[] = this.data.datasets[0].data;

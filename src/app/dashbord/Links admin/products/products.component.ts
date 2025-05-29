@@ -64,10 +64,6 @@ export class ProductsComponent {
     alert('Edit: ' + product.title);
   }
 
-  deleteProduct(product: Product) {
-    this.products = this.products.filter((p) => p !== product);
-  }
-
   getNotifCount() {
     this.notificationservice.getCountUnreadNotifications().subscribe(
       (data) => {
@@ -86,5 +82,36 @@ export class ProductsComponent {
   }
   goToNotifications() {
     this.router.navigate(['/admin/notifications']);
+  }
+
+  selectedProduct: any = null;
+  showDeleteModal = false;
+
+  openDeleteModal(account: any): void {
+    this.selectedProduct = account;
+    this.showDeleteModal = true;
+  }
+
+  cancelDelete(): void {
+    this.selectedProduct = null;
+    this.showDeleteModal = false;
+  }
+
+  goToAddProduct() {
+    this.router.navigate(['/admin/addproduct']);
+  }
+  confirmDelete(): void {
+    if (!this.selectedProduct) return;
+
+    this.productService.deleteProduct(this.selectedProduct.id).subscribe({
+      next: () => {
+        console.log('Produit supprimé avec succès');
+        this.showDeleteModal = false;
+        this.selectedProduct = null;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la suppression du produit', err);
+      },
+    });
   }
 }

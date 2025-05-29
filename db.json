@@ -2,43 +2,51 @@
   "accounts": [
     {
       "id": 1,
-      "name": "Omar Khalloufi",
-      "email": "omar@example.com",
+      "name": "Alice Ben Salem",
+      "email": "alice.bensalem@example.com",
       "type": "hr",
       "status": "Active",
-      "balance": 3200
+      "balance": 1200
     },
     {
       "id": 2,
-      "name": "Lina Haddad",
-      "email": "lina@example.com",
+      "name": "Mohamed Trabelsi",
+      "email": "mohamed.trabelsi@example.com",
       "type": "employee",
-      "status": "Inactive",
-      "balance": 1800
+      "status": "Active",
+      "balance": 800
     },
     {
       "id": 3,
-      "name": "Karim Ben Youssef",
-      "email": "karim@example.com",
+      "name": "Leila Mbarek",
+      "email": "leila.mbarek@example.com",
       "type": "learner",
-      "status": "Active",
-      "balance": 900
+      "status": "Inactive",
+      "balance": 0
     },
     {
       "id": 4,
-      "name": "Sarah Trabelsi",
-      "email": "sarah@example.com",
-      "type": "employee",
-      "status": "Inactive",
-      "balance": 1500
+      "name": "Youssef Ghannouchi",
+      "email": "youssef.ghannouchi@example.com",
+      "type": "learner",
+      "status": "Active",
+      "balance": 2000
     },
     {
       "id": 5,
-      "name": "Ahmed Jaziri",
-      "email": "ahmed@example.com",
+      "name": "Sonia Gharbi",
+      "email": "sonia.gharbi@example.com",
+      "type": "learner",
+      "status": "Inactive",
+      "balance": 500
+    },
+       {
+      "id": 6,
+      "name": "Omar Gharbi",
+      "email": "omar.gharbi@example.com",
       "type": "hr",
-      "status": "Active",
-      "balance": 4300
+      "status": "Inactive",
+      "balance": 500
     }
   ]
 }

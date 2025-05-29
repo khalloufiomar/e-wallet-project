@@ -6,11 +6,15 @@ import { Product } from '../model/class/user';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3000/products'; // à adapter à ton backend
+  private apiUrl = 'http://localhost:3001/products'; // à adapter à ton backend
 
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

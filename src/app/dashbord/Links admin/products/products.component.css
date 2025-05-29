@@ -67,3 +67,85 @@ table th {
     max-width: 500px;
     margin: 40px auto;
 }
+
+.soft-strong {
+    font-weight: 500;
+    /* Entre normal (400) et bold (700) */
+}
+
+.notification-badge {
+    position: absolute;
+    top: -2px;
+    right: 9px;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    cursor: pointer;
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 12px;
+}
+
+.modal-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-cancel {
+    padding: 8px 16px;
+    background-color: white;
+    border: 1px solid rgb(148, 143, 143);
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-delete-confirm {
+    padding: 8px 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+}

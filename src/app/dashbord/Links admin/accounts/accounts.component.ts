@@ -59,7 +59,7 @@ export class AccountsComponent {
       `🔄 Tentative de changement de statut pour ${account.id} → ${newStatus}`
     );
 
-    this.AccountsadminService.updateStatus(account.id,"active").subscribe({
+    this.AccountsadminService.updateStatus(account.id, 'active').subscribe({
       next: (response) => {
         console.log('✅ Réponse du serveur :', response);
         account.active = newStatus;
@@ -87,7 +87,10 @@ export class AccountsComponent {
   }
 
   confirmDelete(): void {
-    this.AccountsadminService.updateStatus(this.selectedAccount.id,"delete").subscribe({
+    this.AccountsadminService.updateStatus(
+      this.selectedAccount.id,
+      'delete'
+    ).subscribe({
       next: () => {
         this.accounts = this.accounts.filter(
           (a: any) => a.id !== this.selectedAccount.id
