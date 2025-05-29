@@ -1,0 +1,148 @@
+<!-- 🔺 HEADER ajouté ici -->
+<div class="header d-flex justify-content-between align-items-center mb-4">
+  <div class="title h5 fw-bold m-0">Products</div>
+
+  <div class="profile d-flex align-items-center position-relative">
+    <!-- Icône de notification avec badge -->
+    <div
+      class="position-relative me-3"
+      (click)="resetNotificationState(); goToNotifications()"
+    >
+      <i class="bi bi-bell-fill" style="font-size: 1.4rem !important"></i>
+
+      <!-- Badge affiché uniquement si le nombre de notifications est > 0 -->
+      <span
+        *ngIf="notificationCount > 0"
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+        style="
+          font-size: 0.6rem;
+          color: white;
+          background-color: #893cac;
+          min-width: 1.8rem;
+          height: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0.1rem 0.5rem;
+          top: 90%;
+          transform: translateY(-50%) translateX(20%);
+        "
+      >
+        {{ notificationCount }}
+      </span>
+    </div>
+
+    <!-- Icône de profil -->
+    <i class="bi bi-person-circle fs-4 text-dark"></i>
+  </div>
+</div>
+
+<!-- 💳 CARD (déjà existante) -->
+<div class="card shadow p-4 rounded">
+  <div
+    class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2"
+  >
+    <!-- Partie gauche : Titre + sous-titre -->
+    <div class="transaction-history d-flex flex-column">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-building fs-5"></i>
+        <h5 class="mb-0">products</h5>
+      </div>
+      <small class="text-muted" style="font-size: 0.9rem">
+        {{ products.length }} products available
+      </small>
+    </div>
+
+    <!-- Partie droite : Search + Add -->
+    <div class="d-flex align-items-center gap-2">
+      <!-- Search Bar -->
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        placeholder="Search product..."
+        [(ngModel)]="searchTerm"
+        style="
+          width: 200px;
+          background-color: white;
+          border: 1px solid #ced4da;
+          border-radius: 20px;
+          font-size: 0.85rem;
+          padding: 4px 10px;
+        "
+      />
+
+      <!-- Bouton Add Company -->
+      <button
+        class="btn btn-sm"
+        style="background-color: #7f56d9; color: white"
+      >
+        <i class="bi bi-plus-circle me-1"></i> Add Product
+      </button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table align-middle table-hover">
+      <thead class="align-middle">
+        <tr>
+          <th style="min-width: 100px">Image</th>
+          <th style="min-width: 160px">Title</th>
+          <th style="min-width: 250px">Description</th>
+          <th style="min-width: 100px">Price</th>
+          <th style="min-width: 120px">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of filteredProducts">
+          <td>
+            <img
+              [src]="product.image"
+              class="rounded shadow-sm"
+              width="50"
+              height="50"
+            />
+          </td>
+          <td>
+            <strong>{{ product.title }}</strong>
+          </td>
+          <td>{{ product.description }}</td>
+          <td class="fw-bold text-success">${{ product.price }}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-outline-secondary me-2"
+              (click)="editProduct(product)"
+            >
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="deleteProduct(product)"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 🔧 STYLES (optionnels si utilisés uniquement pour badge) -->
+<style>
+  .notification-badge {
+    position: absolute;
+    top: -2px;
+    right: 9px;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    cursor: pointer;
+  }
+</style>

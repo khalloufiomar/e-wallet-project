@@ -22,6 +22,7 @@ import { AccountsComponent } from './dashbord/Links admin/accounts/accounts.comp
 import { DashadminComponent } from './dashbord/Links admin/dashadmin/dashadmin.component';
 import { CompaniesComponent } from './dashbord/Links admin/companies/companies.component';
 import { AddcompanyComponent } from './dashbord/Links admin/addcompany/addcompany.component';
+import { ProductsComponent } from './dashbord/Links admin/products/products.component';
 
 export const routes: Routes = [
   {
@@ -66,6 +67,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashadminComponent },
       { path: 'companies', component: CompaniesComponent },
       { path: 'addcompany', component: AddcompanyComponent },
+      { path: 'product', component: ProductsComponent },
     ],
   },
   {

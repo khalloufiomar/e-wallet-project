@@ -86,3 +86,11 @@ export interface Company {
   companyEmail: string;
   createdAt: Date;
 }
+
+// product.model.ts
+export interface Product {
+  image: string;
+  title: string;
+  description: string;
+  price: number;
+}
