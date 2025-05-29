@@ -43,7 +43,7 @@ export class TransactionsComponent {
               new Date(b.create_date).getTime() -
               new Date(a.create_date).getTime()
           ) // tri décroissant
-          .slice(0, 5); // prend les 3 premières
+           // prend les 3 premières
         this.loading = false;
       },
       (error) => {

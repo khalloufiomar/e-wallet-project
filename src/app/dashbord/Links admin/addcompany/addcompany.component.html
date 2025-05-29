@@ -76,10 +76,10 @@
     </div>
 
     <!-- Success Alert -->
-    <div *ngIf="companyCreated" class="alert alert-success py-2">
-      <strong>Company Code: {{ createdCompany.companyCode }}</strong
+    <div *ngIf="createdCompany" class="alert alert-success py-2">
+      <strong *ngIf="createdCompany">Company Code: {{ createdCompany.company_code }}</strong
       ><br />
-      <strong>Company Name: {{ createdCompany.name }}</strong
+      <strong *ngIf="createdCompany">Company Name: {{ createdCompany.name }}</strong
       ><br />
       <small>This code was automatically generated</small>
     </div>
@@ -87,7 +87,7 @@
     <button
       class="btn btn-primary px-4 w-100"
       style="background-color: #a78bfa; border: none"
-      (click)="addCompany()"
+      type = "submit"
     >
       Add Company
     </button>

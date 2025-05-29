@@ -6,9 +6,10 @@ import { CompanyService } from '../../../services/company.service';
 
 @Component({
   selector: 'app-addcompany',
+  standalone: true, // Required when using `imports` in components
   imports: [FormsModule, CommonModule],
   templateUrl: './addcompany.component.html',
-  styleUrl: './addcompany.component.css',
+  styleUrls: ['./addcompany.component.css'],
 })
 export class AddcompanyComponent implements OnInit {
   companyName: string = '';
@@ -19,17 +20,11 @@ export class AddcompanyComponent implements OnInit {
   errorMessages: string[] = [];
   errorTimer: any = null;
 
-  createdCompany: Company = {
-    name: '',
-    companyCode: '',
-    companyEmail: '',
-    createdAt: new Date(),
-  };
+  createdCompany: Company | null = null;
 
   constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
-    // Chargement de la liste des sociétés depuis le backend
     this.companyService.getCompanies().subscribe({
       next: (data) => {
         this.companies = data;
@@ -40,29 +35,7 @@ export class AddcompanyComponent implements OnInit {
     });
   }
 
-  // Génère un code unique qui ne doit pas déjà exister dans companies
-  generateUniqueCompanyCode(): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let newCode = '';
-    let isUnique = false;
-
-    while (!isUnique) {
-      newCode = Array.from(
-        { length: 6 },
-        () => characters[Math.floor(Math.random() * characters.length)]
-      ).join('');
-
-      // Vérifie que le code n'existe pas déjà
-      isUnique = !this.companies.some(
-        (company) => company.companyCode === newCode
-      );
-    }
-
-    return newCode;
-  }
-
   addCompany(): void {
-    // Nettoyer l'ancien timer d'erreur
     if (this.errorTimer) {
       clearTimeout(this.errorTimer);
       this.errorTimer = null;
@@ -70,7 +43,6 @@ export class AddcompanyComponent implements OnInit {
 
     this.errorMessages = [];
 
-    // Validation des champs
     if (this.companyName.trim() === '') {
       this.errorMessages.push('Name required');
     }
@@ -81,17 +53,6 @@ export class AddcompanyComponent implements OnInit {
       this.errorMessages.push('Email invalid');
     }
 
-    // Vérifier si l'email existe déjà dans la liste
-    const emailExists = this.companies.some(
-      (c) =>
-        c.companyEmail.toLowerCase() === this.companyEmail.trim().toLowerCase()
-    );
-
-    if (emailExists) {
-      this.errorMessages.push('This email is already used by another company.');
-    }
-
-    // S'il y a des erreurs, afficher temporairement les messages
     if (this.errorMessages.length > 0) {
       this.errorTimer = setTimeout(() => {
         this.errorMessages = [];
@@ -100,24 +61,18 @@ export class AddcompanyComponent implements OnInit {
       return;
     }
 
-    // Préparer la nouvelle société
-    const newCompany: Company = {
+    const newCompany = {
       name: this.companyName.trim(),
-      companyCode: this.generateUniqueCompanyCode(),
-      companyEmail: this.companyEmail.trim(),
-      createdAt: new Date(),
+      email: this.companyEmail.trim(),
     };
 
-    // Appel au backend pour ajouter la société
-    this.companyService.addCompany(newCompany).subscribe({
+    this.companyService.addCompany(newCompany.name, newCompany.email).subscribe({
       next: (created) => {
         this.companyCreated = true;
         this.createdCompany = created;
 
-        // Mettre à jour la liste locale
         this.companies.push(created);
 
-        // Réinitialiser les champs du formulaire
         this.companyName = '';
         this.companyEmail = '';
       },
@@ -131,7 +86,7 @@ export class AddcompanyComponent implements OnInit {
       },
     });
   }
-  // Validation simple de l'email
+
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
