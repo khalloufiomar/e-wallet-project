@@ -6,15 +6,15 @@ import { Company } from '../model/class/user';
   providedIn: 'root',
 })
 export class CompanyService {
-  private apiUrl = 'http://localhost:3008/companies';
+  private apiUrl = 'http://localhost:8069/api';
 
   constructor(private http: HttpClient) {}
 
   getCompanies(): Observable<Company[]> {
-    return this.http.get<Company[]>(this.apiUrl);
+    return this.http.get<Company[]>(`${this.apiUrl}/getAllCompanies`);
   }
 
-  addCompany(company: Company): Observable<Company> {
-    return this.http.post<Company>(this.apiUrl, company);
+  addCompany(name: string, email: string): Observable<Company> {
+    return this.http.post<Company>(`${this.apiUrl}/add_company`, {name,email});
   }
 }

@@ -81,10 +81,11 @@ export interface Account {
 }
 
 export interface Company {
+  id: number;
   name: string;
-  companyCode: string;
-  companyEmail: string;
-  createdAt: Date;
+  email: string;
+  company_code: string;
+  create_date: Date;
 }
 
 // product.model.ts
