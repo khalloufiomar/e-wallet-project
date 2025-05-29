@@ -1,16 +1,44 @@
 {
-  "products": [
+  "accounts": [
     {
-      "image": "course1.png",
-      "title": "Basic Training Course",
-      "description": "A comprehensive introduction to the fundamentals.",
-      "price": 99.99
+      "id": 1,
+      "name": "Omar Khalloufi",
+      "email": "omar@example.com",
+      "type": "hr",
+      "status": "Active",
+      "balance": 3200
     },
     {
-      "image": "course2.png",
-      "title": "Advanced Programming",
-      "description": "Deep dive into advanced concepts and techniques.",
-      "price": 199.99
+      "id": 2,
+      "name": "Lina Haddad",
+      "email": "lina@example.com",
+      "type": "employee",
+      "status": "Inactive",
+      "balance": 1800
+    },
+    {
+      "id": 3,
+      "name": "Karim Ben Youssef",
+      "email": "karim@example.com",
+      "type": "learner",
+      "status": "Active",
+      "balance": 900
+    },
+    {
+      "id": 4,
+      "name": "Sarah Trabelsi",
+      "email": "sarah@example.com",
+      "type": "employee",
+      "status": "Inactive",
+      "balance": 1500
+    },
+    {
+      "id": 5,
+      "name": "Ahmed Jaziri",
+      "email": "ahmed@example.com",
+      "type": "hr",
+      "status": "Active",
+      "balance": 4300
     }
   ]
 }

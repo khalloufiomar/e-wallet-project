@@ -2,51 +2,119 @@
   <h1>Admin Dashboard</h1>
   <p class="subtitle">Overview of platform performance and user statistics</p>
 
-  <div class="cards">
+  <!-- Ligne 1 : 4 cartes égales -->
+  <!-- Ligne 1 : 4 cartes égales -->
+  <div class="dashboard-row">
     <!-- Total Users -->
-    <div class="card">
+    <div class="card card-quarter">
       <div class="card-title">Total Users</div>
-      <div class="card-value">{{ this.accounts.length }}</div>
+      <div class="card-value-row">
+        <div class="card-value">{{ accounts.length }}</div>
+        <div class="icon-circle" style="background-color: #f3e8ff">
+          <i class="bi bi-people" style="color: #be84f3"></i>
+        </div>
+      </div>
       <div class="card-subtext text-success">+24 today</div>
     </div>
 
     <!-- Active Users -->
-    <div class="card">
+    <div class="card card-quarter">
       <div class="card-title">Active Users</div>
-      <div class="card-value">{{ activeaccount }}</div>
-
+      <div class="card-value-row">
+        <div class="card-value">{{ activeaccount }}</div>
+        <div class="icon-circle" style="background-color: #dcfce7">
+          <i class="bi bi-people" style="color: #75cd95"></i>
+        </div>
+      </div>
       <div class="progress-bar">
         <div
           class="progress"
-          [style.width.%]="(activeaccount / this.accounts.length) * 100"
+          [style.width.%]="(activeaccount / accounts.length) * 100"
         ></div>
       </div>
-
       <div class="card-subtext">
-        <!-- on evite la division par 0 -->
-        {{ (activeaccount / this.accounts.length) * 100 | number : "1.0-0" }}%
-        of total users
+        {{ (activeaccount / accounts.length) * 100 | number : "1.0-0" }}% of
+        total users
       </div>
     </div>
 
     <!-- Total Balance -->
-    <div class="card">
+    <div class="card card-quarter">
       <div class="card-title">Total Balance</div>
-      <div class="card-value">{{ totalBalance | number }}</div>
-      <div class="card-subtext">
-        Average: {{ totalBalance / this.accounts.length }} per user
+      <div class="card-value-row">
+        <div class="card-value">${{ totalBalance | number }}</div>
+        <div class="icon-circle" style="background-color: #dbeafe">
+          <i class="bi bi-wallet" style="color: #5a8af0"></i>
+        </div>
+      </div>
+      <div class="card-subtext" *ngIf="0 < totalBalance">
+        Average: ${{ totalBalance / accounts.length }} per user
+      </div>
+      <div class="card-subtext" *ngIf="totalBalance == 0">
+        Average: 0 per user
       </div>
     </div>
 
-    <div class="card">
+    <!-- Today's Transactions -->
+    <div class="card card-quarter">
       <div class="card-title">Today's Transactions</div>
-      <div class="card-value">{{ todayTransactionCount }}</div>
+      <div class="card-value-row">
+        <div class="card-value">{{ todayTransactionCount }}</div>
+        <div class="icon-circle" style="background-color: #ffedd5">
+          <i class="bi bi-bar-chart-steps" style="color: #f29159"></i>
+        </div>
+      </div>
       <div class="card-subtext text-info">
         {{
           todayTransactionCount > 0
             ? "Processing normally"
             : "No transactions today"
         }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Ligne 2 : 2 cartes graphiques égales -->
+  <div class="dashboard-row" *ngIf="accounts.length">
+    <!-- Carte graphique 1 -->
+    <div class="card card-half">
+      <div class="card-header">
+        <i class="bi bi-pie-chart icon"></i>
+        <span class="card-header-title">User Distribution by Type</span>
+      </div>
+
+      <div class="chart-container">
+        <p-chart
+          type="pie"
+          [data]="data"
+          [options]="options"
+          style="max-width: 320px; width: 100%"
+        ></p-chart>
+
+        <div class="chart-legend">
+          <div
+            *ngFor="let item of data.labels; let i = index"
+            class="legend-item"
+          >
+            <span
+              class="legend-color"
+              [style.backgroundColor]="data.datasets[0].backgroundColor[i]"
+            ></span>
+            <span>{{ item }}: {{ getPercentage(i) }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carte graphique 2 -->
+    <div class="card card-half" *ngIf="accounts.length">
+      <div class="chart-container">
+        <p-chart
+          type="pie"
+          [data]="data"
+          [options]="options"
+          style="max-width: 320px; width: 100%"
+        ></p-chart>
       </div>
     </div>
   </div>

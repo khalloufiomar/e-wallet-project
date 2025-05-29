@@ -18,7 +18,7 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class UserComponent {
   showTransactions = true;
-  notificationCount = 100;
+  notificationCount = 0;
   showNotification = false;
   handleSeeAll() {
     this.showTransactions = true;

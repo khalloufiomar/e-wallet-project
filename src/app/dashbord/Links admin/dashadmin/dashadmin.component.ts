@@ -6,9 +6,16 @@ import { TransactionService } from '../../../services/transaction.service';
 import { Transaction } from '../../../model/class/user';
 import { interval } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ChartModule } from 'primeng/chart';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectorRef, effect, inject, PLATFORM_ID } from '@angular/core';
+import { DashadminService } from '../../../services/dashadmin.service';
+import { Router } from '@angular/router';
+import { NavigationEnd } from '@angular/router';
+
 @Component({
   selector: 'app-dashadmin',
-  imports: [CommonModule],
+  imports: [CommonModule, ChartModule],
   templateUrl: './dashadmin.component.html',
   styleUrl: './dashadmin.component.css',
 })
@@ -21,16 +28,39 @@ export class DashadminComponent implements OnInit {
 
   constructor(
     private AccountsadminService: AccountsadminService,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private cd: ChangeDetectorRef,
+    private dashadmin: DashadminService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.fetchAccounts();
-    this.countUserTypes();
+    this.countUserStatus();
+    this.loadAccounts();
 
     this.transactionService.getAllTransactions().subscribe((data) => {
       this.transactions = data;
       this.todayTransactionCount = this.countTodayTransactions(data);
+    });
+
+    // 👉 Forcer rechargement du dashboard si on clique à nouveau dessus
+    this.router.events.subscribe((event) => {
+      if (
+        event instanceof NavigationEnd &&
+        event.urlAfterRedirects === '/dashboard'
+      ) {
+        // Tu peux ajouter un console.log pour confirmer
+        console.log('Dashboard clicked again – refreshing data...');
+        this.fetchAccounts();
+        this.countUserStatus();
+        this.loadAccounts();
+
+        this.transactionService.getAllTransactions().subscribe((data) => {
+          this.transactions = data;
+          this.todayTransactionCount = this.countTodayTransactions(data);
+        });
+      }
     });
   }
   fetchAccounts(): void {
@@ -45,7 +75,7 @@ export class DashadminComponent implements OnInit {
     });
   }
 
-  countUserTypes(): void {
+  countUserStatus(): void {
     // On remet à 0 avant de recompter
     this.activeaccount = 0;
     this.inactiveaccount = 0;
@@ -57,6 +87,43 @@ export class DashadminComponent implements OnInit {
         this.inactiveaccount++;
       }
     }
+  }
+  hrcount = 0;
+  employeecount = 0;
+  learnercount = 0;
+
+  data: any;
+  options: any;
+
+  countUserTypes(): void {
+    // Remise à zéro
+    this.hrcount = 0;
+    this.employeecount = 0;
+    this.learnercount = 0;
+
+    for (let account of this.accounts) {
+      switch (account.type) {
+        case 'hr':
+          this.hrcount++;
+          break;
+        case 'employee':
+          this.employeecount++;
+          break;
+        case 'learner':
+          this.learnercount++;
+          break;
+      }
+    }
+    // Mise à jour du graphique
+    this.data = {
+      labels: ['HR', 'Employee', 'Learner'],
+      datasets: [
+        {
+          data: [this.hrcount, this.employeecount, this.learnercount],
+          backgroundColor: ['#6366f1', '#22c55e', '#facc15'],
+        },
+      ],
+    };
   }
 
   get totalBalance(): number {
@@ -76,5 +143,67 @@ export class DashadminComponent implements OnInit {
         txDate.getFullYear() === today.getFullYear()
       );
     }).length;
+  }
+
+  platformId = inject(PLATFORM_ID);
+
+  initChart(hrCount: number, employeeCount: number, learnerCount: number) {
+    if (isPlatformBrowser(this.platformId)) {
+      const documentStyle = getComputedStyle(document.documentElement);
+      const textColor =
+        documentStyle.getPropertyValue('--p-text-color') || '#000';
+      const textColorSecondary =
+        documentStyle.getPropertyValue('--p-text-muted-color') || '#777';
+      const surfaceBorder =
+        documentStyle.getPropertyValue('--p-content-border-color') || '#ccc';
+
+      this.data = {
+        labels: ['HR Companies', 'Employees', 'Learners'],
+        datasets: [
+          {
+            data: [hrCount, employeeCount, learnerCount],
+            backgroundColor: [
+              '#8b5cf6', // orange
+              '#0ea5e9', // cyan
+              '#f97316', // purple
+            ],
+            borderColor: ['#fff', '#fff', '#fff'],
+            borderWidth: 2,
+          },
+        ],
+      };
+
+      this.options = {
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor,
+            },
+          },
+        },
+      };
+
+      this.cd.markForCheck();
+    }
+  }
+
+  getPercentage(index: number): string {
+    const dataArray: number[] = this.data.datasets[0].data;
+
+    if (!dataArray || dataArray.length === 0) return '0';
+
+    const total: number = dataArray.reduce((a, b) => a + b, 0);
+    const value: number = dataArray[index] || 0;
+
+    const percent: number = total > 0 ? (value / total) * 100 : 0;
+
+    return percent.toFixed(0); // Tu peux changer en .toFixed(1) si tu veux 1 décimale
+  }
+
+  loadAccounts() {
+    this.AccountsadminService.getAllAccounts().subscribe((res) => {
+      this.accounts = res;
+      this.countUserTypes();
+    });
   }
 }

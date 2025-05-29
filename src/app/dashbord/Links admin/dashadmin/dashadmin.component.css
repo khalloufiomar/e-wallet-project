@@ -1,5 +1,5 @@
 .dashboard-container {
-    padding: 20px;
+    padding: 2rem;
     font-family: Arial, sans-serif;
 }
 
@@ -12,57 +12,138 @@ h1 {
     margin-bottom: 20px;
 }
 
-.cards {
+.dashboard-row {
     display: flex;
-    gap: 16px;
     flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .card {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    flex: 1 1 200px;
-    max-width: 250px;
+    padding: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+    flex-grow: 1;
+}
+
+.card-quarter {
+    flex: 1 1 calc(25% - 1rem);
+}
+
+.card-half {
+    flex: 1 1 calc(50% - 1rem);
 }
 
 .card-title {
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
     color: #333;
 }
 
 .card-value {
-    font-size: 24px;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #000;
 }
 
 .card-subtext {
-    margin-top: 8px;
-    font-size: 14px;
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
     color: #777;
 }
 
 .text-success {
-    color: green;
+    color: #16a34a;
 }
 
 .text-info {
-    color: #007bff;
+    color: #2563eb;
 }
 
 .progress-bar {
     background: #eee;
-    border-radius: 6px;
-    height: 8px;
-    margin-top: 6px;
+    height: 6px;
+    border-radius: 5px;
+    margin-top: 5px;
     overflow: hidden;
 }
 
 .progress {
-    background: #a78bfa;
-    /* light purple */
     height: 100%;
+    background: #8b5cf6;
+    border-radius: 5px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    justify-content: flex-start;
+}
+
+.card-header .icon {
+    font-size: 1.2rem;
+    color: #6366f1;
+    margin-right: 0.5rem;
+}
+
+.card-header-title {
+    font-weight: normal;
+    font-size: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.small-chart {
+    max-width: 160px;
+    margin: 0 auto;
+}
+
+.chart-legend {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    color: #555;
+}
+
+.legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.card-value-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

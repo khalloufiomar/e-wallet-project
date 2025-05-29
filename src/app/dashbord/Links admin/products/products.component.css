@@ -56,3 +56,14 @@ table th {
     /* Légèrement agrandi */
     border-radius: 50%;
 }
+
+.no-transactions-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    color: #444;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    margin: 40px auto;
+}
