@@ -21,7 +21,19 @@
         <span
           *ngIf="notificationCount > 0"
           class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-          style="font-size: 0.6rem; color: white; background-color: #893cac; min-width: 1.8rem; height: 1rem; display: flex; justify-content: center; align-items: center; padding: 0.1rem 0.5rem; top: 90%; transform: translateY(-50%) translateX(20%);"
+          style="
+            font-size: 0.6rem;
+            color: white;
+            background-color: #893cac;
+            min-width: 1.8rem;
+            height: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.1rem 0.5rem;
+            top: 90%;
+            transform: translateY(-50%) translateX(20%);
+          "
         >
           {{ notificationCount }}
         </span>
@@ -40,19 +52,6 @@
       Elles apparaîtront ici lorsqu'elles seront créées.
     </p>
   </div>
-
-  <style>
-    .no-transactions-card {
-      background-color: white;
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
-      color: #444;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      max-width: 500px;
-      margin: 40px auto;
-    }
-  </style>
 
   <!-- Card section -->
   <div class="card" *ngIf="invoices.length > 0">
@@ -108,7 +107,6 @@
           >
             <div class="status-text">{{ invoice.payment_state }}</div>
           </td>
-          
         </tr>
       </tbody>
     </table>
@@ -191,7 +189,9 @@
               }"
               class="fw-semibold"
             >
-              {{"paid" === selectedInvoice.payment_state ? "Paid" : "Not Paid"}}
+              {{
+                "paid" === selectedInvoice.payment_state ? "Paid" : "Not Paid"
+              }}
             </span>
           </div>
         </div>
@@ -209,10 +209,17 @@
         <td *ngIf="selectedInvoice.payment_state === 'paid'">
           <button
             class="btn btn-primary"
-            (click)="downloadInvoicePdf(selectedInvoice.id, selectedInvoice.access_token)">
+            (click)="
+              downloadInvoicePdf(
+                selectedInvoice.id,
+                selectedInvoice.access_token
+              )
+            "
+          >
             Download PDF
           </button>
-          </td> <!-- Conditional button to download invoice PDF -->
+        </td>
+        <!-- Conditional button to download invoice PDF -->
       </div>
     </div>
   </div>

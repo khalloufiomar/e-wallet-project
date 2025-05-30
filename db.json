@@ -1,60 +1,100 @@
 {
-  "accounts": [
+  "payments": [
     {
-      "name": "Omar Ben Salem",
-      "email": "omar.bensalem@example.com",
-      "type": "hr",
-      "status": "Active",
-      "balance": 1500.00
+      "id": 1,
+      "ref": "TXN20240501A",
+      "date": "2025-05-01",
+      "amount": 120.50,
+      "currency": "TND",
+      "paymentState": "paid"
     },
     {
-      "name": "Sara Khaldi",
-      "email": "sara.khaldi@example.com",
-      "type": "employee",
-      "status": "Inactive",
-      "balance": 0.00
+      "id": 2,
+      "ref": "TXN20240502B",
+      "date": "2025-05-02",
+      "amount": 75.00,
+      "currency": "EUR",
+      "paymentState": "not_paid"
     },
     {
-      "name": "Ahmed Mansour",
-      "email": "ahmed.mansour@example.com",
-      "type": "learner",
-      "status": "Active",
-      "balance": 320.00
+      "id": 3,
+      "ref": "TXN20240503C",
+      "date": "2025-05-03",
+      "amount": 200.00,
+      "currency": "USD",
+      "paymentState": "paid"
     },
     {
-      "name": "Fatma Trabelsi",
-      "email": "fatma.trabelsi@example.com",
-      "type": "hr",
-      "status": "Inactive",
-      "balance": 890.50
+      "id": 4,
+      "ref": "TXN20240504D",
+      "date": "2025-05-04",
+      "amount": 49.99,
+      "currency": "TND",
+      "paymentState": "paid"
     },
     {
-      "name": "Karim Jaziri",
-      "email": "karim.jaziri@example.com",
-      "type": "learner",
-      "status": "Active",
-      "balance": 120.10
+      "id": 5,
+      "ref": "TXN20240505E",
+      "date": "2025-05-05",
+      "amount": 300.00,
+      "currency": "EUR",
+      "paymentState": "not_paid"
     },
     {
-      "name": "Mouna Gharbi",
-      "email": "mouna.gharbi@example.com",
-      "type": "employee",
-      "status": "Active",
-      "balance": 940.00
+      "id": 6,
+      "ref": "TXN20240506F",
+      "date": "2025-05-06",
+      "amount": 150.00,
+      "currency": "TND",
+      "paymentState": "paid"
     },
     {
-      "name": "Slim Dabbabi",
-      "email": "slim.dabbabi@example.com",
-      "type": "employee",
-      "status": "Active",
-      "balance": 973.33
+      "id": 7,
+      "ref": "TXN20240507G",
+      "date": "2025-05-07",
+      "amount": 89.90,
+      "currency": "USD",
+      "paymentState": "not_paid"
     },
     {
-      "name": "Rania Saidi",
-      "email": "rania.saidi@example.com",
-      "type": "learner",
-      "status": "Inactive",
-      "balance": 45.25
+      "id": 8,
+      "ref": "TXN20240508H",
+      "date": "2025-05-08",
+      "amount": 175.75,
+      "currency": "EUR",
+      "paymentState": "paid"
+    },
+    {
+      "id": 9,
+      "ref": "TXN20240509I",
+      "date": "2025-05-09",
+      "amount": 210.00,
+      "currency": "USD",
+      "paymentState": "not_paid"
+    },
+    {
+      "id": 10,
+      "ref": "TXN20240510J",
+      "date": "2025-05-10",
+      "amount": 130.00,
+      "currency": "TND",
+      "paymentState": "paid"
+    },
+    {
+      "id": 11,
+      "ref": "TXN20240511K",
+      "date": "2025-05-11",
+      "amount": 160.40,
+      "currency": "EUR",
+      "paymentState": "not_paid"
+    },
+    {
+      "id": 12,
+      "ref": "TXN20240512L",
+      "date": "2025-05-12",
+      "amount": 99.99,
+      "currency": "TND",
+      "paymentState": "paid"
     }
   ]
 }
