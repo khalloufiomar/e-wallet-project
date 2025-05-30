@@ -1,67 +1,61 @@
 {
-  "transactions": [
+  "accounts": [
     {
       "id": 1,
-      "transaction": "TXN1001",
-      "date": "2025-05-01",
-      "category": "Shopping",
-      "sender": "John Doe",
-      "receiver": "Amazon",
-      "amount": 250.50
+      "name": "Ahmed Ben Ali",
+      "email": "ahmed.benali@example.com",
+      "type": "learner",
+      "status": "Active",
+      "balance": 1200
     },
     {
       "id": 2,
-      "transaction": "TXN1002",
-      "date": "2025-05-02",
-      "category": "Food",
-      "sender": "Jane Smith",
-      "receiver": "Uber Eats",
-      "amount": 35.75
+      "name": "Salma Trabelsi",
+      "email": "salma.trabelsi@example.com",
+      "type": "employee",
+      "status": "Inactive",
+      "balance": 300
     },
     {
       "id": 3,
-      "transaction": "TXN1003",
-      "date": "2025-05-03",
-      "category": "Entertainment",
-      "sender": "Alice Johnson",
-      "receiver": "Netflix",
-      "amount": 15.00
+      "name": "Mohamed Kacem",
+      "email": "mohamed.kacem@example.com",
+      "type": "Employee",
+      "status": "Active",
+      "balance": 750
     },
     {
       "id": 4,
-      "transaction": "TXN1004",
-      "date": "2025-05-04",
-      "category": "Rent",
-      "sender": "Bob Williams",
-      "receiver": "Landlord",
-      "amount": 1200.00
+      "name": "Khalil Ferjani",
+      "email": "khalil.ferjani@example.com",
+      "type": "hr",
+      "status": "Inactive",
+      "balance": 0
     },
     {
       "id": 5,
-      "transaction": "TXN1005",
-      "date": "2025-05-05",
-      "category": "Utilities",
-      "sender": "Charlie Brown",
-      "receiver": "Electric Company",
-      "amount": 85.30
+      "name": "Nesrine Gharbi",
+      "email": "nesrine.gharbi@example.com",
+      "type": "hr",
+      "status": "Active",
+      "balance": 5600
     },
-    {
-      "id": 6,
-      "transaction": "TXN1006",
-      "date": "2025-05-06",
-      "category": "Travel",
-      "sender": "Diana Prince",
-      "receiver": "Airline",
-      "amount": 450.00
+       {
+      "id": 5,
+      "name": "Nesrine Gharbi",
+      "email": "nesrine.gharbi@example.com",
+      "type": "employee",
+      "status": "Active",
+      "balance": 5600
     },
-    {
-      "id": 7,
-      "transaction": "TXN1007",
-      "date": "2025-05-07",
-      "category": "Health",
-      "sender": "Evan Peters",
-      "receiver": "Pharmacy",
-      "amount": 60.20
+       {
+      "id": 5,
+      "name": "Nesrine Gharbi",
+      "email": "nesrine.gharbi@example.com",
+      "type": "learner",
+      "status": "Active",
+      "balance": 5600
     }
+
   ]
 }

@@ -64,8 +64,10 @@ export const routes: Routes = [
     component: AdminComponent,
     //canActivate: [authGuard], // 🔒 Protège aussi la page admin
     children: [
-      { path: 'accounts', component: AccountsComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // ✅ redirection vers dashboard
+
       { path: 'dashboard', component: DashadminComponent },
+      { path: 'accounts', component: AccountsComponent },
       { path: 'companies', component: CompaniesComponent },
       { path: 'addcompany', component: AddcompanyComponent },
       { path: 'product', component: ProductsComponent },

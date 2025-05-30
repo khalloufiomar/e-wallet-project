@@ -12,17 +12,16 @@ export class AccountsadminService {
   constructor(private http: HttpClient) {}
 
   getAllAccounts(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/getAllUsers`, { withCredentials: true } );
+    return this.http.get<any>(`${this.apiUrl}/getAllUsers`, {
+      withCredentials: true,
+    });
   }
 
-
   updateStatus(user_id: string, action: string): Observable<any> {
-  return this.http.post(
-    `${this.apiUrl}/AdminActions`,
-    { user_id, action },
-    { withCredentials: true }
-  );
-}
-
-  
+    return this.http.post(
+      `${this.apiUrl}/AdminActions`,
+      { user_id, action },
+      { withCredentials: true }
+    );
+  }
 }
