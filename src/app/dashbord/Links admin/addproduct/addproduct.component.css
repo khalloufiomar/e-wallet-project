@@ -1,0 +1,136 @@
+.card {
+    max-width: 500px;
+    margin: 40px auto;
+    border: 1px solid #eee;
+}
+
+input.form-control {
+    height: 45px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background-color: #e6ffed;
+    border: 1px solid #b2f2bb;
+    color: #1f513f;
+}
+
+/* Par exemple, si tu veux changer le curseur sur le bouton */
+button.btn-outline-primary {
+    cursor: pointer;
+}
+
+/* Style du nom fichier */
+.selected-file-name {
+    font-style: italic;
+    color: #555;
+}
+
+/* Carte et form */
+.custom-card {
+    max-width: 480px;
+    margin: auto;
+    border: none;
+    box-shadow: 0 0.25rem 0.75rem rgba(120, 95, 230, 0.15);
+    border-radius: 0.5rem;
+}
+
+/* Titre simple, couleur sombre */
+.custom-title {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #3a3a3a;
+}
+
+/* Labels : typographie fine, sans bordure */
+.custom-label {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: #333333;
+    padding-bottom: 3px;
+    /* border-bottom: 1px solid transparent; */
+    user-select: none;
+    transition: border-color 0.3s ease;
+}
+
+.custom-label:hover,
+.custom-label:focus {
+    border-bottom-color: #a78bfa;
+}
+
+/* Inputs épurés */
+.custom-input {
+    border-radius: 0.4rem;
+    border: 1.5px solid #ddd;
+    padding: 10px 14px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    transition: border-color 0.3s ease;
+}
+
+.custom-input:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 6px #a78bfa88;
+    outline: none;
+}
+
+/* Boutons */
+.custom-btn {
+    min-width: 130px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0.45rem 1.3rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.custom-btn-outline-secondary {
+    border-color: #bbb;
+    color: #555;
+}
+
+.custom-btn:hover {
+    filter: brightness(0.9);
+    cursor: pointer;
+}
+
+/* Bouton Upload */
+.custom-btn-upload {
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    font-size: 0.95rem;
+}
+
+/* Nom du fichier sélectionné */
+.selected-file-name {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    user-select: text;
+}
+
+.custom-label {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #333;
+    letter-spacing: 0.2px;
+}
+
+/* Responsive (optionnel) */
+@media (max-width: 576px) {
+    .custom-card {
+        margin: 1rem;
+    }
+
+    .d-flex.justify-content-between.mt-4 {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .custom-btn {
+        width: 100%;
+    }
+}

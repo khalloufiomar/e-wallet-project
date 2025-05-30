@@ -1,5 +1,7 @@
 <div class="accounts-page container">
   <h1>Accounts</h1>
+
+  <!-- Message si aucun compte -->
   <div *ngIf="accounts.length === 0" class="no-transactions-card">
     <i class="bi bi-building fs-1 text-secondary mb-3"></i>
     <h5 class="fw-bold mb-2">Aucun compte</h5>
@@ -8,6 +10,8 @@
       Les comptes apparaîtront ici dès qu'ils seront disponibles.
     </p>
   </div>
+
+  <!-- Actions en haut -->
   <div
     class="d-flex justify-content-between align-items-center mb-2"
     *ngIf="accounts.length"
@@ -17,8 +21,6 @@
       <button class="btn btn-filter" (click)="toggleFilterDropdown()">
         <i class="fa fa-filter me-1"></i> Filter by Type
       </button>
-
-      <!-- Dropdown -->
       <div class="filter-dropdown" *ngIf="showFilter">
         <h6 class="filter-title">Account Types</h6>
         <ul class="filter-list">
@@ -30,11 +32,12 @@
       </div>
     </div>
   </div>
+
   <p class="description" *ngIf="accounts.length">
     View and manage all users accounts
   </p>
 
-  <!-- Summary cards -->
+  <!-- Résumé -->
   <div class="account-summary row" *ngIf="accounts.length">
     <div class="summary-card learner col">
       <div class="header">
@@ -52,12 +55,12 @@
         <span class="title">Inactive</span>
       </div>
       <div class="footer">
-        <p>Dormants accounts with no recent activities</p>
+        <p>Dormant accounts with no recent activities</p>
       </div>
     </div>
   </div>
 
-  <!-- Table -->
+  <!-- Tableau -->
   <div class="table-card" *ngIf="accounts.length">
     <table class="accounts-table">
       <thead>
@@ -71,12 +74,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let account of filteredAccounts">
+        <tr *ngFor="let account of paginatedAccounts">
           <td>{{ account.name }}</td>
           <td>{{ account.email }}</td>
           <td>{{ account.type }}</td>
-
-          <!-- Status avec couleurs dynamiques -->
           <td>
             <span
               [ngClass]="{
@@ -88,10 +89,7 @@
               {{ account.active ? "Active" : "Inactive" }}
             </span>
           </td>
-
           <td>{{ account.balance }} CT</td>
-
-          <!-- Actions -->
           <td>
             <div class="d-flex gap-0">
               <button
@@ -107,10 +105,7 @@
                     : "Activate"
                 }}
               </button>
-              <!-- <button
-                class="btn btn-delete btn-same-width"
-                (click)="openDeleteModal(account)"
-              >
+              <!-- <button class="btn btn-delete btn-same-width" (click)="openDeleteModal(account)">
                 Delete
               </button> -->
             </div>
@@ -119,8 +114,42 @@
       </tbody>
     </table>
 
+    <!-- Footer tableau -->
     <div class="table-footer">
-      <p>Showing {{ accounts.length }} accounts</p>
+      <p>
+        Showing {{ paginatedAccounts.length }} of
+        {{ filteredAccounts.length }} accounts
+      </p>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-3">
+      <nav>
+        <ul class="pagination mb-0">
+          <!-- Précédent -->
+          <li
+            class="page-item"
+            [class.disabled]="currentPage === 1"
+            (click)="changePage(currentPage - 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">Previous</a>
+          </li>
+
+          <!-- Page actuelle -->
+          <li class="page-item active">
+            <a class="page-link" href="javascript:void(0)">{{ currentPage }}</a>
+          </li>
+
+          <!-- Suivant -->
+          <li
+            class="page-item"
+            [class.disabled]="currentPage === totalPages"
+            (click)="changePage(currentPage + 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </div>

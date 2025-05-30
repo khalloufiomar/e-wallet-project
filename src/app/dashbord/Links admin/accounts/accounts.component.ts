@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Account } from '../../../model/class/user';
+import { Account, Product } from '../../../model/class/user';
 import { AccountsadminService } from '../../../services/accountsadmin.service';
 
 @Component({
@@ -11,25 +11,32 @@ import { AccountsadminService } from '../../../services/accountsadmin.service';
 })
 export class AccountsComponent {
   accounts: Account[] = [];
+  filteredAccounts: Account[] = [];
 
-  // 👉 Variables pour stocker les counts par type
+  currentPage: number = 1;
+  pageSize: number = 5;
+  searchTerm: string = '';
+
   activeaccount = 0;
   inactiveaccount = 0;
+
+  selectedAccount: any = null;
+  showDeleteModal = false;
+  showFilter = false;
 
   constructor(private AccountsadminService: AccountsadminService) {}
 
   ngOnInit(): void {
     this.fetchAccounts();
-    this.countUserTypes();
   }
 
   fetchAccounts(): void {
     this.AccountsadminService.getAllAccounts().subscribe({
       next: (data) => {
         this.accounts = data;
-        console.log('Accounts loaded:', data);
         this.filteredAccounts = [...this.accounts];
         this.countUserTypes();
+        this.currentPage = 1;
       },
       error: (error) => {
         console.error('Error fetching accounts:', error);
@@ -38,7 +45,6 @@ export class AccountsComponent {
   }
 
   countUserTypes(): void {
-    // On remet à 0 avant de recompter
     this.activeaccount = 0;
     this.inactiveaccount = 0;
 
@@ -54,15 +60,11 @@ export class AccountsComponent {
   toggleStatus(account: any): void {
     account.loading = true;
 
-    const newStatus = account.active === true ? 'Active' : 'Inactive';
-    console.log(
-      `🔄 Tentative de changement de statut pour ${account.id} → ${newStatus}`
-    );
+    const newStatus = account.active === true ? 'Inactive' : 'Active';
 
     this.AccountsadminService.updateStatus(account.id, 'active').subscribe({
       next: (response) => {
-        console.log('✅ Réponse du serveur :', response);
-        account.active = newStatus;
+        account.active = newStatus === 'Active';
         account.loading = false;
         this.countUserTypes();
       },
@@ -72,9 +74,6 @@ export class AccountsComponent {
       },
     });
   }
-
-  selectedAccount: any = null;
-  showDeleteModal = false;
 
   openDeleteModal(account: any): void {
     this.selectedAccount = account;
@@ -93,7 +92,10 @@ export class AccountsComponent {
     ).subscribe({
       next: () => {
         this.accounts = this.accounts.filter(
-          (a: any) => a.id !== this.selectedAccount.id
+          (a) => a.id !== this.selectedAccount.id
+        );
+        this.filteredAccounts = this.filteredAccounts.filter(
+          (a) => a.id !== this.selectedAccount.id
         );
         this.showDeleteModal = false;
         this.selectedAccount = null;
@@ -106,9 +108,6 @@ export class AccountsComponent {
     });
   }
 
-  showFilter = false;
-  filteredAccounts: any[] = [];
-
   toggleFilterDropdown(): void {
     this.showFilter = !this.showFilter;
   }
@@ -119,7 +118,24 @@ export class AccountsComponent {
     } else {
       this.filteredAccounts = this.accounts.filter((a) => a.type === type);
     }
-    this.countUserTypes(); // Mettre à jour les compteurs après filtrage
+    this.countUserTypes();
+    this.currentPage = 1;
     this.showFilter = false;
+  }
+
+  // 🔢 Pagination
+  get totalPages(): number {
+    return Math.ceil(this.filteredAccounts.length / this.pageSize);
+  }
+
+  get paginatedAccounts(): Account[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredAccounts.slice(start, start + this.pageSize);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
   }
 }

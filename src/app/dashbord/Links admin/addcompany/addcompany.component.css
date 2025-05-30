@@ -14,3 +14,37 @@ input.form-control {
     border: 1px solid #b2f2bb;
     color: #1f513f;
 }
+
+.label-custom {
+    font-weight: 400;
+    font-size: 0.95rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+input.form-control {
+    border-radius: 0.4rem;
+    height: 42px;
+}
+
+.custom-btn {
+    height: 42px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.4rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.custom-label {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #333;
+    letter-spacing: 0.2px;
+}
+
+.custom-btn {
+    height: 42px;
+    font-weight: 500;
+    font-size: 0.95rem;
+}

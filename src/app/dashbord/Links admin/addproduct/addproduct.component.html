@@ -1,1 +1,159 @@
-<p>addproduct works!</p>
+<div class="card shadow-sm p-4 bg-white rounded border-0">
+  <h5 class="mb-1 text-muted fw-semibold">
+    <i class="bi bi-box-seam me-2"></i> Add New Product
+  </h5>
+  <p class="text-muted mb-3 small">Create a new product for your catalog</p>
+  <hr />
+
+  <form (ngSubmit)="addproduct()" #productForm="ngForm" novalidate>
+    <!-- Toast erreurs -->
+    <div
+      *ngIf="errorMessages.length > 0"
+      class="toast-container position-fixed top-0 end-0 p-3"
+    >
+      <div
+        class="toast text-bg-danger show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-body">
+          <div class="d-flex gap-3 align-items-center">
+            <i class="fa-solid fa-circle-exclamation fa-lg"></i>
+            <div
+              class="flex-grow-1 d-flex justify-content-between align-items-center"
+            >
+              <div class="fw-normal small">
+                <div *ngFor="let message of errorMessages">
+                  <span class="fw-bold me-1">•</span>{{ message }}
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                aria-label="Close"
+                (click)="errorMessages = []"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Titre -->
+    <div class="mb-3">
+      <label for="producttitle" class="form-label custom-label"
+        >Product Title</label
+      >
+      <input
+        type="text"
+        id="producttitle"
+        class="form-control"
+        placeholder="Enter product title"
+        name="producttitle"
+        [(ngModel)]="producttitle"
+        required
+      />
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="productdescription" class="form-label custom-label"
+        >Product Description</label
+      >
+      <input
+        type="text"
+        id="productdescription"
+        class="form-control"
+        placeholder="Enter product description"
+        name="productdescription"
+        [(ngModel)]="productdescription"
+        required
+      />
+    </div>
+
+    <!-- Prix -->
+    <div class="mb-3">
+      <label for="price" class="form-label custom-label">Price (TND)</label>
+      <input
+        type="number"
+        id="price"
+        class="form-control"
+        placeholder="Enter price"
+        name="price"
+        [(ngModel)]="price"
+        required
+        min="0"
+      />
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+      <label for="imageUpload" class="form-label custom-label"
+        >Upload Image</label
+      >
+      <div class="d-flex align-items-center gap-3">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="fileInput.click()"
+        >
+          <i class="bi bi-upload me-2"></i> Choose Image
+        </button>
+        <span *ngIf="selectedFile">{{ selectedFile.name }}</span>
+      </div>
+      <input
+        type="file"
+        id="imageUpload"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+        #fileInput
+        hidden
+      />
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-6 pe-1">
+        <button
+          class="btn w-100"
+          type="button"
+          (click)="resetForm()"
+          style="
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            color: #495057;
+            box-shadow: none;
+            transition: all 0.2s ease-in-out;
+          "
+          onmouseover="this.style.backgroundColor='#e9ecef'"
+          onmouseout="this.style.backgroundColor='#f8f9fa'"
+          onfocus="this.style.boxShadow='0 0 0 0.15rem rgba(0,0,0,0.1)'"
+          onblur="this.style.boxShadow='none'"
+        >
+          Reset Form
+        </button>
+      </div>
+      <div class="col-6 ps-1">
+        <button
+          class="btn w-100"
+          type="submit"
+          style="
+            background-color: #a78bfa;
+            border: 1px solid #a78bfa;
+            border-radius: 8px;
+            color: white;
+            box-shadow: none;
+            transition: all 0.2s ease-in-out;
+          "
+          onmouseover="this.style.backgroundColor='#8b6ee0'"
+          onmouseout="this.style.backgroundColor='#a78bfa'"
+          onfocus="this.style.boxShadow='0 0 0 0.15rem rgba(167,139,250,0.5)'"
+          onblur="this.style.boxShadow='none'"
+        >
+          Add Product
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

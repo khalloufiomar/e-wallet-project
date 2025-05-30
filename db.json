@@ -1,61 +1,60 @@
 {
   "accounts": [
     {
-      "id": 1,
-      "name": "Ahmed Ben Ali",
-      "email": "ahmed.benali@example.com",
-      "type": "learner",
-      "status": "Active",
-      "balance": 1200
-    },
-    {
-      "id": 2,
-      "name": "Salma Trabelsi",
-      "email": "salma.trabelsi@example.com",
-      "type": "employee",
-      "status": "Inactive",
-      "balance": 300
-    },
-    {
-      "id": 3,
-      "name": "Mohamed Kacem",
-      "email": "mohamed.kacem@example.com",
-      "type": "Employee",
-      "status": "Active",
-      "balance": 750
-    },
-    {
-      "id": 4,
-      "name": "Khalil Ferjani",
-      "email": "khalil.ferjani@example.com",
-      "type": "hr",
-      "status": "Inactive",
-      "balance": 0
-    },
-    {
-      "id": 5,
-      "name": "Nesrine Gharbi",
-      "email": "nesrine.gharbi@example.com",
+      "name": "Omar Ben Salem",
+      "email": "omar.bensalem@example.com",
       "type": "hr",
       "status": "Active",
-      "balance": 5600
+      "balance": 1500.00
     },
-       {
-      "id": 5,
-      "name": "Nesrine Gharbi",
-      "email": "nesrine.gharbi@example.com",
+    {
+      "name": "Sara Khaldi",
+      "email": "sara.khaldi@example.com",
       "type": "employee",
-      "status": "Active",
-      "balance": 5600
+      "status": "Inactive",
+      "balance": 0.00
     },
-       {
-      "id": 5,
-      "name": "Nesrine Gharbi",
-      "email": "nesrine.gharbi@example.com",
+    {
+      "name": "Ahmed Mansour",
+      "email": "ahmed.mansour@example.com",
       "type": "learner",
       "status": "Active",
-      "balance": 5600
+      "balance": 320.00
+    },
+    {
+      "name": "Fatma Trabelsi",
+      "email": "fatma.trabelsi@example.com",
+      "type": "hr",
+      "status": "Inactive",
+      "balance": 890.50
+    },
+    {
+      "name": "Karim Jaziri",
+      "email": "karim.jaziri@example.com",
+      "type": "learner",
+      "status": "Active",
+      "balance": 120.10
+    },
+    {
+      "name": "Mouna Gharbi",
+      "email": "mouna.gharbi@example.com",
+      "type": "employee",
+      "status": "Active",
+      "balance": 940.00
+    },
+    {
+      "name": "Slim Dabbabi",
+      "email": "slim.dabbabi@example.com",
+      "type": "employee",
+      "status": "Active",
+      "balance": 973.33
+    },
+    {
+      "name": "Rania Saidi",
+      "email": "rania.saidi@example.com",
+      "type": "learner",
+      "status": "Inactive",
+      "balance": 45.25
     }
-
   ]
 }

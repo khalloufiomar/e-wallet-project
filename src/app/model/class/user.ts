@@ -95,3 +95,10 @@ export interface Product {
   description: string;
   price: number;
 }
+
+export interface ProductPayload {
+  producttitle: string;
+  productdescription: string;
+  price: number;
+  imageBase64: string;
+}

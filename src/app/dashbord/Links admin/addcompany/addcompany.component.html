@@ -1,10 +1,12 @@
 <div class="card shadow-sm p-4 bg-white rounded">
-  <h5 class="mb-3 d-flex align-items-center">
+  <h5 class="mb-1 text-muted fw-semibold">
     <i class="bi bi-building me-2"></i> Add New Company
   </h5>
+  <p class="text-muted mb-3 small">Create a new company profile</p>
   <hr />
 
   <form (ngSubmit)="addCompany()" #companyForm="ngForm">
+    <!-- Toast erreurs -->
     <div
       *ngIf="errorMessages.length > 0"
       class="toast-container position-fixed top-0 end-0 p-3"
@@ -21,13 +23,11 @@
             <div
               class="flex-grow-1 d-flex justify-content-between align-items-center"
             >
-              <!-- Affiche tous les messages -->
               <div class="fw-normal small">
                 <div *ngFor="let message of errorMessages">
                   <span class="fw-bold me-1">•</span>{{ message }}
                 </div>
               </div>
-
               <button
                 type="button"
                 class="btn-close btn-close-white"
@@ -42,10 +42,9 @@
 
     <!-- Company Name -->
     <div class="mb-3">
-      <label for="companyName" class="form-label fw-semibold">
-        <i class="bi bi-plus"></i>
-        Company Name
-      </label>
+      <label for="companyName" class="form-label custom-label"
+        >Company Name</label
+      >
       <input
         type="text"
         id="companyName"
@@ -59,10 +58,9 @@
 
     <!-- Email -->
     <div class="mb-3">
-      <label for="companyEmail" class="form-label fw-semibold">
-        <i class="bi bi-envelope"></i>
-        Company Email
-      </label>
+      <label for="companyEmail" class="form-label custom-label"
+        >Company Email</label
+      >
       <input
         type="email"
         id="companyEmail"
@@ -75,19 +73,20 @@
       />
     </div>
 
-    <!-- Success Alert -->
+    <!-- Success -->
     <div *ngIf="createdCompany" class="alert alert-success py-2">
-      <strong *ngIf="createdCompany">Company Code: {{ createdCompany.company_code }}</strong
+      <strong>Company Code: {{ createdCompany.company_code }}</strong
       ><br />
-      <strong *ngIf="createdCompany">Company Name: {{ createdCompany.name }}</strong
+      <strong>Company Name: {{ createdCompany.name }}</strong
       ><br />
       <small>This code was automatically generated</small>
     </div>
 
+    <!-- Add Button -->
     <button
-      class="btn btn-primary px-4 w-100"
+      class="btn btn-primary w-100 custom-btn mt-3"
       style="background-color: #a78bfa; border: none"
-      type = "submit"
+      type="submit"
     >
       Add Company
     </button>
