@@ -1,25 +1,8 @@
-<!-- <header
-  class="login-header-bar d-flex justify-content-between align-items-center px-4 py-2"
->
-  <div class="logo d-flex align-items-center">
-    <img src="clevory-logo.png" alt="Logo" class="me-2" />
-    <span class="fw-bold text-dark fs-5">Clevory</span>
-  </div>
-
-  <button
-    class="btn btn-outline-dark rounded-circle btn-close-header"
-    (click)="goHome()"
-    aria-label="Close"
-  >
-    <i class="bi bi-x-lg"></i>
-  </button>
-</header> -->
-
 <div class="container d-flex justify-content-center align-items-center vh-100">
-  <!-- Card Container -->
+  <!-- grande card -->
   <div class="card shadow-lg custom-card">
     <div class="row no-gutters">
-      <!-- Section Image (gauche) -->
+      <!-- div a gauche qui contient l'image -->
       <div class="col-md-4 position-relative">
         <img
           src="rocket.png"
@@ -28,12 +11,12 @@
         />
       </div>
 
-      <!-- Section Formulaire (droite) -->
+      <!-- div du form a droite -->
       <div
         class="col-md-7 d-flex align-items-center justify-content-center p-5 bg-light rounded-end"
       >
         <div class="w-100">
-          <!-- Title -->
+          <!-- titre du form -->
           <div class="d-flex align-items-center mb-4">
             <a
               (click)="goBack()"
@@ -45,28 +28,8 @@
             <h3 class="text-dark text-start login-header m-0">Log In</h3>
           </div>
 
-          <style>
-            .back-arrow {
-              width: 40px;
-              height: 40px;
-              background-color: #f0f0f0; /* tu peux changer la couleur ici */
-              border-radius: 50%;
-              text-decoration: none;
-              color: #000;
-              transition: background-color 0.3s ease;
-            }
-
-            .back-arrow:hover {
-              background-color: #c7c4c4;
-            }
-
-            .material-icons {
-              font-size: 24px;
-            }
-          </style>
           <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-            <!-- Toast d'erreur -->
-            <!-- Toast d'erreur -->
+            <!-- Toast affiche les messages d'erreur -->
             <div
               *ngIf="errorMessages.length > 0"
               class="toast-container position-fixed top-0 end-0 p-3"
@@ -102,7 +65,7 @@
               </div>
             </div>
 
-            <!-- Email Field -->
+            <!-- champ Email -->
             <div class="mb-3">
               <label for="email" class="form-label text-start"
                 >Email Address</label
@@ -120,7 +83,7 @@
               />
             </div>
 
-            <!-- Password Field -->
+            <!-- champ password -->
             <div class="mb-3">
               <label for="password" class="form-label text-start"
                 >Password</label

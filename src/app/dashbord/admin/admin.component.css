@@ -1,20 +1,19 @@
+/* design pour la card du navbar */
 .nav-card {
     background: #1C1C1E;
-    /* Dégradé de fond */
     border-top-right-radius: 20px;
-    /* Coin supérieur droit arrondi 20*/
     border-bottom-right-radius: 20px;
-    /* Coin inférieur droit arrondi 20*/
     height: 100vh;
     position: fixed;
     width: 230px;
-    /* 18% */
 }
+
 
 .newNotif {
     background-color: rgba(255, 0, 0, 0.3);
 }
 
+/* logo du coins */
 .circle-logo {
     width: 40px;
     height: 40px;
@@ -25,12 +24,13 @@
     align-items: center;
 }
 
+/* titre clevory admin */
 .titre {
     font-weight: "inter", "semi-serif";
 }
 
 
-
+/* les liens style */
 .nav-links a {
     text-decoration: none;
     cursor: pointer;
@@ -51,25 +51,114 @@
     gap: 0px;
 }
 
+/* style pour l'icone du lien */
 .nav-item-link i {
     color: white;
 }
 
+/* style des lien lorsque le lien est active */
 .active-link {
     background-color: rgb(74, 74, 74) !important;
     color: rgb(255, 255, 255) !important;
     border-radius: 50px !important;
 }
 
+/* style des icone lorsque le lien est active */
 .active-link i {
     color: black !important;
     color: rgb(255, 255, 255) !important;
 
 }
 
+/* style pour cette componenet */
 :host {
     display: block;
     background-color: #f4f6f9 !important;
     /* Fond général du composant */
     min-height: 100vh;
+}
+
+/* nouvelle notification */
+.notification-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+/* Styles pour la div de  l'image du coin*/
+.circle-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* Styles pour l'image du coin*/
+.circle-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Styles pour la responsivité */
+@media (max-width: 1000px) {
+    .sidebar {
+        display: none !important;
+        /* Cacher complètement la sidebar */
+    }
+
+    .mobile-navbar {
+        display: block !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1c1c1e;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-content {
+        width: 100%;
+        padding-left: 0;
+        margin-top: 90px;
+        /* Espace pour la navbar mobile */
+    }
+
+    .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .mobile-nav-item i {
+        font-size: 20px;
+        margin-bottom: 2px;
+    }
+
+    .mobile-menu-text {
+        font-size: 10px;
+    }
+
+    .mobile-nav-item.active-link {
+        background-color: rgb(74, 74, 74);
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .mobile-menu-links {
+        overflow-x: auto;
+    }
+
+    .mobile-nav-item {
+        min-width: 60px;
+    }
 }

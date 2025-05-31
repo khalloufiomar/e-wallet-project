@@ -71,7 +71,7 @@
     <!-- Menu gauche (visible uniquement sur desktop) -->
     <div class="col-md-2 col-sm-3 h-100 p-0 sidebar">
       <div class="nav-card h-100 d-flex flex-column p-3">
-        <!-- Logo -->
+        <!-- Logo du coin-->
         <div class="d-flex align-items-center mb-4">
           <div class="circle-logo me-3">
             <img src="coin.png" alt="Clevory Logo" class="circle-image" />
@@ -200,83 +200,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .notification-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    border-radius: 50%;
-  }
-  /* Styles pour la responsivité */
-  @media (max-width: 1000px) {
-    .sidebar {
-      display: none !important; /* Cacher complètement la sidebar */
-    }
-
-    .mobile-navbar {
-      display: block !important;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #1c1c1e;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .main-content {
-      width: 100%;
-      padding-left: 0;
-      margin-top: 90px; /* Espace pour la navbar mobile */
-    }
-
-    .mobile-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: white;
-      text-decoration: none;
-      padding: 5px;
-      font-size: 12px;
-    }
-
-    .mobile-nav-item i {
-      font-size: 20px;
-      margin-bottom: 2px;
-    }
-
-    .mobile-menu-text {
-      font-size: 10px;
-    }
-
-    .mobile-nav-item.active-link {
-      background-color: rgb(74, 74, 74);
-      border-radius: 5px;
-    }
-  }
-
-  @media (max-width: 576px) {
-    .mobile-menu-links {
-      overflow-x: auto;
-    }
-
-    .mobile-nav-item {
-      min-width: 60px;
-    }
-  }
-  .circle-logo {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    overflow: hidden; /* Pour que l'image reste bien ronde */
-    background-color: white; /* Optionnel : tu peux retirer si tu veux pas de fond */
-  }
-
-  .circle-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-</style>

@@ -1,20 +1,19 @@
+/* style pour la navbard  */
 .nav-card {
     background: #1C1C1E;
-    /* Dégradé de fond */
     border-top-right-radius: 20px;
-    /* Coin supérieur droit arrondi 20*/
     border-bottom-right-radius: 20px;
-    /* Coin inférieur droit arrondi 20*/
     height: 100vh;
     position: fixed;
     width: 230px;
-    /* 18% */
 }
 
+/* style pour nouvelle notification  */
 .newNotif {
-    background-color: rgba(255, 0, 0, 0.3); 
-  }
+    background-color: rgba(255, 0, 0, 0.3);
+}
 
+/* style pour le logo de coin  */
 .circle-logo {
     width: 40px;
     height: 40px;
@@ -25,12 +24,13 @@
     align-items: center;
 }
 
+/* style pour le titre clevory  */
 .titre {
     font-weight: "inter", "semi-serif";
 }
 
 
-
+/* style pour les liens  */
 .nav-links a {
     text-decoration: none;
     cursor: pointer;
@@ -51,22 +51,25 @@
     gap: 0px;
 }
 
+/* style pour les icones des liens  */
 .nav-item-link i {
     color: white;
 }
 
+/* style pour les liens actives  */
 .active-link {
     background-color: rgb(74, 74, 74) !important;
     color: rgb(255, 255, 255) !important;
     border-radius: 50px !important;
 }
 
+/* style pour les icones des liens actives  */
 .active-link i {
     color: black !important;
     color: rgb(255, 255, 255) !important;
-
 }
 
+/* style pour cett apge (component)  */
 :host {
     display: block;
     background-color: #f4f6f9 !important;

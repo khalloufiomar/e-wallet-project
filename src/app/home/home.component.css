@@ -7,6 +7,100 @@ header {
     margin-bottom: 30px;
 }
 
+.header-logo {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    padding: 0px;
+}
+
+/* Conteneur de l'image */
+.container-ronde {
+    text-align: right;
+    /* Centrer l'image à droite */
+    z-index: 0;
+    /* L'image au premier plan */
+}
+
+.image-ronde {
+    width: 40%;
+    height: auto;
+    border-radius: 0px;
+    margin-top: -820px;
+}
+
+.container-violet {
+    text-align: right;
+    z-index: -10000;
+}
+
+.image-violet {
+    width: 45%;
+    height: auto;
+    border-radius: 0px;
+    margin-top: -1500px;
+    margin-bottom: -100px;
+}
+
+.image-containerronde {
+    flex: 1;
+    padding-right: 30px;
+    z-index: -10000;
+}
+
+.section-imageronde {
+    width: 50%;
+    height: auto;
+    border-radius: 0px;
+    margin-top: -4000px;
+    margin-left: -90px;
+    z-index: -5000;
+}
+
+.container-cube {
+    text-align: right;
+    z-index: -1;
+}
+
+.image-cube {
+    width: 45%;
+    height: auto;
+    border-radius: 0px;
+    margin-top: -450px;
+    margin-bottom: -160px;
+}
+
+.container-l {
+    position: relative;
+    z-index: 0;
+    height: 100%;
+}
+
+.image-l {
+    position: absolute;
+    right: 0;
+    top: -1050px;
+    width: 40%;
+    height: auto;
+    z-index: -50000 !important;
+}
+
+.image-containerx {
+    flex: 1;
+    padding-right: 30px;
+    z-index: -10000;
+}
+
+.section-imagex {
+    width: 40%;
+    height: auto;
+    border-radius: 0px;
+    margin-top: -1450px;
+    margin-left: -0px;
+    z-index: -5000;
+}
+
 /* card des lien du header */
 .nav-card {
     background: #fdfdfd;
@@ -534,5 +628,35 @@ header {
 
     .step-description {
         font-size: 0.8rem;
+    }
+}
+
+/* Ajout d'une media query pour les écrans entre 769px et 1061px */
+@media (min-width: 769px) and (max-width: 1061px) {
+    #explore {
+        margin-top: -400px !important;
+        /* Augmenter la marge négative pour réduire l'espace */
+    }
+
+    .skills-title {
+        margin-bottom: 0 !important;
+        /* Réduire la marge sous le titre */
+    }
+
+    .text-center.py-2 {
+        padding-bottom: 0 !important;
+        /* Réduire le padding en bas */
+    }
+
+    /* Réduire l'espace entre "How It Works?" et la section suivante */
+    .text-center.py-4 {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: -100px;
+    }
+
+    /* Ajuster la marge de la section container qui suit */
+    .container.py-5 {
+        padding-top: 10px !important;
     }
 }
