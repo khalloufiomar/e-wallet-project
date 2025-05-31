@@ -7,21 +7,23 @@ import { ProductPayload } from '../model/class/user';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3001/products'; // à adapter à ton backend
+  private apiUrl = 'http://localhost:3050/products';
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+  getProducts(): Observable<ProductPayload[]> {
+    return this.http.get<ProductPayload[]>(`${this.apiUrl}`);
   }
-
-  deleteProduct(id: number) {
+  deleteProduct(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   private backendUrl = 'http://localhost:3000/products'; // à modifier
 
-  addProduct(product: ProductPayload): Observable<any> {
-    return this.http.post(this.backendUrl, product);
+  addProduct(product: ProductPayload): Observable<ProductPayload> {
+    return this.http.post<ProductPayload>(this.apiUrl, product);
+  }
+  updateProduct(id: number, productPayload: ProductPayload): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, productPayload);
   }
 }

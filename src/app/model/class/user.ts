@@ -88,15 +88,16 @@ export interface Company {
   create_date: Date;
 }
 
-// product.model.ts
 export interface Product {
-  image: string;
+  id: number;
   title: string;
   description: string;
   price: number;
+  image: string; // ici imageBase64 encodée en Data URL
 }
 
 export interface ProductPayload {
+  id: number;
   producttitle: string;
   productdescription: string;
   price: number;

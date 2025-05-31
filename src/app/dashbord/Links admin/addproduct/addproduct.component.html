@@ -1,8 +1,15 @@
 <div class="card shadow-sm p-4 bg-white rounded border-0">
   <h5 class="mb-1 text-muted fw-semibold">
-    <i class="bi bi-box-seam me-2"></i> Add New Product
+    <i class="bi bi-box-seam me-2"></i>
+    {{ isEditMode ? "Edit Product" : "Add New Product" }}
   </h5>
-  <p class="text-muted mb-3 small">Create a new product for your catalog</p>
+  <p class="text-muted mb-3 small">
+    {{
+      isEditMode
+        ? "Update the product details below"
+        : "Create a new product for your catalog"
+    }}
+  </p>
   <hr />
 
   <form (ngSubmit)="addproduct()" #productForm="ngForm" novalidate>
@@ -33,6 +40,37 @@
                 class="btn-close btn-close-white"
                 aria-label="Close"
                 (click)="errorMessages = []"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Toast de succès (vert) -->
+    <div
+      *ngIf="successMessage"
+      class="toast-container position-fixed top-0 end-0 p-3"
+    >
+      <div
+        class="toast text-bg-success show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-body">
+          <div class="d-flex gap-3 align-items-center">
+            <i class="fa-solid fa-circle-check fa-lg"></i>
+            <div
+              class="flex-grow-1 d-flex justify-content-between align-items-center"
+            >
+              <div class="fw-normal small">
+                {{ successMessage }}
+              </div>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                aria-label="Close"
+                (click)="successMessage = ''"
               ></button>
             </div>
           </div>
@@ -111,11 +149,20 @@
         hidden
       />
     </div>
+    <div *ngIf="imageBase64" class="mt-3">
+      <img
+        [src]="imageBase64"
+        alt="Product Image"
+        style="max-height: 150px; border-radius: 8px"
+      />
+    </div>
 
     <div class="row mt-4">
-      <div class="col-6 pe-1">
+      <div class="col-12 d-flex gap-2">
+        <!-- Affiche le bouton Reset seulement si on n'est PAS en mode édition -->
         <button
-          class="btn w-100"
+          *ngIf="!isEditMode"
+          class="btn flex-fill"
           type="button"
           (click)="resetForm()"
           style="
@@ -133,10 +180,27 @@
         >
           Reset Form
         </button>
-      </div>
-      <div class="col-6 ps-1">
+
         <button
-          class="btn w-100"
+          *ngIf="isEditMode"
+          class="btn btn-secondary flex-fill"
+          type="button"
+          (click)="cancelEdit()"
+          style="
+            border-radius: 8px;
+            box-shadow: none;
+            transition: all 0.2s ease-in-out;
+          "
+          onmouseover="this.style.backgroundColor='#6c757d'"
+          onmouseout="this.style.backgroundColor='#6c757d'"
+          onfocus="this.style.boxShadow='0 0 0 0.15rem rgba(108,117,125,0.5)'"
+          onblur="this.style.boxShadow='none'"
+        >
+          Cancel Edit
+        </button>
+
+        <button
+          class="btn flex-fill"
           type="submit"
           style="
             background-color: #a78bfa;
@@ -151,7 +215,7 @@
           onfocus="this.style.boxShadow='0 0 0 0.15rem rgba(167,139,250,0.5)'"
           onblur="this.style.boxShadow='none'"
         >
-          Add Product
+          {{ isEditMode ? "Update Product" : "Add Product" }}
         </button>
       </div>
     </div>

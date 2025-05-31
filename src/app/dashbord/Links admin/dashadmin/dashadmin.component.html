@@ -58,24 +58,18 @@
       </div>
     </div>
 
-    <!-- Today's Transactions -->
+    <!-- Total Products -->
     <div class="card card-quarter">
-      <div class="card-title">Today's Transactions</div>
+      <div class="card-title">Total Products</div>
       <div class="card-value-row">
         <div class="card-value">
-          {{ todayTransactionCount | number : "1.0-0" }}
+          {{ totalProductCount | number : "1.0-0" }}
         </div>
         <div class="icon-circle" style="background-color: #ffedd5">
-          <i class="bi bi-bar-chart-steps" style="color: #f29159"></i>
+          <i class="bi bi-box-seam" style="color: #f29159"></i>
         </div>
       </div>
-      <div class="card-subtext text-info">
-        {{
-          todayTransactionCount > 0
-            ? "Processing normally"
-            : "No transactions today"
-        }}
-      </div>
+      <div class="card-subtext text-info">Available in catalog</div>
     </div>
   </div>
 

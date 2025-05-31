@@ -27,10 +27,28 @@ export class AddproductComponent {
   selectedFile: File | null = null;
   errorMessages: string[] = [];
   successMessage: string = '';
+  productId: number | null = null; // Id du produit en édition, sinon null
+  isEditMode = false; // false par défaut (ajout)
+  products: ProductPayload[] = [];
+  filteredProducts: ProductPayload[] = [];
 
   imageBase64: string | null = null;
+  selectedFileName: string | null = null;
+  constructor(private productService: ProductService, private router: Router) {
+    const nav = this.router.getCurrentNavigation();
+    const product = nav?.extras.state?.['product'];
 
-  constructor(private productService: ProductService, private router: Router) {}
+    if (product) {
+      this.isEditMode = true;
+      this.productId = product.id;
+      this.producttitle = product.title || '';
+      this.productdescription = product.description || '';
+      this.price = product.price || null;
+      if (product.image) {
+        this.imageBase64 = `data:image/jpeg;base64,${product.image}`;
+      }
+    }
+  }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -82,27 +100,55 @@ export class AddproductComponent {
     }
 
     const productPayload: ProductPayload = {
+      id: this.productId || 0,
       producttitle: this.producttitle,
       productdescription: this.productdescription,
       price: this.price!,
       imageBase64: this.imageBase64!,
     };
 
-    this.productService.addProduct(productPayload).subscribe({
-      next: () => {
-        this.successMessage = 'Product created successfully!';
-        this.resetForm();
+    if (this.isEditMode && this.productId) {
+      this.productService
+        .updateProduct(this.productId, productPayload)
+        .subscribe({
+          next: () => {
+            this.successMessage = 'Product updated successfully!';
+            // Efface le message après 4 secondes
 
-        // Cacher l'alerte après 4 secondes
-        setTimeout(() => {
-          this.successMessage = '';
-        }, 4000);
-      },
-      error: (error) => {
-        console.error('Error creating product:', error);
-        this.errorMessages.push('Failed to create product.');
-      },
-    });
+            setTimeout(() => {
+              this.successMessage = '';
+              this.router.navigate(['/admin/product']);
+            }, 4000);
+          },
+          error: (error) => {
+            console.error('Error updating product:', error);
+            this.errorMessages.push('Failed to update product.');
+          },
+        });
+    } else {
+      // Création d'un nouveau produit
+      // Après création réussie
+      this.productService.addProduct(productPayload).subscribe({
+        next: (createdProduct: ProductPayload) => {
+          // Ajoute le produit au début du tableau (en gardant la forme ProductPayload)
+          this.products.unshift(createdProduct);
+
+          // Si tu utilises filteredProducts, mets-le aussi à jour (même type)
+          this.filteredProducts = [...this.products];
+
+          this.successMessage = 'Product created successfully!';
+          this.resetForm();
+
+          setTimeout(() => {
+            this.successMessage = '';
+          }, 4000);
+        },
+        error: (error) => {
+          console.error('Error creating product:', error);
+          this.errorMessages.push('Failed to create product.');
+        },
+      });
+    }
   }
 
   resetForm() {
@@ -118,7 +164,12 @@ export class AddproductComponent {
     ) as HTMLInputElement;
     if (fileInput) fileInput.value = '';
   }
-  goBack() {
-    this.router.navigate(['admin/product']); // adapte le chemin selon ton routing
+  goBackToProducts() {
+    this.router.navigate(['/products']); // Ou le bon chemin selon ton routing
+  }
+  cancelEdit() {
+    this.isEditMode = false;
+    this.productId = null;
+    this.resetForm();
   }
 }

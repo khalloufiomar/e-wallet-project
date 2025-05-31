@@ -12,6 +12,7 @@ import { ChangeDetectorRef, effect, inject, PLATFORM_ID } from '@angular/core';
 import { DashadminService } from '../../../services/dashadmin.service';
 import { Router } from '@angular/router';
 import { NavigationEnd } from '@angular/router';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-dashadmin',
@@ -31,13 +32,15 @@ export class DashadminComponent implements OnInit {
     private transactionService: TransactionService,
     private cd: ChangeDetectorRef,
     private dashadmin: DashadminService,
-    private router: Router
+    private router: Router,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
     this.fetchAccounts();
     this.countUserStatus();
     this.loadAccounts();
+    this.fetchTotalProducts(); // appel au chargement
 
     this.transactionService.getAllTransactions().subscribe((data) => {
       this.transactions = data;
@@ -295,5 +298,17 @@ export class DashadminComponent implements OnInit {
     });
 
     return monthlyCounts;
+  }
+  totalProductCount = 0;
+
+  fetchTotalProducts(): void {
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.totalProductCount = products.length;
+      },
+      error: (err) => {
+        console.error('Erreur en récupérant les produits :', err);
+      },
+    });
   }
 }
