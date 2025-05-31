@@ -7,12 +7,52 @@
     <div class="mobile-menu-links">
       <div class="d-flex justify-content-around py-2">
         <a
+          routerLink="dashboard"
+          routerLinkActive="active-link"
+          class="mobile-nav-item"
+        >
+          <i class="bi bi-grid"></i>
+          <span class="mobile-menu-text">Dashboard</span>
+        </a>
+        <a
           routerLink="accounts"
           routerLinkActive="active-link"
           class="mobile-nav-item"
         >
           <i class="bi bi-people"></i>
           <span class="mobile-menu-text">Accounts</span>
+        </a>
+        <a
+          routerLink="companies"
+          routerLinkActive="active-link"
+          class="mobile-nav-item"
+        >
+          <i class="bi bi-building"></i>
+          <span class="mobile-menu-text">Companies</span>
+        </a>
+        <a
+          routerLink="addcompany"
+          routerLinkActive="active-link"
+          class="mobile-nav-item"
+        >
+          <i class="bi bi-person-plus"></i>
+          <span class="mobile-menu-text">Add Company</span>
+        </a>
+        <a
+          routerLink="product"
+          routerLinkActive="active-link"
+          class="mobile-nav-item"
+        >
+          <i class="bi bi-box-seam"></i>
+          <span class="mobile-menu-text">Product</span>
+        </a>
+        <a
+          routerLink="addproduct"
+          routerLinkActive="active-link"
+          class="mobile-nav-item"
+        >
+          <i class="bi bi-people"></i>
+          <span class="mobile-menu-text">Add Product</span>
         </a>
 
         <a
@@ -36,7 +76,7 @@
           <div class="circle-logo me-3">
             <img src="coin.png" alt="Clevory Logo" class="circle-image" />
           </div>
-          <span class="titre text-white fs-5">Clevory</span>
+          <span class="titre text-white fs-5">Clevory Admin</span>
         </div>
 
         <!-- Bouton toggle pour mobile -->

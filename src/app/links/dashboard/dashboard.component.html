@@ -155,10 +155,12 @@
         <div class="col-xs-12 mb-3">
           <div class="info-card">
             <div class="card-header">
-              <button class="edit-btn"><i class="bi bi-pen"></i></button>
+              <button class="edit-btn" (click)="goToSettings()">
+                <i class="bi bi-pen"></i>
+              </button>
             </div>
             <div class="card-body d-flex flex-column align-items-center">
-              <img src="icone.png" class="profile-icon" alt="Profile Icon" />
+              <i class="bi bi-person-circle fs-1 text-white"></i>
               <p class="full-name">{{ userName }}</p>
               <p class="user-type">{{ userType }}</p>
               <p class="email">{{ userEmail }}</p>

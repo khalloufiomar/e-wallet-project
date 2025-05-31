@@ -16,7 +16,7 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class DashboardComponent implements OnInit {
   // transactions: any[] = [];
-  notificationCount = 100;
+  notificationCount = 0;
   showNotification = false;
   tndAmount: number = 50; // Montant en TND
   ctAmount: number = 50; // Montant en CT
@@ -125,6 +125,9 @@ export class DashboardComponent implements OnInit {
   }
   goToNotifications() {
     this.router.navigate(['/user/notifications']);
+  }
+  goToSettings() {
+    this.router.navigate(['/user/settings']);
   }
   isHrCompany(): boolean {
     return this.userType === 'hr';
