@@ -54,16 +54,26 @@
   </div>
 
   <!-- Card section -->
-  <div class="card" *ngIf="invoices.length > 0">
+  <div class="card" *ngIf="invoices.length > 0" style="margin-bottom: 20px">
     <div class="header-card">
       <div class="transaction-history">
         <i class="fa fa-exchange-alt"></i> Invoices History
       </div>
       <div class="right-section">
         <div class="buttons">
-          <button class="filter-btn">
-            <i class="fa fa-filter"></i> Filter
-          </button>
+          <div class="position-relative">
+            <button class="btn btn-filter" (click)="toggleFilterDropdown()">
+              <i class="fa fa-filter me-1"></i> Filter by Type
+            </button>
+            <div class="filter-dropdown" *ngIf="showFilter">
+              <h6 class="filter-title">Payment State</h6>
+              <ul class="filter-list">
+                <li (click)="filterByPaymentState('all')">All Invoices</li>
+                <li (click)="filterByPaymentState('paid')">Paid</li>
+                <li (click)="filterByPaymentState('not_paid')">not_paid</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -89,7 +99,7 @@
       </thead>
       <tbody>
         <tr
-          *ngFor="let invoice of invoices"
+          *ngFor="let invoice of paginatedInvoices"
           [ngClass]="{ 'not-paid-row': invoice.payment_state === 'not_paid' }"
           (click)="openInvoiceDetails(invoice)"
         >
@@ -119,17 +129,33 @@
       </p>
     </div>
 
-    <!-- Pagination displayed only when loading = false -->
-    <div *ngIf="!loading && invoices.length > 5" class="pagination">
-      <div class="showing">
-        Showing 1 to 5 of {{ invoices.length }} invoices
-      </div>
-      <div class="pagination-buttons">
-        <button class="prev-btn"><i class="fa fa-chevron-left"></i></button>
-        <button class="page-btn current-page">1</button>
-        <button class="page-btn next-page">2</button>
-        <button class="next-btn"><i class="fa fa-chevron-right"></i></button>
-      </div>
+    <div class="d-flex justify-content-center mt-3">
+      <nav>
+        <ul class="pagination mb-0">
+          <!-- Previous -->
+          <li
+            class="page-item"
+            [class.disabled]="currentPage === 1"
+            (click)="changePage(currentPage - 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">Previous</a>
+          </li>
+
+          <!-- Current Page -->
+          <li class="page-item active">
+            <a class="page-link" href="javascript:void(0)">{{ currentPage }}</a>
+          </li>
+
+          <!-- Next -->
+          <li
+            class="page-item"
+            [class.disabled]="currentPage === totalPages"
+            (click)="changePage(currentPage + 1)"
+          >
+            <a class="page-link" href="javascript:void(0)">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </div>

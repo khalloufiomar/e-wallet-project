@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IPayPalConfig, NgxPayPalModule } from 'ngx-paypal';
 import { MessagingService } from '../../services/messaging.service';
 import { NotificationService } from '../../services/notification.service';
-
+import { Invoice } from '../../model/class/user';
 @Component({
   selector: 'app-invoices',
   imports: [NgClass, CommonModule, NgxPayPalModule],
@@ -21,8 +21,28 @@ export class InvoicesComponent {
   invoiceDetails: any = null; // Détails de la facture à afficher
   invoices: any[] = [];
   selectedInvoice: any = null;
+  // Typage : Invoice devrait être importé et défini
+  filteredInvoices: Invoice[] = [];
   loading: boolean = true;
+  showFilter: boolean = false;
+  selectedPaymentFilter: string = 'all'; // état du filtre actuel
+  currentPage: number = 1;
+  pageSize: number = 5; // nombre d'éléments par page
 
+  get totalPages(): number {
+    return Math.ceil(this.filteredInvoices.length / this.pageSize) || 1;
+  }
+
+  get paginatedInvoices(): Invoice[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredInvoices.slice(start, start + this.pageSize);
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
   constructor(
     private invoicesService: InvoicesService,
     private route: ActivatedRoute, // Injecter ActivatedRoute pour accéder à l'ID de la facture
@@ -64,34 +84,36 @@ export class InvoicesComponent {
     );
   }
   downloadInvoicePdf(id: string, accessToken: string): void {
-  this.invoicesService.getInvoicePdf(id, accessToken).subscribe({
-    next: (blob: Blob) => {
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `invoice_${id}.pdf`;
-      link.click();
-      window.URL.revokeObjectURL(url);
-    },
-    error: (err) => {
-      console.error('Failed to download invoice PDF', err);
-    },
-  });
-}
-
+    this.invoicesService.getInvoicePdf(id, accessToken).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `invoice_${id}.pdf`;
+        link.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Failed to download invoice PDF', err);
+      },
+    });
+  }
+  // Chargement des factures
   loadInvoices(): void {
+    this.loading = true;
     this.invoicesService.getAllInvoices().subscribe(
       (data) => {
         this.invoices = data;
-        console.log('Factures chargées:', this.invoices);
+        this.filteredInvoices = data; // Initialement pas filtré
+        this.currentPage = 1;
         this.loading = false;
       },
       (error) => {
         console.error('Erreur lors du chargement des factures :', error);
+        this.loading = false;
       }
     );
   }
-
   openInvoiceDetails(invoice: any) {
     this.selectedInvoice = invoice;
     const modal = new bootstrap.Modal(
@@ -217,5 +239,25 @@ export class InvoicesComponent {
   }
   goToNotifications() {
     this.router.navigate(['/user/notifications']);
+  }
+  toggleFilterDropdown() {
+    this.showFilter = !this.showFilter;
+  }
+
+  filterByPaymentState(state: string) {
+    this.selectedPaymentFilter = state;
+    this.applyFilters();
+    this.showFilter = false; // ferme le dropdown après sélection
+  }
+
+  applyFilters() {
+    if (this.selectedPaymentFilter === 'all') {
+      this.filteredInvoices = this.invoices;
+    } else {
+      this.filteredInvoices = this.invoices.filter(
+        (invoice) => invoice.payment_state === this.selectedPaymentFilter
+      );
+    }
+    this.currentPage = 1; // reset page à 1 après filtre
   }
 }

@@ -18,6 +18,33 @@ export class TransactionsComponent {
   transactions: Transaction[] = [];
   loading: boolean = true;
   dropdownOpen = false;
+  transaction: Transaction[] = [];
+
+  // Typage : Invoice devrait être importé et défini
+  filteredInvoices: Transaction[] = [];
+  showFilter: boolean = false;
+  selectedPaymentFilter: string = 'all'; // état du filtre actuel
+  currentPage: number = 1;
+  pageSize: number = 5; // nombre d'éléments par page
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredTransactions.length / this.pageSize) || 1;
+  }
+
+  get paginatedTransactions(): Transaction[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredTransactions.slice(start, start + this.pageSize);
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  selectedInvoice: any = null;
+  filteredTransactions: Transaction[] = [];
+
   constructor(
     private transactionService: TransactionService,
     private notificationservice: NotificationService,
@@ -37,13 +64,14 @@ export class TransactionsComponent {
     this.transactionService.getSelfTransactions().subscribe(
       (data) => {
         console.log(data);
-        this.transactions = data
-          .sort(
-            (a, b) =>
-              new Date(b.create_date).getTime() -
-              new Date(a.create_date).getTime()
-          ) // tri décroissant
-           // prend les 3 premières
+        this.transactions = data.sort(
+          (a, b) =>
+            new Date(b.create_date).getTime() -
+            new Date(a.create_date).getTime()
+        ); // tri décroissant
+        // prend les 3 premières
+        this.filteredTransactions = data; // Initialement pas filtré
+        this.currentPage = 1;
         this.loading = false;
       },
       (error) => {
@@ -95,22 +123,24 @@ export class TransactionsComponent {
   goToNotifications() {
     this.router.navigate(['/user/notifications']);
   }
-  // Pagination
-  currentPage: number = 1;
-  itemsPerPage: number = 5;
-
-  get paginatedTransaction(): Transaction[] {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    return this.transactions.slice(start, start + this.itemsPerPage);
+  toggleFilterDropdown() {
+    this.showFilter = !this.showFilter;
   }
 
-  get totalPages(): number {
-    return Math.ceil(this.transactions.length / this.itemsPerPage);
+  filterByCategory(category: string) {
+    this.selectedPaymentFilter = category;
+    this.applyFilters();
+    this.showFilter = false; // ferme le dropdown après sélection
   }
 
-  changePage(page: number) {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
+  applyFilters() {
+    if (this.selectedPaymentFilter === 'all') {
+      this.filteredInvoices = this.transactions;
+    } else {
+      this.filteredInvoices = this.transactions.filter(
+        (transaction) => transaction.category === this.selectedPaymentFilter
+      );
     }
+    this.currentPage = 1; // reset page à 1 après filtre
   }
 }

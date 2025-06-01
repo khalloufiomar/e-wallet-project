@@ -106,3 +106,12 @@ export interface ProductPayload {
   category: string;
   active:boolean;
 }
+
+export interface Invoice {
+  id: number;
+  ref: string;
+  date: string;
+  amount: number;
+  currency: string;
+  payment_state: 'paid' | 'not_paid';
+}
