@@ -265,6 +265,65 @@ body {
   margin: 40px auto;
 }
 
+
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  /* Un peu plus d'espace au-dessus de la pagination */
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.prev-btn,
+.next-btn,
+.page-btn {
+  padding: 8px 12px;
+  /* Agrandi pour une meilleure interaction */
+  border-radius: 20px;
+  font-size: 14px;
+  /* Agrandi la police des boutons */
+  border: none;
+  cursor: pointer;
+}
+
+.prev-btn,
+.next-btn {
+  background-color: #9f98ff;
+  color: white;
+}
+
+.page-btn {
+  background-color: #fff;
+  border: 1px solid #9f98ff;
+  color: #9f98ff;
+}
+
+.current-page {
+  font-weight: bold;
+  background-color: #9f98ff;
+  color: white;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #893cac;
+  border-color: #893cac;
+  color: white;
+  border-radius: 10px;
+}
+
+.pagination .page-link {
+  color: #893cac;
+  border-radius: 10px;
+}
+
 /* Styles responsifs */
 @media (max-width: 1255px) {
   .card {
@@ -440,4 +499,55 @@ body {
   .pagination-buttons .page-btn:not(.current-page) {
     display: none;
   }
+}
+
+
+
+.btn-filter {
+  background-color: #7f56d9;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-dropdown {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 8px;
+  width: 120px;
+  z-index: 100;
+  font-size: 12px;
+}
+
+.filter-title {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.filter-list {
+  list-style: none;
+  /* ✅ Supprime les puces */
+  padding: 0;
+  margin: 0;
+}
+
+.filter-list li {
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #333;
+}
+
+.filter-list li:hover {
+  background-color: #f3f3f3;
 }

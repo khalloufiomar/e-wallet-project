@@ -84,17 +84,12 @@
     }
   </style>
   <!-- Card section -->
-  <div class="card" *ngIf="transactions.length > 0">
+  <div class="card" *ngIf="transactions.length > 0" style="margin-bottom: 20px">
     <div class="header-card">
       <div class="transaction-history">
         <i class="fa fa-exchange-alt"></i> Transaction History
       </div>
       <div class="right-section">
-        <div class="buttons">
-          <button class="filter-btn">
-            <i class="fa fa-filter"></i> Filter
-          </button>
-        </div>
         <div class="export-container" (click)="toggleDropdown()">
           <button class="export-btn">
             <i class="fa fa-download"></i> Export
@@ -128,7 +123,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let transaction of transactions">
+        <tr *ngFor="let transaction of paginatedTransactions">
           <td><input type="checkbox" /></td>
           <td class="transaction-cell">
             <!-- <img [src]="transaction.icon" alt="Icon" class="transaction-icon" /> -->
@@ -145,10 +140,10 @@
       </tbody>
     </table>
 
-    <!-- Pagination affichée seulement quand loading = false -->
     <div class="d-flex justify-content-center mt-3">
       <nav>
-        <ul class="pagination">
+        <ul class="pagination mb-0">
+          <!-- Previous -->
           <li
             class="page-item"
             [class.disabled]="currentPage === 1"
@@ -157,15 +152,12 @@
             <a class="page-link" href="javascript:void(0)">Previous</a>
           </li>
 
-          <li
-            class="page-item"
-            *ngFor="let page of [].constructor(totalPages); let i = index"
-            [class.active]="i + 1 === currentPage"
-            (click)="changePage(i + 1)"
-          >
-            <a class="page-link" href="javascript:void(0)">{{ i + 1 }}</a>
+          <!-- Current Page -->
+          <li class="page-item active">
+            <a class="page-link" href="javascript:void(0)">{{ currentPage }}</a>
           </li>
 
+          <!-- Next -->
           <li
             class="page-item"
             [class.disabled]="currentPage === totalPages"

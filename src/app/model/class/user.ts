@@ -103,3 +103,12 @@ export interface ProductPayload {
   price: number;
   imageBase64: string;
 }
+
+export interface Invoice {
+  id: number;
+  ref: string;
+  date: string;
+  amount: number;
+  currency: string;
+  payment_state: 'paid' | 'not_paid';
+}
