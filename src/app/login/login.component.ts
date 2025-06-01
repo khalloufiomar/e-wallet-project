@@ -69,7 +69,12 @@ export class LoginComponent {
           console.log('Connexion réussie:', response);
 
           if (response.result.status === "Active") {
-            this.router.navigate(['/user/dashboard']);
+              if (response.result.type === "admin"){
+                this.router.navigate(['/admin']);
+              }
+              else{
+                this.router.navigate(['/user/dashboard']);
+              } 
           } else {
             this.errorMessages.push(
               'your acount is inactive, please contact clevory support'

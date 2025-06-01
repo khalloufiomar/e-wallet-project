@@ -10,27 +10,14 @@ export class AuthService {
   private baseUrl = 'http://localhost:8069/';
   constructor(private http: HttpClient, private router: Router) {}
 
-  setToken(token: string): void {
-    localStorage.setItem('token', token);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    this.router.navigate(['/login']);
-  }
-
-  isLoggedIn(): boolean {
-    return !!this.getToken();
-  }
-
   getCurrentUserInfos(): Observable<any> {
-    return this.http.get(`${this.baseUrl}web/session/me`, { withCredentials: true });
+    return this.http.get(`${this.baseUrl}web/session/me`, { withCredentials: true});
   }
+
+  checkGuard(): Observable<any> {
+    return this.http.get(`${this.baseUrl}web/session/me`, { withCredentials: true, observe: 'response'});
+  }
+  
   getUserById(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
   }

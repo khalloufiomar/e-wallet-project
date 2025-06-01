@@ -38,7 +38,6 @@ export class DashadminComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAccounts();
-    this.countUserStatus();
     this.loadAccounts();
     this.fetchTotalProducts(); // appel au chargement
 
@@ -73,6 +72,7 @@ export class DashadminComponent implements OnInit {
       next: (data) => {
         this.accounts = data;
         console.log('Accounts loaded:', data);
+        this.countUserStatus()
       },
       error: (error) => {
         console.error('Error fetching accounts:', error);
@@ -84,7 +84,6 @@ export class DashadminComponent implements OnInit {
     // On remet à 0 avant de recompter
     this.activeaccount = 0;
     this.inactiveaccount = 0;
-
     for (let account of this.accounts) {
       if (account.active === true) {
         this.activeaccount++;

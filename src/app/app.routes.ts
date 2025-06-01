@@ -14,7 +14,7 @@ import { NotificationsComponent } from './links/notifications/notifications.comp
 import { BuyCoinsComponent } from './links/buycoins/buycoins.component';
 import { SettingsComponent } from './links/settings/settings.component';
 import { ProfileSettingsComponentComponent } from './settings links/profilesettings/profile-settings-component.component';
-import { authGuard } from './auth.guard';
+import { authGuard, authGuardAdmin } from './auth.guard';
 import { InvoicesComponent } from './links/invoices/invoices.component';
 import { InvoiceDetailsComponent } from './links/invoice-details/invoice-details.component';
 import { StoreComponent } from './links/store/store.component';
@@ -46,7 +46,7 @@ export const routes: Routes = [
   {
     path: 'user',
     component: UserComponent,
-    //canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'transactions', component: TransactionsComponent },
@@ -62,10 +62,9 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    //canActivate: [authGuard], // 🔒 Protège aussi la page admin
+    canActivate: [authGuard, authGuardAdmin], // 🔒 Protège aussi la page admin
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // ✅ redirection vers dashboard
-
       { path: 'dashboard', component: DashadminComponent },
       { path: 'accounts', component: AccountsComponent },
       { path: 'companies', component: CompaniesComponent },
