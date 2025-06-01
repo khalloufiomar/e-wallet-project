@@ -93,13 +93,16 @@ export interface Product {
   title: string;
   description: string;
   price: number;
-  image: string; // ici imageBase64 encodée en Data URL
+  image: string;
+  active: boolean;
 }
 
 export interface ProductPayload {
   id: number;
-  producttitle: string;
-  productdescription: string;
-  price: number;
-  imageBase64: string;
+  name: string;
+  description: string;
+  price_lc: number;
+  image: string;
+  category: string;
+  active:boolean;
 }

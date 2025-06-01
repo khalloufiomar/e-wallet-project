@@ -43,16 +43,20 @@ export class ProductsComponent {
     // Récupération des produits
     this.productService.getProducts().subscribe({
       next: (response: ProductPayload[]) => {
+        console.log('Produits récupérés :', response);
         // <-- ici on indique que c’est ProductPayload[]
         this.products = response.map((productPayload) => ({
           id: productPayload.id,
-          title: productPayload.producttitle,
-          description: productPayload.productdescription,
-          price: productPayload.price,
-          image: `data:image/jpeg;base64,${productPayload.imageBase64}`, // conversion base64
+          title: productPayload.name,
+          description: productPayload.description,
+          price: productPayload.price_lc,
+          image: `data:image/jpeg;base64,${productPayload.image}`,
+          category: productPayload.category, // conversion base64
+          active: productPayload.active,
         }));
         this.filteredProducts = [...this.products];
         this.loading = false;
+        console.log('Produits :', this.products);
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des produits :', error);
@@ -99,13 +103,13 @@ export class ProductsComponent {
   confirmDelete(): void {
     if (!this.selectedProduct) return;
 
-    this.productService.deleteProduct(this.selectedProduct.id).subscribe({
+    this.productService.activateDeactivateProduct(this.selectedProduct.id).subscribe({
       next: () => {
-        this.products = this.products.filter(
-          (p) => p.id !== this.selectedProduct!.id
-        );
-        this.filteredProducts = [...this.products];
         this.cancelDelete();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
       },
       error: (err) => {
         console.error('Erreur lors de la suppression du produit :', err);

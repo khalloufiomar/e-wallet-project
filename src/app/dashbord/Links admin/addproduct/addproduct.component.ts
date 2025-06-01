@@ -24,6 +24,7 @@ export class AddproductComponent {
   producttitle: string = '';
   productdescription: string = '';
   price: number | null = null;
+  category: string = '';
   selectedFile: File | null = null;
   errorMessages: string[] = [];
   successMessage: string = '';
@@ -31,6 +32,7 @@ export class AddproductComponent {
   isEditMode = false; // false par défaut (ajout)
   products: ProductPayload[] = [];
   filteredProducts: ProductPayload[] = [];
+  active: boolean = true; // Assure que la catégorie est définie
 
   imageBase64: string | null = null;
   selectedFileName: string | null = null;
@@ -44,8 +46,10 @@ export class AddproductComponent {
       this.producttitle = product.title || '';
       this.productdescription = product.description || '';
       this.price = product.price || null;
+      this.category = product.category || '';
+      this.active = product.active ;
       if (product.image) {
-        this.imageBase64 = `data:image/jpeg;base64,${product.image}`;
+        this.imageBase64 = `${product.image}`;
       }
     }
   }
@@ -101,13 +105,16 @@ export class AddproductComponent {
 
     const productPayload: ProductPayload = {
       id: this.productId || 0,
-      producttitle: this.producttitle,
-      productdescription: this.productdescription,
-      price: this.price!,
-      imageBase64: this.imageBase64!,
+      name: this.producttitle,
+      description: this.productdescription,
+      price_lc: this.price!,
+      image: this.imageBase64!,
+      category: this.category || '',
+      active: this.active // Assure que la catégorie est définie
     };
 
     if (this.isEditMode && this.productId) {
+      console.log('Updating product:', productPayload);
       this.productService
         .updateProduct(this.productId, productPayload)
         .subscribe({
@@ -128,8 +135,10 @@ export class AddproductComponent {
     } else {
       // Création d'un nouveau produit
       // Après création réussie
+      console.log('Creating product:', productPayload);
       this.productService.addProduct(productPayload).subscribe({
         next: (createdProduct: ProductPayload) => {
+          
           // Ajoute le produit au début du tableau (en gardant la forme ProductPayload)
           this.products.unshift(createdProduct);
 

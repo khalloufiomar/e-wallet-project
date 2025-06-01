@@ -98,6 +98,7 @@
           <th style="min-width: 160px">Title</th>
           <th style="min-width: 250px">Description</th>
           <th style="min-width: 100px">Price</th>
+          <th style="min-width: 100px">Available</th>
           <th style="min-width: 120px">Actions</th>
         </tr>
       </thead>
@@ -117,6 +118,9 @@
           <td>{{ product.description }}</td>
           <td class="fw-bold text-success">${{ product.price }}</td>
           <td>
+            {{ product.active }}
+          </td>
+          <td>
             <button
               class="btn btn-sm btn-outline-secondary me-2"
               (click)="editProduct(product)"
@@ -124,11 +128,13 @@
               <i class="bi bi-pencil-square"></i>
             </button>
             <button
-              class="btn btn-sm btn-outline-danger"
+              class="btn btn-sm"
+              [ngClass]="product.active ? 'btn-outline-danger' : 'btn-outline-success'"
               (click)="openDeleteModal(product)"
             >
-              <i class="bi bi-trash"></i>
+              <i [ngClass]="product.active ? 'bi bi-x-circle' : 'bi bi-check-circle'"></i>
             </button>
+
           </td>
         </tr>
       </tbody>
@@ -137,16 +143,25 @@
 </div>
 <div class="modal-overlay" *ngIf="showDeleteModal">
   <div class="modal-box">
-    <h2 class="modal-title">Confirm Deletion</h2>
+    <h2 class="modal-title">Confirm Action</h2>
     <p class="modal-text">
-      Are you sure you want to delete
-      <strong>{{ selectedProduct?.title || "this product" }}</strong
-      >?
+      {{ selectedProduct?.active 
+        ? 'Are you sure you want to deactivate' 
+        : 'Are you sure you want to activate' 
+      }}
+      <strong>{{ selectedProduct?.title || "this product" }}</strong>?
     </p>
+      <p class="modal-note">
+      {{ selectedProduct?.active 
+        ? 'Note: Deactivating this product will make it unavailable in the store for users.' 
+        : 'Note: Activating this product will make it available in the store for users.' 
+      }}
+    </p>
+
     <div class="modal-actions">
       <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
-      <button class="btn-delete-confirm" (click)="confirmDelete()">
-        Delete
+      <button [ngClass]="selectedProduct?.active ? 'btn-delete-confirm' : 'btn-activate-confirm'" (click)="confirmDelete()">
+        {{ selectedProduct?.active ? 'Deactivate' : 'Activate' }}
       </button>
     </div>
   </div>
