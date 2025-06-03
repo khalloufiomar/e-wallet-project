@@ -47,32 +47,13 @@ export class DashadminComponent implements OnInit {
       const monthlyData = this.getMonthlyTransactionData(data); // 🟡 calcule les données dynamiquement
       this.initChart(monthlyData); // 🟢 passe-les au graphique
     });
-
-    // 👉 Forcer rechargement du dashboard si on clique à nouveau dessus
-    // this.router.events.subscribe((event) => {
-    //   if (
-    //     event instanceof NavigationEnd &&
-    //     event.urlAfterRedirects === '/dashboard'
-    //   ) {
-    //     // Tu peux ajouter un console.log pour confirmer
-    //     console.log('Dashboard clicked again – refreshing data...');
-    //     this.fetchAccounts();
-    //     this.countUserStatus();
-    //     this.loadAccounts();
-
-    //     this.transactionService.getAllTransactions().subscribe((data) => {
-    //       this.transactions = data;
-    //       this.todayTransactionCount = this.countTodayTransactions(data);
-    //     });
-    //   }
-    // });
   }
   fetchAccounts(): void {
     this.AccountsadminService.getAllAccounts().subscribe({
       next: (data) => {
         this.accounts = data;
         console.log('Accounts loaded:', data);
-        this.countUserStatus()
+        this.countUserStatus();
       },
       error: (error) => {
         console.error('Error fetching accounts:', error);
@@ -91,6 +72,16 @@ export class DashadminComponent implements OnInit {
         this.inactiveaccount++;
       }
     }
+    this.basicData = {
+      labels: ['Active Users', 'Inactive Users'],
+      datasets: [
+        {
+          label: 'Users by Status',
+          backgroundColor: ['#4CAF50', '#F44336'], // Vert et rouge
+          data: [this.activeaccount, this.inactiveaccount],
+        },
+      ],
+    };
   }
   hrcount = 0;
   employeecount = 0;
@@ -151,46 +142,6 @@ export class DashadminComponent implements OnInit {
   }
 
   platformId = inject(PLATFORM_ID);
-
-  // initChart(hrCount: number, employeeCount: number, learnerCount: number) {
-  //   if (isPlatformBrowser(this.platformId)) {
-  //     const documentStyle = getComputedStyle(document.documentElement);
-  //     const textColor =
-  //       documentStyle.getPropertyValue('--p-text-color') || '#000';
-  //     const textColorSecondary =
-  //       documentStyle.getPropertyValue('--p-text-muted-color') || '#777';
-  //     const surfaceBorder =
-  //       documentStyle.getPropertyValue('--p-content-border-color') || '#ccc';
-
-  //     this.data = {
-  //       labels: ['HR', 'Employee', 'Learner'],
-  //       datasets: [
-  //         {
-  //           data: [hrCount, employeeCount, learnerCount],
-  //           backgroundColor: [
-  //             '#8b5cf6', // orange
-  //             '#0ea5e9', // cyan
-  //             '#f97316', // purple
-  //           ],
-  //           borderColor: ['#fff', '#fff', '#fff'],
-  //           borderWidth: 2,
-  //         },
-  //       ],
-  //     };
-
-  //     this.options = {
-  //       plugins: {
-  //         legend: {
-  //           labels: {
-  //             color: textColor,
-  //           },
-  //         },
-  //       },
-  //     };
-
-  //     this.cd.markForCheck();
-  //   }
-  // }
 
   getPercentage(index: number): string {
     const dataArray: number[] = this.data.datasets[0].data;

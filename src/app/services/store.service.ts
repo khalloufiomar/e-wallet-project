@@ -5,18 +5,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class StoreService {
-  private baseApiUrl = 'http://localhost:8069/api'; // URL du JSON Server
+  private baseApiUrl = 'http://localhost:8069/api';
 
   constructor(private http: HttpClient) {}
 
   // Méthode pour récupérer les données
   getData(): Observable<any> {
-    return this.http.get<any>(`${this.baseApiUrl}/getCourses`,{ withCredentials: true });
-  };
+    return this.http.get<any>(`${this.baseApiUrl}/getCourses`, {
+      withCredentials: true,
+    });
+  }
   purchaseCourse(courseId: number): Observable<any> {
     const params = new HttpParams().set('courseId', courseId);
     return this.http.get<any>(`${this.baseApiUrl}/purchaseCourse`, {
       params,
-      withCredentials: true
+      withCredentials: true,
     });
-}}
+  }
+}

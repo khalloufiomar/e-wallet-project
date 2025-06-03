@@ -77,7 +77,7 @@ export interface Account {
   active: boolean;
   balance: number;
   createdAt: string;
-  loading?: boolean; // ✅ facultatif
+  loading?: boolean;
 }
 
 export interface Company {
@@ -104,7 +104,7 @@ export interface ProductPayload {
   price_lc: number;
   image: string;
   category: string;
-  active:boolean;
+  active: boolean;
 }
 
 export interface Invoice {

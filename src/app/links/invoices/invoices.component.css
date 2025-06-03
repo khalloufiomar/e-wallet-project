@@ -16,7 +16,6 @@ body {
 
 .title {
   font-size: 40px;
-  /* Légèrement augmenté pour une taille plus grande */
   font-weight: 600;
   margin-left: 50px;
 
@@ -24,9 +23,7 @@ body {
 
 .profile-image {
   width: 45px;
-  /* Légèrement agrandi */
   height: 45px;
-  /* Légèrement agrandi */
   border-radius: 50%;
 }
 
@@ -34,12 +31,9 @@ body {
   background-color: white;
   border-radius: 15px;
   padding: 30px;
-  /* Légèrement augmenté pour plus de marge */
   max-width: 1000px;
-  /* Augmenté la largeur maximale */
   margin: 0 auto;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  /* Ombre plus marquée */
 }
 
 .header-card {
@@ -80,7 +74,6 @@ body {
 
 .transaction-history {
   font-size: 22px;
-  /* Augmenté pour plus de lisibilité */
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -94,22 +87,7 @@ body {
   align-items: center;
 }
 
-.search-bar {
-  display: flex;
-  align-items: center;
-  background-color: #e0e0e0;
-  border-radius: 20px;
-  padding: 5px 12px;
-}
 
-.search-bar input {
-  border: none;
-  background: transparent;
-  padding: 5px;
-  font-size: 14px;
-  width: 180px;
-  /* Augmenté la largeur de la barre de recherche */
-}
 
 .buttons {
   display: flex;
@@ -125,20 +103,17 @@ body {
   background-color: #fff;
   cursor: pointer;
   font-size: 14px;
-  /* Augmenté la taille de la police */
 }
 
 .transactions-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 15px;
-  /* Agrandi la taille de la police du tableau */
 }
 
 .transactions-table th,
 .transactions-table td {
   padding: 12px;
-  /* Légèrement augmenté pour plus de confort */
   border-bottom: 1px solid #e0e0e0;
   text-align: left;
 }
@@ -155,11 +130,8 @@ body {
 
 .transaction-icon {
   width: 32px;
-  /* Agrandi l'icône */
   height: 32px;
-  /* Agrandi l'icône */
   margin-right: 12px;
-  /* Un peu plus d'espace autour de l'icône */
 }
 
 .transaction-name {
@@ -168,7 +140,6 @@ body {
 
 .transaction-subtext {
   font-size: 13px;
-  /* Un peu plus petit pour être plus lisible */
   color: #888;
 }
 
@@ -185,10 +156,8 @@ body {
 .status-text {
   display: inline-block;
   padding: 5px 12px;
-  /* Augmenté pour plus de confort */
   border-radius: 12px;
   font-size: 13px;
-  /* Agrandi pour une meilleure visibilité */
   min-width: 90px;
   text-align: center;
 }
@@ -198,7 +167,6 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-top: 30px;
-  /* Un peu plus d'espace au-dessus de la pagination */
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -212,10 +180,8 @@ body {
 .next-btn,
 .page-btn {
   padding: 8px 12px;
-  /* Agrandi pour une meilleure interaction */
   border-radius: 20px;
   font-size: 14px;
-  /* Agrandi la police des boutons */
   border: none;
   cursor: pointer;
 }
@@ -266,13 +232,13 @@ body {
 }
 
 
+/*  pagination */
 
 .pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 30px;
-  /* Un peu plus d'espace au-dessus de la pagination */
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -286,10 +252,8 @@ body {
 .next-btn,
 .page-btn {
   padding: 8px 12px;
-  /* Agrandi pour une meilleure interaction */
   border-radius: 20px;
   font-size: 14px;
-  /* Agrandi la police des boutons */
   border: none;
   cursor: pointer;
 }
@@ -536,7 +500,6 @@ body {
 
 .filter-list {
   list-style: none;
-  /* ✅ Supprime les puces */
   padding: 0;
   margin: 0;
 }

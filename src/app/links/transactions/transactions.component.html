@@ -44,25 +44,7 @@
     </div>
   </div>
 
-  <style>
-    .notification-badge {
-      position: absolute;
-      top: -2px;
-      right: 9px;
-      background-color: rgb(255, 0, 0); /* rouge vif */
-      color: white;
-      border-radius: 50%;
-      width: 16px;
-      height: 16px;
-      font-size: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      cursor: pointer;
-    }
-  </style>
-
+  <!-- si n'a pas de transactions -->
   <div *ngIf="transactions.length === 0" class="no-transactions-card">
     <i class="bi bi-receipt fs-1 text-secondary mb-3"></i>
     <h5 class="fw-bold mb-2">Aucune transaction</h5>
@@ -71,18 +53,7 @@
       Elles apparaîtront ici lorsqu'elles seront créées.
     </p>
   </div>
-  <style>
-    .no-transactions-card {
-      background-color: white;
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
-      color: #444;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      max-width: 500px;
-      margin: 40px auto;
-    }
-  </style>
+
   <!-- Card section -->
   <div class="card" *ngIf="transactions.length > 0" style="margin-bottom: 20px">
     <div class="header-card">
@@ -140,6 +111,7 @@
       </tbody>
     </table>
 
+    <!-- pagination -->
     <div class="d-flex justify-content-center mt-3">
       <nav>
         <ul class="pagination mb-0">

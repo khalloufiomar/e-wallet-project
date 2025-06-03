@@ -44,6 +44,7 @@
     </div>
   </div>
 
+  <!-- card indique n'a pas des facrure pour le moment lorsque le nombre de facture est 0 -->
   <div *ngIf="invoices.length === 0" class="no-transactions-card">
     <i class="bi bi-receipt fs-1 text-secondary mb-3"></i>
     <h5 class="fw-bold mb-2">Aucune Facture</h5>
@@ -62,6 +63,7 @@
       <div class="right-section">
         <div class="buttons">
           <div class="position-relative">
+            <!-- boutton de filtrage des invocies selon la status -->
             <button class="btn btn-filter" (click)="toggleFilterDropdown()">
               <i class="fa fa-filter me-1"></i> Filter by Type
             </button>
@@ -121,7 +123,7 @@
       </tbody>
     </table>
 
-    <!-- Message in gray above pagination -->
+    <!-- Message muted -->
     <div class="invoice-info" style="margin-top: 10px; font-size: 12px">
       <p style="color: gray">
         * Cliquez sur une ligne pour voir les détails ou payer une facture en
@@ -129,6 +131,7 @@
       </p>
     </div>
 
+    <!-- pagination -->
     <div class="d-flex justify-content-center mt-3">
       <nav>
         <ul class="pagination mb-0">
@@ -159,6 +162,7 @@
     </div>
   </div>
 </div>
+
 <!-- Modal: Invoice details -->
 <div
   class="modal fade"
@@ -188,7 +192,7 @@
       <!-- Ref -->
       <div class="mb-3 text-muted small">Ref : {{ selectedInvoice.ref }}</div>
 
-      <!-- Gray line -->
+      <!-- ligne hr gray-->
       <hr class="text-secondary opacity-25" />
 
       <!-- Content -->
@@ -223,7 +227,7 @@
         </div>
       </div>
 
-      <!-- Gray line -->
+      <!-- hr Gray line -->
       <hr class="text-secondary opacity-25" />
       <!-- Payment options + PayPal -->
       <div>
@@ -233,6 +237,7 @@
           <ngx-paypal [config]="payPalConfig"></ngx-paypal>
         </div>
         <td *ngIf="selectedInvoice.payment_state === 'paid'">
+          <!-- si, la status du invocie paid , tu peux telecharger fichier contient cette facture -->
           <button
             class="btn btn-primary"
             (click)="
@@ -245,7 +250,6 @@
             Download PDF
           </button>
         </td>
-        <!-- Conditional button to download invoice PDF -->
       </div>
     </div>
   </div>

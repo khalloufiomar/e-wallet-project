@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationService {
-  private baseApiUrl = 'http://localhost:8069/api'; // Remplace par l'URL de ton API
+  private baseApiUrl = 'http://localhost:8069/api';
 
   constructor(private http: HttpClient) {}
 
@@ -16,14 +16,20 @@ export class NotificationService {
     });
   }
   getCountUnreadNotifications(): Observable<{ notifCount: number }> {
-    return this.http.get<{ notifCount: number }>(`${this.baseApiUrl}/countNotifications`, {
-      withCredentials: true,
-    });
+    return this.http.get<{ notifCount: number }>(
+      `${this.baseApiUrl}/countNotifications`,
+      {
+        withCredentials: true,
+      }
+    );
   }
   markAllNotificationsAsRead(): Observable<{ notifCount: number }> {
-    return this.http.post<{ notifCount: number }>(`${this.baseApiUrl}/markAllAsRead`, {
-      withCredentials: true,
-    });
+    return this.http.post<{ notifCount: number }>(
+      `${this.baseApiUrl}/markAllAsRead`,
+      {
+        withCredentials: true,
+      }
+    );
   }
   addDeviceToken(token: string): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(

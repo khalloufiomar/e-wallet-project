@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class DashboardService {
-  private apiUrl = 'http://localhost:3000/users'; // Remplace par l'URL réelle de ton backend
+  private apiUrl = 'http://localhost:3000/users';
 
   constructor(private http: HttpClient) {}
 

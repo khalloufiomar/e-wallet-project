@@ -1,0 +1,20 @@
+ .card {
+     border-radius: 1rem;
+ }
+
+ .custom-alert {
+     font-size: 0.95rem;
+     border-radius: 0.5rem;
+     padding: 1rem;
+     color: #000000;
+ }
+
+ .alert-success {
+     background-color: #04a421;
+     color: #000000;
+ }
+
+ .alert-error {
+     background-color: #ffdada;
+     color: #000000;
+ }

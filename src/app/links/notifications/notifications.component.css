@@ -1,3 +1,20 @@
+.notification-badge {
+    position: absolute;
+    top: -2px;
+    right: 9px;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    cursor: pointer;
+}
+
 .card.custom-card {
     background-color: white;
     border-radius: 15px;
@@ -59,11 +76,8 @@
 
 .unread-notification {
     background-color: #f0f8ff;
-    /* light blue-ish background */
     border-left: 4px solid #007bff;
-    /* blue accent on the left */
     font-weight: 500;
-    /* slightly bolder text */
     padding: 10px;
     border-radius: 6px;
     transition: background-color 0.3s ease;
@@ -74,6 +88,16 @@
     cursor: pointer;
 }
 
+.no-transactions-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    color: #444;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    margin: 40px auto;
+}
 
 /* Styles responsifs */
 @media (max-width: 1300px) {
@@ -304,7 +328,6 @@
 
 .title {
     font-size: 40px;
-    /* Légèrement augmenté pour une taille plus grande */
     font-weight: 600;
     margin-left: 50px;
 
@@ -312,8 +335,6 @@
 
 .profile-image {
     width: 45px;
-    /* Légèrement agrandi */
     height: 45px;
-    /* Légèrement agrandi */
     border-radius: 50%;
 }

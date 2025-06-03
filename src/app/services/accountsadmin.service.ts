@@ -7,7 +7,7 @@ import { Account } from '../model/class/user';
   providedIn: 'root',
 })
 export class AccountsadminService {
-  private apiUrl = 'http://localhost:8069/api'; // 👉 Modifie l’URL selon ton backend
+  private apiUrl = 'http://localhost:8069/api';
 
   constructor(private http: HttpClient) {}
 

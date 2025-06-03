@@ -1,68 +1,74 @@
 {
-  "transactions": [
+  "accounts": [
     {
-      "id": "Invoice #2001",
-      "create_date": "2025-05-28",
-      "category": "payment",
-      "sender": "Clevory",
-      "receiver": "Omar",
-      "amount": 200.00
+      "name": "Ahmed Ben Ali",
+      "email": "ahmed.benali@example.com",
+      "type": "hr",
+      "active": true,
+      "balance": 120.5
     },
     {
-      "id": "Invoice #2002",
-      "create_date": "2025-05-27",
-      "category": "purchase",
-      "sender": "ISAMM",
-      "receiver": "Clevory",
-      "amount": 99.99
+      "name": "Fatma Trabelsi",
+      "email": "fatma.trabelsi@example.com",
+      "type": "learner",
+      "active": false,
+      "balance": 0
     },
     {
-      "id": "Invoice #2003",
-      "create_date": "2025-05-26",
-      "category": "transfer",
-      "sender": "TechCorp",
-      "receiver": "Omar",
-      "amount": 320.00
+      "name": "Mohamed Kacem",
+      "email": "mohamed.kacem@example.com",
+      "type": "learner",
+      "active": true,
+      "balance": 300
     },
     {
-      "id": "Invoice #2004",
-      "create_date": "2025-05-25",
-      "category": "payment",
-      "sender": "EduPlus",
-      "receiver": "Clevory",
-      "amount": 85.00
+      "name": "Asma Jaziri",
+      "email": "asma.jaziri@example.com",
+      "type": "employee",
+      "active": false,
+      "balance": 25
     },
     {
-      "id": "Invoice #2005",
-      "create_date": "2025-05-24",
-      "category": "purchase",
-      "sender": "Clevory",
-      "receiver": "Fatma",
-      "amount": 150.00
+      "name": "Youssef Hammami",
+      "email": "youssef.hammami@example.com",
+      "type": "learner",
+      "active": true,
+      "balance": 800.75
     },
     {
-      "id": "Invoice #2006",
-      "create_date": "2025-05-23",
-      "category": "payment",
-      "sender": "ISAMM",
-      "receiver": "Ahmed",
-      "amount": 115.00
+      "name": "Youssef Hammami",
+      "email": "youssef.hammami@example.com",
+      "type": "learner",
+      "active": true,
+      "balance": 800.75
     },
     {
-      "id": "Invoice #2007",
-      "create_date": "2025-05-22",
-      "category": "transfer",
-      "sender": "SkillUp",
-      "receiver": "Clevory",
-      "amount": 180.00
+      "name": "Youssef Hammami",
+      "email": "youssef.hammami@example.com",
+      "type": "learner",
+      "active": true,
+      "balance": 800.75
     },
     {
-      "id": "Invoice #2008",
-      "create_date": "2025-05-21",
-      "category": "purchase",
-      "sender": "Omar",
-      "receiver": "Clevory",
-      "amount": 250.00
+      "name": "Youssef Hammami",
+      "email": "youssef.hammami@example.com",
+      "type": "learner",
+      "active": true,
+      "balance": 800.75
+    },
+    {
+      "name": "Youssef Hammami",
+      "email": "youssef.hammami@example.com",
+      "type": "learner",
+      "active": true,
+      "balance": 800.75
+    },
+    {
+      "name": "Youssef Hammami",
+      "email": "youssef.hammami@example.com",
+      "type": "learner",
+      "active": true,
+      "balance": 800.75
     }
   ]
 }

@@ -6,7 +6,7 @@ import { Transaction } from '../model/class/user';
   providedIn: 'root',
 })
 export class TransactionService {
-  private apiUrl = 'http://localhost:8069/api/getTransactions'; // Remplace par l'URL de ton API
+  private apiUrl = 'http://localhost:8069/api/getTransactions';
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class TransactionService {
       }
     );
   }
-  private apitransactions = 'http://localhost:3006/transactions'; // Remplace par l'URL de ton API
+  private apitransactions = 'http://localhost:3006/transactions';
 
   getAllTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.apitransactions);

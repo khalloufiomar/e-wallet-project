@@ -36,24 +36,6 @@
         {{ notificationCount }}
       </span>
     </div>
-    <style>
-      .notification-badge {
-        position: absolute;
-        top: -2px;
-        right: 9px;
-        background-color: rgb(255, 0, 0); /* rouge vif */
-        color: white;
-        border-radius: 50%;
-        width: 16px;
-        height: 16px;
-        font-size: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 1;
-        cursor: pointer;
-      }
-    </style>
 
     <!-- Icône de profil -->
     <i class="bi bi-person-circle fs-4 text-dark"></i>
@@ -104,60 +86,59 @@
         </div>
       </div>
       <form>
-  <div class="mb-3">
-    <label for="fullName" class="form-label text-label">
-      <i class="material-icons me-1 icon-custom">person</i>
-      Full Name
-    </label>
-    <input
-      type="text"
-      id="fullName"
-      class="form-control"
-      placeholder="John Doe"
-      [(ngModel)]="userName"
-      name="userName"
-    />
-  </div>
+        <div class="mb-3">
+          <label for="fullName" class="form-label text-label">
+            <i class="material-icons me-1 icon-custom">person</i>
+            Full Name
+          </label>
+          <input
+            type="text"
+            id="fullName"
+            class="form-control"
+            placeholder="John Doe"
+            [(ngModel)]="userName"
+            name="userName"
+          />
+        </div>
 
-  <div class="mb-3">
-    <label for="email" class="form-label text-label">
-      <i class="material-icons me-1 icon-custom">email</i>
-      Email Address
-    </label>
-    <input
-      type="email"
-      id="email"
-      class="form-control"
-      placeholder="john.doe@example.com"
-      [(ngModel)]="userEmail"
-      name="userEmail"
-    />
-  </div>
+        <div class="mb-3">
+          <label for="email" class="form-label text-label">
+            <i class="material-icons me-1 icon-custom">email</i>
+            Email Address
+          </label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="john.doe@example.com"
+            [(ngModel)]="userEmail"
+            name="userEmail"
+          />
+        </div>
 
-  <div class="mb-3">
-    <label for="phone" class="form-label text-label">
-      <i class="material-icons me-1 icon-custom">phone</i>
-      Phone Number
-    </label>
-    <input
-      type="tel"
-      id="phone"
-      class="form-control"
-      placeholder="+216 11 111 111"
-      [(ngModel)]="phone"
-      name="phone"
-    />
-  </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label text-label">
+            <i class="material-icons me-1 icon-custom">phone</i>
+            Phone Number
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            class="form-control"
+            placeholder="+216 11 111 111"
+            [(ngModel)]="phone"
+            name="phone"
+          />
+        </div>
 
-  <button
-    type="submit"
-    class="btn btn-primary w-100 btn-custom"
-    (click)="updateUserInfos(userName, userEmail, phone)"
-  >
-    Save Changes
-  </button>
-</form>
-
+        <button
+          type="submit"
+          class="btn btn-primary w-100 btn-custom"
+          (click)="updateUserInfos(userName, userEmail, phone)"
+        >
+          Save Changes
+        </button>
+      </form>
     </div>
   </div>
 </div>

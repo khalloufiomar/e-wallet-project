@@ -6,14 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UpdatepasswordService {
-  private baseApiUrl = 'http://localhost:8069/api'; // Remplacez par l'URL de votre API backend
+  private baseApiUrl = 'http://localhost:8069/api';
 
   constructor(private http: HttpClient) {}
 
   // Méthode pour mettre à jour le mot de passe
   sendPasswordResetRequest(email: string): Observable<any> {
     // Envoi d'une requête POST avec le nouveau mot de passe
-    return this.http.post(`${this.baseApiUrl}/request_passwordReset`, { email });
+    return this.http.post(`${this.baseApiUrl}/request_passwordReset`, {
+      email,
+    });
   }
   validateToken(token: string): Observable<any> {
     // Envoi d'une requête POST avec le nouveau mot de passe
@@ -21,6 +23,9 @@ export class UpdatepasswordService {
   }
   updatePassword(token: string, newPassword: string): Observable<any> {
     // Envoi d'une requête POST avec le nouveau mot de passe
-    return this.http.post(`${this.baseApiUrl}/reset_password`, { token, newPassword });
+    return this.http.post(`${this.baseApiUrl}/reset_password`, {
+      token,
+      newPassword,
+    });
   }
 }

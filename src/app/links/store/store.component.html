@@ -50,6 +50,7 @@
     <span class="fw-semibold text-dark" *ngIf="data.length">All Courses</span>
   </p>
 
+  <!-- si n'a pas de product -->
   <div *ngIf="data.length === 0" class="no-transactions-card">
     <i class="bi bi-shop fs-1 text-secondary mb-3"></i>
     <h5 class="fw-bold mb-2">The store is empty</h5>
@@ -60,35 +61,41 @@
   </div>
 
   <div class="row g-4">
-  <div class="col-md-4" *ngFor="let course of data">
-    <div class="card h-100 shadow-sm border-0 rounded-4">
-      <img
-        [src]="course.imageUrl"
-        class="card-img-top rounded-top-4 img-fluid"
-        style="height: auto; object-fit: cover"
-      />
-      <div class="card-body d-flex flex-column">
-        <span class="badge small mb-3 w-fit-content">
-          {{ course.category }}
-        </span>
-        <h6 class="card-title">{{ course.name }}</h6>
-        <p class="card-text text-muted small mb-3">
-          {{ course.description }}
-        </p>
-        <p class="text-muted mb-2"><strong>Price:</strong> {{ course.price_lc }} LC</p>
+    <div class="col-md-4" *ngFor="let course of data">
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <img
+          [src]="course.imageUrl"
+          class="card-img-top rounded-top-4 img-fluid"
+          style="height: auto; object-fit: cover"
+        />
+        <div class="card-body d-flex flex-column">
+          <span class="badge small mb-3 w-fit-content">
+            {{ course.category }}
+          </span>
+          <h6 class="card-title">{{ course.name }}</h6>
+          <p class="card-text text-muted small mb-3">
+            {{ course.description }}
+          </p>
+          <p class="text-muted mb-2">
+            <strong>Price:</strong> {{ course.price_lc }} LC
+          </p>
 
-        <ng-container *ngIf="!course.is_purchased; else purchasedMsg">
-          <button class="btn btn-primary mt-auto enroll-btn" (click)="purchaseCourse(course.id)">
-            Enroll now
-          </button>
-        </ng-container>
+          <ng-container *ngIf="!course.is_purchased; else purchasedMsg">
+            <button
+              class="btn btn-primary mt-auto enroll-btn"
+              (click)="purchaseCourse(course.id)"
+            >
+              Enroll now
+            </button>
+          </ng-container>
 
-        <ng-template #purchasedMsg>
-          <div class="text-success mt-auto fw-semibold">Already purchased</div>
-        </ng-template>
+          <ng-template #purchasedMsg>
+            <div class="text-success mt-auto fw-semibold">
+              Already purchased
+            </div>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
 </div>

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 export interface Employee {
   userId: number;
   userName: string;
@@ -14,7 +13,7 @@ export interface Employee {
   providedIn: 'root',
 })
 export class TransferService {
-  private apiUrl = 'http://localhost:8069'; // remplace avec ton vrai endpoint
+  private apiUrl = 'http://localhost:8069';
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +22,7 @@ export class TransferService {
     amount: number;
     description?: string;
   }): Observable<any> {
-    console.log(data)
+    console.log(data);
     return this.http.post(`${this.apiUrl}/api/sendCredit`, data);
   }
   // Récupération des derniers transferts
@@ -32,6 +31,8 @@ export class TransferService {
   }
 
   getEmpsWallet(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiUrl}/api/getEmpsWallet`, {withCredentials: true,}); 
+    return this.http.get<Employee[]>(`${this.apiUrl}/api/getEmpsWallet`, {
+      withCredentials: true,
+    });
   }
 }
