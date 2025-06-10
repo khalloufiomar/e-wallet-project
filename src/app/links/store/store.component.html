@@ -50,6 +50,70 @@
     <span class="fw-semibold text-dark" *ngIf="data.length">All Courses</span>
   </p>
 
+  <!-- Toasts en haut à droite -->
+  <div
+    class="toast-container position-fixed top-0 end-0 p-3 z-3"
+    style="z-index: 1055"
+  >
+    <!-- Toast d'erreur -->
+    <div
+      *ngIf="errorMessages.length > 0"
+      class="toast text-bg-danger show"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="toast-body">
+        <div class="d-flex gap-3 align-items-center">
+          <i class="fa-solid fa-circle-exclamation fa-lg"></i>
+          <div
+            class="flex-grow-1 d-flex justify-content-between align-items-center"
+          >
+            <div class="fw-semibold">
+              <div *ngFor="let message of errorMessages">
+                {{ message }}
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              aria-label="Close"
+              (click)="errorMessages = []"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast de succès -->
+    <div
+      *ngIf="successMessage"
+      class="toast text-bg-success show mt-2"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="toast-body">
+        <div class="d-flex gap-3 align-items-center">
+          <i class="fa-solid fa-circle-check fa-lg"></i>
+          <div
+            class="flex-grow-1 d-flex justify-content-between align-items-center"
+          >
+            <div class="fw-semibold">
+              {{ successMessage }}
+            </div>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              aria-label="Close"
+              (click)="successMessage = ''"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- si n'a pas de product -->
   <div *ngIf="data.length === 0" class="no-transactions-card">
     <i class="bi bi-shop fs-1 text-secondary mb-3"></i>

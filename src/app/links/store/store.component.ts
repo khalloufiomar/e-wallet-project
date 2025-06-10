@@ -17,6 +17,8 @@ export class StoreComponent implements OnInit {
   showNotification = false;
   isLoading = true;
   data: Course[] = []; // Variable pour stocker les données
+  successMessage = '';
+  errorMessages: string[] = [];
 
   constructor(
     private storeService: StoreService,
@@ -32,9 +34,9 @@ export class StoreComponent implements OnInit {
       (response) => {
         this.data = response; // Stocke la réponse dans la variable data
         console.log(this.data);
-        for (let course of this.data){
+        for (let course of this.data) {
           const base64String = course.image;
-          const imageSrc = `data:image/jpeg;base64,${base64String}`
+          const imageSrc = `data:image/jpeg;base64,${base64String}`;
           course.imageUrl = imageSrc; // Met à jour l'image avec le format base64
         } // Affiche les données dans la console pour vérifier
       },
@@ -47,11 +49,19 @@ export class StoreComponent implements OnInit {
     this.storeService.purchaseCourse(courseId).subscribe(
       (response) => {
         console.log('Achat effectué avec succès', response);
-        alert('Purchase successfully completed!');
+        // alert('Purchase successfully completed!');
         window.location.reload();
+        this.successMessage = 'Purchase successfully completed!';
+        setTimeout(() => {
+          this.successMessage = '';
+        }, 4000);
       },
       (error) => {
         console.error('Erreur lors de lachat du cours', error);
+        this.errorMessages.push('Erreur lors de lachat du cours', error);
+        setTimeout(() => {
+          this.errorMessages = [];
+        }, 4000);
       }
     );
   }
