@@ -28,6 +28,8 @@ export class InvoicesComponent {
   selectedPaymentFilter: string = 'all'; // état du filtre actuel
   currentPage: number = 1;
   pageSize: number = 5; // nombre d'éléments par page
+  successMessage = '';
+  errorMessages: string[] = [];
 
   get totalPages(): number {
     return Math.ceil(this.filteredInvoices.length / this.pageSize) || 1;
@@ -196,18 +198,30 @@ export class InvoicesComponent {
               orderData
             );
 
+            this.successMessage = `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for details.`;
+
             // Optional: replace with a modal, toast, or Angular route redirection
-            alert(
-              `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for details.`
-            );
+            //alert(
+            //`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for details.`
+            //);
+            setTimeout(() => {
+              this.successMessage = '';
+            }, 4000);
           }
         } catch (error: any) {
           console.error('Capture error:', error);
-          alert(
+
+          this.errorMessages.push(
             `Sorry, your transaction could not be processed...\n\n${
               error?.message || error
             }`
           );
+
+          // alert(
+          //   `Sorry, your transaction could not be processed...\n\n${
+          //     error?.message || error
+          //   }`
+          // );
         }
       },
       onCancel: (data, actions) => {

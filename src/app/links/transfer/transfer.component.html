@@ -318,18 +318,14 @@
 <div class="modal-backdrop" *ngIf="showSuccessModal">
   <div class="modal-box success-style">
     <div class="modal-check-circle">
-      <img
-        *ngIf="!isLoading"
-        src="checkmark.png"
-        alt="Success"
-        class="checkmark-img"
-      />
-      <img
+      <!-- *ngIf="!isLoading" -->
+      <img src="Check.png" alt="Success" class="checkmark-img" />
+      <!-- <img
         *ngIf="isLoading"
         src="loading.png"
         alt="Success"
         class="checkmark-img"
-      />
+      /> -->
     </div>
     <h2 class="modal-title">Recipient Amount</h2>
     <p class="modal-subtitle">CT</p>

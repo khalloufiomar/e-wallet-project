@@ -212,7 +212,7 @@ export class TransferComponent implements OnInit {
 
         setTimeout(() => {
           this.successMessage = '';
-        }, 10000);
+        }, 4000);
       },
       error: (err) => {
         this.errorMessages = ['Transfer failed. Please try again.'];

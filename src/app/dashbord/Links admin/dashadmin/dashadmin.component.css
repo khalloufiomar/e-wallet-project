@@ -147,3 +147,86 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
+/* Styles responsifs */
+@media screen and (max-width: 1000px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+
+    .dashboard-row {
+        gap: 0.8rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .card-quarter {
+        flex: 1 1 calc(50% - 0.8rem);
+    }
+
+    .card-half {
+        flex: 1 1 100%;
+    }
+
+    .card-value {
+        font-size: 1.4rem;
+    }
+
+    .card-subtext {
+        font-size: 0.8rem;
+    }
+
+    .chart-container {
+        padding: 0.5rem;
+    }
+
+    .small-chart {
+        max-width: 140px;
+    }
+
+    .chart-legend {
+        padding: 0 0.5rem;
+    }
+
+    .legend-item {
+        font-size: 0.8rem;
+    }
+
+    .icon-circle {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .dashboard-container {
+        padding: 0.8rem;
+    }
+
+    .dashboard-row {
+        gap: 0.6rem;
+    }
+
+    .card-quarter {
+        flex: 1 1 100%;
+    }
+
+    .card {
+        padding: 0.8rem;
+    }
+
+    .card-value {
+        font-size: 1.2rem;
+    }
+
+    .card-header .icon {
+        font-size: 1rem;
+    }
+
+    .icon-circle {
+        width: 24px;
+        height: 24px;
+    }
+}

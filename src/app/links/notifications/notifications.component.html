@@ -46,7 +46,7 @@
 
   <!-- card s'affiche si n'a pas de notification -->
   <div *ngIf="notifications.length === 0" class="no-transactions-card">
-    <i class="bi bi-receipt fs-1 text-secondary mb-3"></i>
+    <i class="bi bi-bell fs-1 text-secondary mb-3"></i>
     <h5 class="fw-bold mb-2">Aucune notifications</h5>
     <p class="text-muted">
       Vous n'avez pas encore de notifications.<br />
@@ -71,9 +71,9 @@
     <!-- Filtres -->
     <div class="d-flex gap-2 mb-3 flex-wrap">
       <button class="filter-tab active">All</button>
-      <button class="filter-tab">Unread</button>
+      <!-- <button class="filter-tab">Unread</button>
       <button class="filter-tab">Transactions</button>
-      <button class="filter-tab">Security</button>
+      <button class="filter-tab">Security</button> -->
     </div>
 
     <!-- Loading spinner -->
@@ -101,22 +101,22 @@
           style="width: 40px; height: 40px"
         >
           <img
-            *ngIf="notif.title === 'transfer recorded'"
+            *ngIf="notif.title === 'Transfer Recorded!'"
             src="transfercoins.png"
             alt="icon"
             width="24"
             height="24"
           />
           <img
-            *ngIf="notif.title === 'payment recorded'"
-            src="payment.png"
+            *ngIf="notif.title === 'Payment Recorded!'"
+            src="transfer.png"
             alt="icon"
             width="24"
             height="24"
           />
           <img
-            *ngIf="notif.title === 'purchase recorded'"
-            src="transfer.png"
+            *ngIf="notif.title === 'Course Purchased!'"
+            src="payment.png"
             alt="icon"
             width="24"
             height="24"
