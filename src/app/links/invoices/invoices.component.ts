@@ -205,8 +205,8 @@ export class InvoicesComponent {
             //`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for details.`
             //);
             setTimeout(() => {
-              this.successMessage = '';
-            }, 4000);
+              window.location.reload();
+            }, 2000);
           }
         } catch (error: any) {
           console.error('Capture error:', error);
